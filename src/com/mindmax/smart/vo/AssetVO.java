@@ -1,5 +1,7 @@
 package com.mindmax.smart.vo;
 
+import java.util.List;
+
 public class AssetVO {
 
 	private String assetId = null;
@@ -8,6 +10,8 @@ public class AssetVO {
 
 	private String parentId = null;
 	private String typeId = null;
+
+	private List<Object> aspects = null;
 
 	public String getAssetId() {
 		return assetId;
@@ -47,6 +51,14 @@ public class AssetVO {
 
 	public void setTypeId(String typeId) {
 		this.typeId = typeId;
+	}
+
+	public List<Object> getAspectList() {
+		return aspects;
+	}
+
+	public void setAspectList(List<Object> aspectList) {
+		this.aspects = aspectList;
 	}
 
 }

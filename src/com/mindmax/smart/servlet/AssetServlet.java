@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.mindmax.smart.util.SmartConstant;
 import com.mindmax.smart.vo.AssetVO;
@@ -88,18 +89,8 @@ public class AssetServlet extends HttpServlet {
 				str = br.readLine();
 				data = data + str;
 			}
-			
-			
-			//data = data.substring(13, data.length()-2);
-			
-			//List<AssetVO> assetList = 
 
 			System.out.println("Data......" + data);
-			
-			/*JSONParser parser = new JSONParser(); 
-			JSONObject json = (JSONObject) parser.parse(data);
-
-			System.out.println("json......" + json.toString());*/
 
 			AssetVO vo = parseVoFromRequest(data,AssetVO.class);
 			if(vo!=null){
@@ -109,7 +100,7 @@ public class AssetServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			response.setContentType("application/json");
-			out.print(data);
+			out.print(vo);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -141,10 +132,14 @@ public class AssetServlet extends HttpServlet {
 				
 				retVal = (AssetVO) gson.fromJson(value.get(0).toString(),className);
 				if(retVal!=null){
-					System.out.println("afafafaa----------->"+retVal.getAssetId());
+					System.out.println("Asset ID----------->"+retVal.getAssetId());
 				}
 				
 			}
+			
+			String jsonString = gson.toJson(retVal);
+
+            System.out.println(""+jsonString);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
