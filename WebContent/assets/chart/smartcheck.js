@@ -1,3 +1,5 @@
+//Date time picker
+
 $(function() {
 	  $('input[name="datetimes"]').daterangepicker({
 		  "showDropdowns": true,
@@ -62,6 +64,7 @@ function onloadData(fdt,tdt){
 				contentType: "application/json",
 				success : function(data){
 					
+					
 					$('#loadingLoad,#loadingTemp,#loadingVib').hide();
 										
 					var dLen = data.length;
@@ -91,30 +94,183 @@ function onloadData(fdt,tdt){
 					
 					var output = data.filter(obj => Object.keys(obj).includes("Axis1_Load","Axis2_Load","Axis3_Load","Axis4_Load"));
 					
-					var axisLoad1Var = []; var axisLoad2Var = []; var axisLoad3Var = []; var axisLoad4Var = []; var axisTemp1Var = []; var axisTemp2Var = [];  var axisTemp3Var = []; var axisTemp4Var = []; var axisVib1Var = []; var axisVib2Var = [];  var axisVib3Var = []; var axisVib4Var = [];
-
-					for(var i = 0; i<output.length; i++) {
-										
-						axisLoad1Var.push(output[i].Axis1_Load); 
-						axisLoad2Var.push(output[i].Axis2_Load); 
-						axisLoad3Var.push(output[i].Axis3_Load); 
-						axisLoad4Var.push(output[i].Axis4_Load);
-						
-						axisTemp1Var.push(output[i].Axis1_Temp); 
-						axisTemp2Var.push(output[i].Axis2_Temp); 
-						axisTemp3Var.push(output[i].Axis3_Temp); 
-						axisTemp4Var.push(output[i].Axis4_Temp);
-						
-						axisVib1Var.push(output[i].Axis1_Vib);
-						axisVib2Var.push(output[i].Axis2_Vib);
-						axisVib3Var.push(output[i].Axis3_Vib);
-						axisVib4Var.push(output[i].Axis4_Vib);
-					}
- // Axis Load
-					var axisLoad1Sum = _.sum(axisLoad1Var); var axisLoad2Sum = _.sum(axisLoad2Var); var axisLoad3Sum = _.sum(axisLoad3Var); var axisLoad4Sum = _.sum(axisLoad4Var);
-					var axisLoad1Count = axisLoad1Var.length; var axisLoad2Count = axisLoad2Var.length; var axisLoad3Count = axisLoad3Var.length; var axisLoad4Count = axisLoad4Var.length;
-					var axisLoad1Percent = _.divide(axisLoad1Sum, axisLoad1Count).toFixed(2); var axisLoad2Percent = _.divide(axisLoad2Sum, axisLoad2Count).toFixed(2); var axisLoad3Percent = _.divide(axisLoad3Sum, axisLoad3Count).toFixed(2); var axisLoad4Percent = _.divide(axisLoad4Sum, axisLoad4Count).toFixed(2);
 					
+
+
+ // Axis Load
+					var axisAverage= 0;
+					var axisLoad1Percent=0;
+					var axisLoad2Percent=0
+					var axisLoad3Percent =0;
+					var axisLoad4Percent=0;
+					var axis1Load = [];
+					var axis2Load=[];
+					var axis3Load=[];
+					var axis4Load=[];
+					var axis1Temp=[];
+					var axis2Temp=[];
+					var axis3Temp=[];
+					var axis4Temp=[];
+					var axis1Vib=[];
+					var axis2Vib=[];
+					var axis3Vib=[];
+					var axis4Vib=[];
+					var timelbl = [];
+					
+				    for(var key in output){				
+				    	axisAverage += +output[key].Axis1_Load.average.toFixed(2);
+				    	axisLoad1Percent = (axisAverage / output.length).toFixed(2);
+				    	
+				    	axis1Load.push(
+				    			output[key].Axis1_Load.minvalue,
+				    			output[key].Axis1_Load.maxvalue,
+				    			output[key].Axis1_Load.firstvalue,
+				    			output[key].Axis1_Load.lastvalue)
+				    	
+				    	axis2Load.push(
+				    			output[key].Axis2_Load.minvalue,
+				    			output[key].Axis2_Load.maxvalue,
+				    			output[key].Axis2_Load.firstvalue,
+				    			output[key].Axis2_Load.lastvalue)	
+				    	
+				    					    
+				    	
+				    	axis3Load.push(
+				    			output[key].Axis3_Load.minvalue,
+				    			output[key].Axis3_Load.maxvalue,
+				    			output[key].Axis3_Load.firstvalue,
+				    			output[key].Axis3_Load.lastvalue)	
+				    	
+				    		axis4Load.push(
+				    			output[key].Axis4_Load.minvalue,
+				    			output[key].Axis4_Load.maxvalue,
+				    			output[key].Axis4_Load.firstvalue,
+				    			output[key].Axis4_Load.lastvalue)
+				    			
+				    		axis1Temp.push(
+				    			output[key].Axis1_Temp.minvalue,
+				    			output[key].Axis1_Temp.maxvalue,
+				    			output[key].Axis1_Temp.firstvalue,
+				    			output[key].Axis1_Temp.lastvalue)
+				    			
+				    		axis2Temp.push(
+				    				output[key].Axis2_Temp.minvalue,
+					    			output[key].Axis2_Temp.maxvalue,
+					    			output[key].Axis2_Temp.firstvalue,
+					    			output[key].Axis2_Temp.lastvalue
+					    			)
+				    			
+				    		axis3Temp.push(
+				    				output[key].Axis3_Temp.minvalue,
+					    			output[key].Axis3_Temp.maxvalue,
+					    			output[key].Axis3_Temp.firstvalue,
+					    			output[key].Axis3_Temp.lastvalue		
+				    		)
+				    			
+				    		axis4Temp.push(
+				    				output[key].Axis4_Temp.minvalue,
+					    			output[key].Axis4_Temp.maxvalue,
+					    			output[key].Axis4_Temp.firstvalue,
+					    			output[key].Axis4_Temp.lastvalue
+				    		)	
+				    						    		
+				    			
+				    		axis1Vib.push(
+				    				output[key].Axis1_Vib.minvalue,
+					    			output[key].Axis1_Vib.maxvalue,
+					    			output[key].Axis1_Vib.firstvalue,
+					    			output[key].Axis1_Vib.lastvalue
+				    		)
+				    		
+				    		axis2Vib.push(
+				    				output[key].Axis2_Vib.minvalue,
+					    			output[key].Axis2_Vib.maxvalue,
+					    			output[key].Axis2_Vib.firstvalue,
+					    			output[key].Axis2_Vib.lastvalue
+				    		)	
+				    		
+				    		axis3Vib.push(
+				    				output[key].Axis3_Vib.minvalue,
+					    			output[key].Axis3_Vib.maxvalue,
+					    			output[key].Axis3_Vib.firstvalue,
+					    			output[key].Axis3_Vib.lastvalue
+				    		)	
+				    		
+				    		axis4Vib.push(
+				    				output[key].Axis4_Vib.minvalue,
+					    			output[key].Axis4_Vib.maxvalue,
+					    			output[key].Axis4_Vib.firstvalue,
+					    			output[key].Axis4_Vib.lastvalue
+				    		)	
+				    	
+				    	timelbl.push(
+				    			moment(output[key].Axis1_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			
+				    			moment(output[key].Axis2_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis3_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis4_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis1_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis2_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis3_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis4_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis1_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis1_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis2_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis2_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis3_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis3_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			
+				    			moment(output[key].Axis4_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
+				    			moment(output[key].Axis4_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss")				    			
+				    			
+				    			
+				    			)
+				    	
+				    }				   
+
+				    
 					// document.getElementById("ax1LT").innerHTML = fromDT;
 					document.getElementById("ax1L").innerHTML = axisLoad1Percent+" %"; document.getElementById("ax2L").innerHTML = axisLoad2Percent+" %"; document.getElementById("ax3L").innerHTML = axisLoad3Percent+" %"; document.getElementById("ax4L").innerHTML = axisLoad4Percent+" %";
 					
@@ -137,9 +293,11 @@ function onloadData(fdt,tdt){
 					}
 // Axis Temp
 					
-					var axisTemp1Sum = _.sum(axisTemp1Var); var axisTemp2Sum = _.sum(axisTemp2Var); var axisTemp3Sum = _.sum(axisTemp3Var); var axisTemp4Sum = _.sum(axisTemp4Var);
-					var axisTemp1Count = axisTemp1Var.length; var axisTemp2Count = axisTemp2Var.length; var axisTemp3Count = axisTemp3Var.length; var axisTemp4Count = axisTemp4Var.length;
-					var axisTemp1Percent = _.divide(axisTemp1Sum, axisTemp1Count).toFixed(2); var axisTemp2Percent = _.divide(axisTemp2Sum, axisTemp2Count).toFixed(2); var axisTemp3Percent = _.divide(axisTemp3Sum, axisTemp3Count).toFixed(2); var axisTemp4Percent = _.divide(axisTemp4Sum, axisTemp4Count).toFixed(2);
+					var axisTemp1Sum = 0;					
+					var axisTemp1Percent = 0;
+					var axisTemp2Percent = 0;
+					var axisTemp3Percent = 0;
+					var axisTemp4Percent = 0;
 					
 					// document.getElementById("ax1TT").innerHTML = fromDT;
 					document.getElementById("ax1T").innerHTML = axisTemp1Percent+" %"; document.getElementById("ax2T").innerHTML = axisTemp2Percent+" %"; document.getElementById("ax3T").innerHTML = axisTemp3Percent+" %"; document.getElementById("ax4T").innerHTML = axisTemp4Percent+" %";
@@ -164,9 +322,11 @@ function onloadData(fdt,tdt){
 					
 // Axis Var
 					
-					var axisVib1Sum = _.sum(axisVib1Var); var axisVib2Sum = _.sum(axisVib2Var); var axisVib3Sum = _.sum(axisVib3Var);  var axisVib4Sum = _.sum(axisVib4Var);
-					var axisVib1Count = axisVib1Var.length; var axisVib2Count = axisVib2Var.length; var axisVib3Count = axisVib3Var.length; var axisVib4Count = axisVib4Var.length;
-					var axisVib1Percent = _.divide(axisVib1Sum, axisVib1Count).toFixed(2); var axisVib2Percent = _.divide(axisVib2Sum, axisVib2Count).toFixed(2); var axisVib3Percent = _.divide(axisVib3Sum, axisVib3Count).toFixed(2); var axisVib4Percent = _.divide(axisVib4Sum, axisVib4Count).toFixed(2);
+					var axisVib1Sum = 0;
+					var axisVib1Percent = 0;
+					var axisVib2Percent = 0;
+					var axisVib3Percent = 0;
+					var axisVib4Percent = 0;
 					
 					// document.getElementById("ax1VT").innerHTML = fromDT;
 					document.getElementById("ax1V").innerHTML = axisVib1Percent+" %"; document.getElementById("ax2V").innerHTML = axisVib2Percent+" %"; document.getElementById("ax3V").innerHTML = axisVib3Percent+" %"; document.getElementById("ax4V").innerHTML = axisVib4Percent+" %";
@@ -189,41 +349,19 @@ function onloadData(fdt,tdt){
 						$('#ax4Vst').attr('class','label label-success');$('#ax4Vst').text("OK");
 					}
 					
-// charts
-					var output = data.filter(obj => Object.keys(obj).includes("Axis1_Load","Axis2_Load","Axis3_Load","Axis4_Load"));
+// charts				
 					
-					var timelbl = [];
+					
 				    var axisLoad1 = [];  var axisLoad2 = []; var axisLoad3 = []; var axisLoad4 = [];
 				    var axisTemp1 = []; var axisTemp2 = [];  var axisTemp3 = []; var axisTemp4 = [];
 				    var axisVib1 = []; var axisVib2 = [];  var axisVib3 = []; var axisVib4 = [];
-				    
-
-					for(var i = 0; i<output.length; i++) {
-												
-						var iotdt = moment(output[i]._time).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
-
-						timelbl.push(iotdt);
-						
-						axisLoad1.push(output[i].Axis1_Load);
-						axisLoad2.push(output[i].Axis2_Load);
-						axisLoad3.push(output[i].Axis3_Load);
-						axisLoad4.push(output[i].Axis4_Load);
-						
-						axisTemp1.push(output[i].Axis1_Temp);
-						axisTemp2.push(output[i].Axis2_Temp);
-						axisTemp3.push(output[i].Axis3_Temp);
-						axisTemp4.push(output[i].Axis4_Temp);
-						
-						axisVib1.push(output[i].Axis1_Vib);
-						axisVib2.push(output[i].Axis2_Vib);
-						axisVib3.push(output[i].Axis3_Vib);
-						axisVib4.push(output[i].Axis4_Vib);
-
-				   }
+				   
+				    console.log(timelbl)
+				    console.log(axis1Load)
 					
-				
 					var minTime = moment(_.min(timelbl));
 					var maxTime = moment(_.max(timelbl));
+					
 					
 					var duration = moment.duration(maxTime.diff(minTime));
 					var asMinutes = duration.asMinutes();
@@ -249,15 +387,10 @@ function onloadData(fdt,tdt){
 						unitStepSizeChart1 = 1; 
 					}
 					
-
-
-					
-
 													
 					 var data1 = {
 					        labels: timelbl,
-					        datasets: [
-					
+					        datasets: [					
 					                   {
 						            label: "Axis 1",
 						            borderColor: 'rgb(78,176,153)',
@@ -266,7 +399,7 @@ function onloadData(fdt,tdt){
 						            pointRadius: 0,
 						            lineTension: 0,
 						            radius: 5,
-						            data: axisLoad1
+						            data: axis1Load
 						          },
 						          {
 						            label: "Axis 2",
@@ -276,7 +409,7 @@ function onloadData(fdt,tdt){
 						            pointRadius: 0,
 						            lineTension: 0,
 						            radius: 5,
-						            data: axisLoad2
+						            data: axis2Load
 						          },
 						          {
 						            label: "Axis 3",
@@ -286,7 +419,7 @@ function onloadData(fdt,tdt){
 						            pointRadius: 0,
 						            lineTension: 0,
 						            radius: 5,
-						            data: axisLoad3
+						            data: axis3Load
 								   },
 								   {
 									label: "Axis 4",
@@ -296,7 +429,7 @@ function onloadData(fdt,tdt){
 						            fill: false,
 						            lineTension: 0,
 						            radius: 5,
-						            data: axisLoad4
+						            data: axis4Load
 									}
 					        ]
 					      };
@@ -387,7 +520,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisTemp1
+					            data: axis1Temp
 					          },
 					          {
 					            label: "Axis 2",
@@ -397,7 +530,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisTemp2
+					            data: axis2Temp
 					          },
 					          {
 					            label: "Axis 3",
@@ -407,7 +540,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisTemp3
+					            data: axis3Temp
 							   },
 							   {
 								label: "Axis 4",
@@ -417,7 +550,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisTemp4
+					            data: axis4Temp
 							   }
 					        ]
 					      };
@@ -505,7 +638,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisVib1
+					            data: axis1Vib
 					          },
 					          {
 					            label: "Axis 2",
@@ -515,7 +648,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisVib2
+					            data: axis2Vib
 					          },
 					          {
 					            label: "Axis 3",
@@ -525,7 +658,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisVib3
+					            data: axis3Vib
 							  },
 							  {
 								label: "Axis 4",
@@ -535,7 +668,7 @@ function onloadData(fdt,tdt){
 					            lineTension: 0,
 					            pointRadius: 0,
 					            radius: 5,
-					            data: axisVib4
+					            data: axis4Vib
 								}
 					        ]
 					      };
@@ -616,7 +749,7 @@ function onloadData(fdt,tdt){
 				      var ctx1 = $("#axisload");
 					  var ctx2 = $("#axistemperature");
 					  var ctx3 = $("#axisvibration");
-				    		    
+				    		
 					  if(window.chart1 != undefined)
 					      window.chart1.destroy();
 						  window.chart1 = new Chart(ctx1, {
@@ -624,6 +757,8 @@ function onloadData(fdt,tdt){
 						    data: data1,
 						    options: options1
 					  });
+						  
+						  
 						  if(window.chart2 != undefined)
 						      window.chart2.destroy();
 							  window.chart2 = new Chart(ctx2, {

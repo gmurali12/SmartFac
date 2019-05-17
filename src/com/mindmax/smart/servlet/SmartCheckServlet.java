@@ -1,13 +1,17 @@
 package com.mindmax.smart.servlet;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -64,8 +68,62 @@ public class SmartCheckServlet extends HttpServlet {
 		System.out.println("Inside Post");
 		//getSmartCheckDetails(request, response);
 		
-		getSmartCheckAggregateDetails(request, response);
+		getDummyData(request, response);
 	}
+	
+    private void getDummyData(HttpServletRequest request,
+            HttpServletResponse response) {
+        String data = "";
+        String str = "";
+
+        String fromDT = request.getParameter("fromDT");
+        String toDT = request.getParameter("toDT");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Calendar c = Calendar.getInstance();
+        Calendar c1 = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(fromDT));
+            c1.setTime(sdf.parse(toDT));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        c.add(Calendar.HOUR, -5);
+        c.add(Calendar.MINUTE, -30);
+        c1.add(Calendar.HOUR, -5);
+        c1.add(Calendar.MINUTE, -30);
+
+        InputStream inputStream = null;
+        JSONArray JData = new JSONArray();
+
+        try {
+
+            inputStream = new FileInputStream(new File(
+            		"/home/dhinesh/eclipse-workspace/personal/smartfac_Mindsphere_chart/src/com/mindmax/smart/servlet/API_All_Axis_Data.txt"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    inputStream));
+
+            while (str != null) {
+                str = br.readLine();
+                data = data + str;
+            }
+
+            JSONArray JArray = new JSONArray(data);
+
+            for (int j = 0; j < JArray.length(); j++) {
+                JData.put(JArray.get(j));
+            }
+
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            out.print(JData);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
 
 	protected void getSmartCheckDetails(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
