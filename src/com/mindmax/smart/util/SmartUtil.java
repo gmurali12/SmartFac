@@ -60,7 +60,6 @@ public class SmartUtil {
 			e.printStackTrace();
 		}
 
-		System.out.println("Filter STring--->" + filterString);
 		return filterString;
 
 	}
