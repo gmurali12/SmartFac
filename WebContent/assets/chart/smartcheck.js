@@ -235,7 +235,7 @@ function smartCheckChart(assetId, fdt,tdt){
 					    			output[key].Axis4_Vib.firstvalue,
 					    			output[key].Axis4_Vib.lastvalue
 				    		)	
-				    	//axis Load
+				    	//axis Load Table
 				    	document.getElementById("ax1TS").innerHTML = moment(output[key].Axis1_Load.lasttime).format("DD-MM-YY HH:mm:ss");				    	
 				    	document.getElementById("ax1L").innerHTML = output[key].Axis1_Load.lastvalue+"%";
 				    	
@@ -248,7 +248,7 @@ function smartCheckChart(assetId, fdt,tdt){
 				    	document.getElementById("ax4TS").innerHTML = moment(output[key].Axis4_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
 				    	document.getElementById("ax4L").innerHTML = output[key].Axis4_Load.lastvalue+"%";
 				    	
-				    	//axis Temp
+				    	//axis Temp Table
 				    	document.getElementById("ax1TTS").innerHTML = moment(output[key].Axis1_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
 				    	document.getElementById("ax1T").innerHTML = output[key].Axis1_Temp.lastvalue+"%";
 				    	
@@ -261,7 +261,7 @@ function smartCheckChart(assetId, fdt,tdt){
 				    	document.getElementById("ax4TTS").innerHTML = moment(output[key].Axis4_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
 				    	document.getElementById("ax4T").innerHTML = output[key].Axis4_Temp.lastvalue+"%";
 				    	
-				    	//axis Vib
+				    	//axis Vib Table
 				    	document.getElementById("ax1VTS").innerHTML = moment(output[key].Axis1_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
 				    	document.getElementById("ax1V").innerHTML = output[key].Axis1_Vib.lastvalue+"%";
 				    	

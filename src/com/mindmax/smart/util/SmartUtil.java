@@ -30,10 +30,10 @@ public class SmartUtil {
 				System.out.println("startDate"+startDate);
 				
 				Calendar endCal = Calendar.getInstance();
-				endCal.set(Calendar.MINUTE,23);
+				endCal.set(Calendar.HOUR,23);
 				endCal.set(Calendar.MINUTE,0);
 				endCal.set(Calendar.SECOND,0);
-				endCal.add(Calendar.DATE, -1);
+				//endCal.add(Calendar.DATE, -1);
 				/*endCal.add(Calendar.HOUR, -5);  
 				endCal.add(Calendar.MINUTE, -30);*/
 				
@@ -111,7 +111,7 @@ public class SmartUtil {
 			filterString.add("&intervalUnit=hour&intervalValue=8");
 			return filterString;
 		} else if (diffHours >= 8 && diffHours < 48) {
-			filterString.add("&intervalUnit=hour&intervalValue=4");
+			filterString.add("&intervalUnit=minute&intervalValue=10");
 			return filterString;
 		} else if (diffHours >= 2 && diffHours < 8) {
 			filterString.add("&intervalUnit=minute&intervalValue=5");

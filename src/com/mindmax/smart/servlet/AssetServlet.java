@@ -102,6 +102,8 @@ public class AssetServlet extends HttpServlet {
 		try {
 
 			URL url = new URL("" + SmartConstant.ASSET_URL);
+			
+			System.out.println("Asset URL--->"+url);
 
 			myURLConnection = (HttpURLConnection) url.openConnection();
 
