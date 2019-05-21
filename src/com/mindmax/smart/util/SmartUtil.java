@@ -22,10 +22,6 @@ public class SmartUtil {
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
 				startCal.add(Calendar.DATE, -1);
-				
-/*				startCal.add(Calendar.HOUR, -5);  
-				startCal.add(Calendar.MINUTE, -30);
-*/				
 				startDate = startCal.getTime();
 				System.out.println("startDate"+startDate);
 				
@@ -33,9 +29,6 @@ public class SmartUtil {
 				endCal.set(Calendar.HOUR,23);
 				endCal.set(Calendar.MINUTE,0);
 				endCal.set(Calendar.SECOND,0);
-				//endCal.add(Calendar.DATE, -1);
-				/*endCal.add(Calendar.HOUR, -5);  
-				endCal.add(Calendar.MINUTE, -30);*/
 				
 				endDate = endCal.getTime();
 				System.out.println("endDate"+endDate);
@@ -47,15 +40,15 @@ public class SmartUtil {
 				date = sdf.parse(fromDate);
 				Calendar startCal = Calendar.getInstance();
 				startCal.setTime(date);
-				startCal.add(Calendar.HOUR, -5);  
-				startCal.add(Calendar.MINUTE, -30);
+				startCal.set(Calendar.MINUTE,0);
+				startCal.set(Calendar.SECOND,0);
 				startDate = startCal.getTime();
 
 				Calendar endCal = Calendar.getInstance();
 				date = sdf.parse(toDate);
 				endCal.setTime(date);
-				endCal.add(Calendar.HOUR, -5);  
-				endCal.add(Calendar.MINUTE, -30);
+				endCal.set(Calendar.MINUTE,0);
+				endCal.set(Calendar.SECOND,0);
 				endDate = endCal.getTime();
 			}
 
@@ -74,17 +67,17 @@ public class SmartUtil {
 
 		StringJoiner filterString = new StringJoiner("");
 		try {
-			String fromDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+			String fromDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
 					.format(startDate);
 			filterString.add("?from=");
 			filterString.add(fromDate);
-			filterString.add(SmartConstant.MILLISECONDS);
+			filterString.add(SmartConstant.TIMEZONE);
 
-			String toDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+			String toDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
 					.format(endDate);
 			filterString.add("&to=");
 			filterString.add(toDate);
-			filterString.add(SmartConstant.MILLISECONDS);
+			filterString.add(SmartConstant.TIMEZONE);
 
 			populateInterval(startDate, endDate, filterString);
 			return filterString.toString();
@@ -111,13 +104,13 @@ public class SmartUtil {
 			filterString.add("&intervalUnit=hour&intervalValue=8");
 			return filterString;
 		} else if (diffHours >= 8 && diffHours < 48) {
-			filterString.add("&intervalUnit=minute&intervalValue=10");
+			filterString.add("&intervalUnit=hour&intervalValue=1");
 			return filterString;
 		} else if (diffHours >= 2 && diffHours < 8) {
-			filterString.add("&intervalUnit=minute&intervalValue=5");
+			filterString.add("&intervalUnit=minute&intervalValue=10");
 			return filterString;
 		} else{
-			filterString.add("&intervalUnit=minute&intervalValue=2");
+			filterString.add("&intervalUnit=minute&intervalValue=5");
 			return filterString;
 		}
 

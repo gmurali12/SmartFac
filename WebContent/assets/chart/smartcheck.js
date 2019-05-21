@@ -60,16 +60,11 @@ $(function() {
 				}
 				 smartCheckChart(response.assetId,null,null);
 			},
-	  error:function(error){
-		 
-		  console.log(assetData)
-		 console.log(error.responseText,"AssetDetailsError") 
-		 
-	  }
-		  
+			error:function(error){
+				console.log(error.responseText,"AssetDetailsError") 
+			}
 	  });
-	  
-	  
+
 	});
 
 function smartCheckChart(assetId, fdt,tdt){
@@ -126,16 +121,7 @@ function smartCheckChart(assetId, fdt,tdt){
 					} else {
 					
 					var output = data.filter(obj => Object.keys(obj).includes("Axis1_Load","Axis2_Load","Axis3_Load","Axis4_Load","Axis1_Temp","Axis2_Temp","Axis3_Temp","Axis4_Temp","Axis1_Vib","Axis2_Vib","Axis3_Vib","Axis4_Vib"));
-					
-					
 
-
- // Axis Load
-					var axisAverage= 0;
-					var axisLoad1Percent=0;
-					var axisLoad2Percent=0
-					var axisLoad3Percent =0;
-					var axisLoad4Percent=0;
 					var axis1Load = [];
 					var axis2Load=[];
 					var axis3Load=[];
@@ -151,278 +137,140 @@ function smartCheckChart(assetId, fdt,tdt){
 					var timelbl = [];
 					
 				    for(var key in output){				
-				    	axisAverage += +output[key].Axis1_Load.average.toFixed(2);
-				    	axisLoad1Percent = (axisAverage / output.length).toFixed(2);
 				    	
-				    	axis1Load.push(
-				    			output[key].Axis1_Load.minvalue,
-				    			output[key].Axis1_Load.maxvalue,
-				    			output[key].Axis1_Load.firstvalue,
-				    			output[key].Axis1_Load.lastvalue)
-				    	
-				    	axis2Load.push(
-				    			output[key].Axis2_Load.minvalue,
-				    			output[key].Axis2_Load.maxvalue,
-				    			output[key].Axis2_Load.firstvalue,
-				    			output[key].Axis2_Load.lastvalue)	
-				    	
-				    					    
-				    	
-				    	axis3Load.push(
-				    			output[key].Axis3_Load.minvalue,
-				    			output[key].Axis3_Load.maxvalue,
-				    			output[key].Axis3_Load.firstvalue,
-				    			output[key].Axis3_Load.lastvalue)	
-				    	
-				    		axis4Load.push(
-				    			output[key].Axis4_Load.minvalue,
-				    			output[key].Axis4_Load.maxvalue,
-				    			output[key].Axis4_Load.firstvalue,
-				    			output[key].Axis4_Load.lastvalue)
+				    	axis1Load.push(output[key].Axis1_Load.minvalue,output[key].Axis1_Load.maxvalue,output[key].Axis1_Load.firstvalue,output[key].Axis1_Load.lastvalue);
+				    	axis2Load.push(output[key].Axis2_Load.minvalue,output[key].Axis2_Load.maxvalue,output[key].Axis2_Load.firstvalue,output[key].Axis2_Load.lastvalue);
+				    	axis3Load.push(output[key].Axis3_Load.minvalue,output[key].Axis3_Load.maxvalue,output[key].Axis3_Load.firstvalue,output[key].Axis3_Load.lastvalue);
+				    	axis4Load.push(output[key].Axis4_Load.minvalue,output[key].Axis4_Load.maxvalue,output[key].Axis4_Load.firstvalue,output[key].Axis4_Load.lastvalue);
 				    			
-				    		axis1Temp.push(
-				    			output[key].Axis1_Temp.minvalue,
-				    			output[key].Axis1_Temp.maxvalue,
-				    			output[key].Axis1_Temp.firstvalue,
-				    			output[key].Axis1_Temp.lastvalue)
-				    			
-				    		axis2Temp.push(
-				    				output[key].Axis2_Temp.minvalue,
-					    			output[key].Axis2_Temp.maxvalue,
-					    			output[key].Axis2_Temp.firstvalue,
-					    			output[key].Axis2_Temp.lastvalue
-					    			)
-				    			
-				    		axis3Temp.push(
-				    				output[key].Axis3_Temp.minvalue,
-					    			output[key].Axis3_Temp.maxvalue,
-					    			output[key].Axis3_Temp.firstvalue,
-					    			output[key].Axis3_Temp.lastvalue		
-				    		)
-				    			
-				    		axis4Temp.push(
-				    				output[key].Axis4_Temp.minvalue,
-					    			output[key].Axis4_Temp.maxvalue,
-					    			output[key].Axis4_Temp.firstvalue,
-					    			output[key].Axis4_Temp.lastvalue
-				    		)	
+				    	axis1Temp.push(output[key].Axis1_Temp.minvalue,output[key].Axis1_Temp.maxvalue,output[key].Axis1_Temp.firstvalue,output[key].Axis1_Temp.lastvalue);
+				    	axis2Temp.push(output[key].Axis2_Temp.minvalue,output[key].Axis2_Temp.maxvalue,output[key].Axis2_Temp.firstvalue,output[key].Axis2_Temp.lastvalue);
+				    	axis3Temp.push(output[key].Axis3_Temp.minvalue,output[key].Axis3_Temp.maxvalue,output[key].Axis3_Temp.firstvalue,output[key].Axis3_Temp.lastvalue);
+				    	axis4Temp.push(output[key].Axis4_Temp.minvalue,output[key].Axis4_Temp.maxvalue,output[key].Axis4_Temp.firstvalue,output[key].Axis4_Temp.lastvalue);
 				    						    		
-				    			
-				    		axis1Vib.push(
-				    				output[key].Axis1_Vib.minvalue,
-					    			output[key].Axis1_Vib.maxvalue,
-					    			output[key].Axis1_Vib.firstvalue,
-					    			output[key].Axis1_Vib.lastvalue
-				    		)
+				    	axis1Vib.push(output[key].Axis1_Vib.minvalue,output[key].Axis1_Vib.maxvalue,output[key].Axis1_Vib.firstvalue,output[key].Axis1_Vib.lastvalue);
+				    	axis2Vib.push(output[key].Axis2_Vib.minvalue,output[key].Axis2_Vib.maxvalue,output[key].Axis2_Vib.firstvalue,output[key].Axis2_Vib.lastvalue);
+				    	axis3Vib.push(output[key].Axis3_Vib.minvalue,output[key].Axis3_Vib.maxvalue,output[key].Axis3_Vib.firstvalue,output[key].Axis3_Vib.lastvalue);
+				    	axis4Vib.push(output[key].Axis4_Vib.minvalue,output[key].Axis4_Vib.maxvalue,output[key].Axis4_Vib.firstvalue,output[key].Axis4_Vib.lastvalue);
+				    	
+				    	timelbl.push(output[key].Axis1_Load.firsttime,output[key].Axis1_Load.mintime,output[key].Axis1_Load.maxtime,output[key].Axis1_Load.lasttime);
+
+				    	/*timelbl.push(output[key].Axis1_Load.firsttime,output[key].Axis1_Load.mintime,output[key].Axis1_Load.maxtime,output[key].Axis1_Load.lasttime);
+				    	timelbl.push(output[key].Axis2_Load.firsttime,output[key].Axis2_Load.mintime,output[key].Axis2_Load.maxtime,output[key].Axis2_Load.lasttime);
+				    	timelbl.push(output[key].Axis3_Load.firsttime,output[key].Axis3_Load.mintime,output[key].Axis3_Load.maxtime,output[key].Axis3_Load.lasttime);
+				    	timelbl.push(output[key].Axis4_Load.firsttime,output[key].Axis4_Load.mintime,output[key].Axis4_Load.maxtime,output[key].Axis4_Load.lasttime);
+				    	
+				    	timelbl.push(output[key].Axis1_Temp.firsttime,output[key].Axis1_Temp.mintime,output[key].Axis1_Temp.maxtime,output[key].Axis1_Temp.lasttime);
+				    	timelbl.push(output[key].Axis2_Temp.firsttime,output[key].Axis2_Temp.mintime,output[key].Axis2_Temp.maxtime,output[key].Axis2_Temp.lasttime);
+				    	timelbl.push(output[key].Axis3_Temp.firsttime,output[key].Axis3_Temp.mintime,output[key].Axis3_Temp.maxtime,output[key].Axis3_Temp.lasttime);
+				    	timelbl.push(output[key].Axis4_Temp.firsttime,output[key].Axis4_Temp.mintime,output[key].Axis4_Temp.maxtime,output[key].Axis4_Temp.lasttime);
+				    	
+				    	timelbl.push(output[key].Axis1_Vib.firsttime,output[key].Axis1_Vib.mintime,output[key].Axis1_Vib.maxtime,output[key].Axis1_Vib.lasttime);
+				    	timelbl.push(output[key].Axis2_Vib.firsttime,output[key].Axis2_Vib.mintime,output[key].Axis2_Vib.maxtime,output[key].Axis2_Vib.lasttime);
+				    	timelbl.push(output[key].Axis3_Vib.firsttime,output[key].Axis3_Vib.mintime,output[key].Axis3_Vib.maxtime,output[key].Axis3_Vib.lasttime);
+				    	timelbl.push(output[key].Axis4_Vib.firsttime,output[key].Axis4_Vib.mintime,output[key].Axis4_Vib.maxtime,output[key].Axis4_Vib.lasttime);*/
+				    	
 				    		
-				    		axis2Vib.push(
-				    				output[key].Axis2_Vib.minvalue,
-					    			output[key].Axis2_Vib.maxvalue,
-					    			output[key].Axis2_Vib.firstvalue,
-					    			output[key].Axis2_Vib.lastvalue
-				    		)	
-				    		
-				    		axis3Vib.push(
-				    				output[key].Axis3_Vib.minvalue,
-					    			output[key].Axis3_Vib.maxvalue,
-					    			output[key].Axis3_Vib.firstvalue,
-					    			output[key].Axis3_Vib.lastvalue
-				    		)	
-				    		
-				    		axis4Vib.push(
-				    				output[key].Axis4_Vib.minvalue,
-					    			output[key].Axis4_Vib.maxvalue,
-					    			output[key].Axis4_Vib.firstvalue,
-					    			output[key].Axis4_Vib.lastvalue
-				    		)	
-				    	//axis Load Table
-				    	document.getElementById("ax1TS").innerHTML = moment(output[key].Axis1_Load.lasttime).format("DD-MM-YY HH:mm:ss");				    	
-				    	document.getElementById("ax1L").innerHTML = output[key].Axis1_Load.lastvalue+"%";
+				    		//axis Load Table
+					    	document.getElementById("ax1TS").innerHTML = moment(output[key].Axis1_Load.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
+					    	document.getElementById("ax1L").innerHTML = output[key].Axis1_Load.lastvalue+"%";
+					    	if(output[key].Axis1_Load.lastvalue > 100){
+								$('#ax1st').attr('class','label label-danger'); $('#ax1st').text("NOT OK");
+							} else {
+								$('#ax1st').attr('class','label label-success'); $('#ax1st').text("OK");
+							}
+					    	
+					    	document.getElementById("ax2TS").innerHTML = moment(output[key].Axis2_Load.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
+					    	document.getElementById("ax2L").innerHTML = output[key].Axis2_Load.lastvalue+"%";
+					    	if(output[key].Axis2_Load.lastvalue > 100){
+								$('#ax2st').attr('class','label label-danger'); $('#ax2st').text("NOT OK");
+							} else {
+								$('#ax2st').attr('class','label label-success'); $('#ax2st').text("OK");
+							}
+					    	
+					    	document.getElementById("ax3TS").innerHTML = moment(output[key].Axis3_Load.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
+					    	document.getElementById("ax3L").innerHTML = output[key].Axis3_Load.lastvalue+"%";
+					    	if(output[key].Axis3_Load.lastvalue > 100){
+								$('#ax3st').attr('class','label label-danger'); $('#ax3st').text("NOT OK");
+							} else {
+								$('#ax3st').attr('class','label label-success'); $('#ax3st').text("OK");
+							}
+					    	
+					    	document.getElementById("ax4TS").innerHTML = moment(output[key].Axis4_Load.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
+					    	document.getElementById("ax4L").innerHTML = output[key].Axis4_Load.lastvalue+"%";
+					    	if(output[key].Axis4_Load.lastvalue > 100){
+								$('#ax4st').attr('class','label label-danger'); $('#ax4st').text("NOT OK");
+							} else {
+								$('#ax4st').attr('class','label label-success'); $('#ax4st').text("OK");
+							}
+					    	
+					    	//axis Temp Table
+					    	document.getElementById("ax1TTS").innerHTML = moment(output[key].Axis1_Temp.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
+					    	document.getElementById("ax1T").innerHTML = output[key].Axis1_Temp.lastvalue+"%";
+					    	if(output[key].Axis1_Temp.lastvalue > 100){
+								$('#ax1Tst').attr('class','label label-danger'); $('#ax1Tst').text("NOT OK");
+							} else {
+								$('#ax1Tst').attr('class','label label-success'); $('#ax1Tst').text("OK");
+							}
+					    	
+					    	document.getElementById("ax2TTS").innerHTML = moment(output[key].Axis2_Temp.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+					    	document.getElementById("ax2T").innerHTML = output[key].Axis2_Temp.lastvalue+"%";
+					    	if(output[key].Axis2_Temp.lastvalue > 100){
+								$('#ax2Tst').attr('class','label label-danger'); $('#ax2Tst').text("NOT OK");
+							} else {
+								$('#ax2Tst').attr('class','label label-success'); $('#ax2Tst').text("OK");
+							}
+					    	
+					    	document.getElementById("ax3TTS").innerHTML = moment(output[key].Axis3_Temp.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
+					    	document.getElementById("ax3T").innerHTML = output[key].Axis3_Temp.lastvalue+"%";
+					    	if(output[key].Axis3_Temp.lastvalue > 100){
+								$('#ax3Tst').attr('class','label label-danger'); $('#ax3Tst').text("NOT OK");
+							} else {
+								$('#ax3Tst').attr('class','label label-success'); $('#ax3Tst').text("OK");
+							}
+					    	
+					    	document.getElementById("ax4TTS").innerHTML = moment(output[key].Axis4_Temp.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+					    	document.getElementById("ax4T").innerHTML = output[key].Axis4_Temp.lastvalue+"%";
+					    	if(output[key].Axis4_Temp.lastvalue > 100){
+								$('#ax4Tst').attr('class','label label-danger'); $('#ax4Tst').text("NOT OK");
+							} else {
+								$('#ax4Tst').attr('class','label label-success'); $('#ax4Tst').text("OK");
+							}
+					    	
+					    	//axis Vib Table
+					    	document.getElementById("ax1VTS").innerHTML = moment(output[key].Axis1_Vib.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
+					    	document.getElementById("ax1V").innerHTML = output[key].Axis1_Vib.lastvalue+"%";
+					    	if(output[key].Axis1_Vib.lastvalue > 100){
+								$('#ax1Vst').attr('class','label label-danger'); $('#ax1Vst').text("NOT OK");
+							} else {
+								$('#ax1Vst').attr('class','label label-success'); $('#ax1Vst').text("OK");
+							}
+					    	
+					    	document.getElementById("ax2VTS").innerHTML = moment(output[key].Axis2_Vib.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+					    	document.getElementById("ax2V").innerHTML = output[key].Axis2_Vib.lastvalue+"%";
+					    	if(output[key].Axis2_Vib.lastvalue > 100){
+								$('#ax2Vst').attr('class','label label-danger'); $('#ax2Vst').text("NOT OK");
+							} else {
+								$('#ax2Vst').attr('class','label label-success'); $('#ax2Vst').text("OK");
+							}
+					    	
+					    	document.getElementById("ax3VTS").innerHTML = moment(output[key].Axis3_Vib.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+					    	document.getElementById("ax3V").innerHTML = output[key].Axis3_Vib.lastvalue+"%";
+					    	if(output[key].Axis3_Vib.lastvalue > 100){
+								$('#ax3Vst').attr('class','label label-danger'); $('#ax3Vst').text("NOT OK");
+							} else {
+								$('#ax3Vst').attr('class','label label-success'); $('#ax3Vst').text("OK");
+							}
+					    	
+					    	document.getElementById("ax4VTS").innerHTML = moment(output[key].Axis4_Vib.lasttime).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+					    	document.getElementById("ax4V").innerHTML = output[key].Axis4_Vib.lastvalue+"%";
+					    	if(output[key].Axis4_Vib.lastvalue > 100){
+								$('#ax4Vst').attr('class','label label-danger'); $('#ax4Vst').text("NOT OK");
+							} else {
+								$('#ax4Vst').attr('class','label label-success'); $('#ax4Vst').text("OK");
+							}
+				    }
 				    	
-				    	document.getElementById("ax2TS").innerHTML = moment(output[key].Axis2_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
-				    	document.getElementById("ax2L").innerHTML = output[key].Axis2_Load.lastvalue+"%";
-				    	
-				    	document.getElementById("ax3TS").innerHTML = moment(output[key].Axis3_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
-				    	document.getElementById("ax3L").innerHTML = output[key].Axis3_Load.lastvalue+"%";
-				    	
-				    	document.getElementById("ax4TS").innerHTML = moment(output[key].Axis4_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
-				    	document.getElementById("ax4L").innerHTML = output[key].Axis4_Load.lastvalue+"%";
-				    	
-				    	//axis Temp Table
-				    	document.getElementById("ax1TTS").innerHTML = moment(output[key].Axis1_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
-				    	document.getElementById("ax1T").innerHTML = output[key].Axis1_Temp.lastvalue+"%";
-				    	
-				    	document.getElementById("ax2TTS").innerHTML = moment(output[key].Axis2_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
-				    	document.getElementById("ax2T").innerHTML = output[key].Axis2_Temp.lastvalue+"%";
-				    	
-				    	document.getElementById("ax3TTS").innerHTML = moment(output[key].Axis3_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
-				    	document.getElementById("ax3T").innerHTML = output[key].Axis3_Temp.lastvalue+"%";
-				    	
-				    	document.getElementById("ax4TTS").innerHTML = moment(output[key].Axis4_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
-				    	document.getElementById("ax4T").innerHTML = output[key].Axis4_Temp.lastvalue+"%";
-				    	
-				    	//axis Vib Table
-				    	document.getElementById("ax1VTS").innerHTML = moment(output[key].Axis1_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
-				    	document.getElementById("ax1V").innerHTML = output[key].Axis1_Vib.lastvalue+"%";
-				    	
-				    	document.getElementById("ax2VTS").innerHTML = moment(output[key].Axis2_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
-				    	document.getElementById("ax2V").innerHTML = output[key].Axis2_Vib.lastvalue+"%";
-				    	
-				    	document.getElementById("ax3VTS").innerHTML = moment(output[key].Axis3_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
-				    	document.getElementById("ax3V").innerHTML = output[key].Axis3_Vib.lastvalue+"%";
-				    	
-				    	document.getElementById("ax4VTS").innerHTML = moment(output[key].Axis4_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
-				    	document.getElementById("ax4V").innerHTML = output[key].Axis4_Vib.lastvalue+"%";
-				    	
-				    	timelbl.push(
-				    			
-				    			moment(output[key].Axis1_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			
-				    			moment(output[key].Axis2_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis3_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis4_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis1_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis2_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis3_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis4_Temp.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Temp.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Temp.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis1_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis1_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis2_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis2_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis3_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis3_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			
-				    			moment(output[key].Axis4_Vib.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Vib.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Vib.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
-				    			moment(output[key].Axis4_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss")				    			
-				    			
-				    			
-				    			)
-				    	
-				    }				   
- 
-				    
-					// document.getElementById("ax1LT").innerHTML = fromDT;
-					//document.getElementById("ax1L").innerHTML = axisLoad1Percent+" %"; document.getElementById("ax2L").innerHTML = axisLoad2Percent+" %"; document.getElementById("ax3L").innerHTML = axisLoad3Percent+" %"; document.getElementById("ax4L").innerHTML = axisLoad4Percent+" %";
-					
-					
-				
-					if(axisLoad1Percent > 100){
-						$('#ax1st').attr('class','label label-danger'); $('#ax1st').text("NOT OK");
-					} else {
-						$('#ax1st').attr('class','label label-success'); $('#ax1st').text("OK");
-					} if(axisLoad2Percent > 100){
-						$('#ax2st').attr('class','label label-danger'); $('#ax2st').text("NOT OK");
-					} else {
-						$('#ax2st').attr('class','label label-success'); $('#ax2st').text("OK");
-					} if(axisLoad3Percent > 100){
-						$('#ax3st').attr('class','label label-danger'); $('#ax3st').text("NOT OK");
-					} else {
-						$('#ax3st').attr('class','label label-success'); $('#ax3st').text("OK");
-					} if(axisLoad4Percent > 100){
-						$('#ax4st').attr('class','label label-danger'); $('#ax4st').text("NOT OK");
-					} else {
-						$('#ax4st').attr('class','label label-success'); $('#ax4st').text("OK");
-					}
-// Axis Temp
-					
-					var axisTemp1Sum = 0;					
-					var axisTemp1Percent = 0;
-					var axisTemp2Percent = 0;
-					var axisTemp3Percent = 0;
-					var axisTemp4Percent = 0;
-					
-					// document.getElementById("ax1TT").innerHTML = fromDT;
-					//document.getElementById("ax1T").innerHTML = axisTemp1Percent+" %"; document.getElementById("ax2T").innerHTML = axisTemp2Percent+" %"; document.getElementById("ax3T").innerHTML = axisTemp3Percent+" %"; document.getElementById("ax4T").innerHTML = axisTemp4Percent+" %";
-					
-					if(axisTemp1Percent > 100){
-						$('#ax1Tst').attr('class','label label-danger'); $('#ax1Tst').text("NOT OK");
-					} else {
-						$('#ax1Tst').attr('class','label label-success'); $('#ax1Tst').text("OK");
-					} if(axisTemp2Percent > 100){
-						$('#ax2Tst').attr('class','label label-danger'); $('#ax2Tst').text("NOT OK");
-					} else {
-						$('#ax2Tst').attr('class','label label-success'); $('#ax2Tst').text("OK");
-					} if(axisTemp3Percent > 100){
-						$('#ax3Tst').attr('class','label label-danger'); $('#ax3Tst').text("NOT OK");
-					} else {
-						$('#ax3Tst').attr('class','label label-success'); $('#ax3Tst').text("OK");
-					} if(axisTemp4Percent > 100){
-						$('#ax4Tst').attr('class','label label-danger'); $('#ax4Tst').text("NOT OK");
-					} else {
-						$('#ax4Tst').attr('class','label label-success'); $('#ax4Tst').text("OK");
-					}	
-					
-					
-// Axis Var
-					
-					var axisVib1Sum = 0;
-					var axisVib1Percent = 0;
-					var axisVib2Percent = 0;
-					var axisVib3Percent = 0;
-					var axisVib4Percent = 0;
-					
-					// document.getElementById("ax1VT").innerHTML = fromDT;
-					//document.getElementById("ax1V").innerHTML = axisVib1Percent+" %"; document.getElementById("ax2V").innerHTML = axisVib2Percent+" %"; document.getElementById("ax3V").innerHTML = axisVib3Percent+" %"; document.getElementById("ax4V").innerHTML = axisVib4Percent+" %";
-					
-					if(axisVib1Percent > 100){
-						$('#ax1Vst').attr('class','label label-danger'); $('#ax1Vst').text("NOT OK");
-					} else {
-						$('#ax1Vst').attr('class','label label-success'); $('#ax1Vst').text("OK");
-					} if(axisVib2Percent > 100){
-						$('#ax2Vst').attr('class','label label-danger'); $('#ax2Vst').text("NOT OK");
-					} else {
-						$('#ax2Vst').attr('class','label label-success'); $('#ax2Vst').text("OK");
-					} if(axisVib3Percent > 100){
-						$('#ax3Vst').attr('class','label label-danger'); $('#ax3Vst').text("NOT OK");
-					} else {
-						$('#ax3Vst').attr('class','label label-success'); $('#ax3Vst').text("OK");
-					} if(axisVib4Percent > 100){
-						$('#ax4Vst').attr('class','label label-danger'); $('#ax4Vst').text("NOT OK");
-					} else {
-						$('#ax4Vst').attr('class','label label-success');$('#ax4Vst').text("OK");
-					}
 					
 // charts				
 					

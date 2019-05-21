@@ -191,65 +191,6 @@ public class SmartCheckServlet extends HttpServlet {
 		}
 	}
 
-	protected void getSmartCheckAggregateDetails(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-		long startTime = System.currentTimeMillis();
-		System.out.println("Inside getSmartCheckDetails - START " + startTime);
-
-		HttpURLConnection myURLConnection = null;
-		String data = "";
-		String str = "";
-
-		try {
-
-			URL url = new URL("" + SmartConstant.AGGREGATE_TIMESERIES_URL
-					+ SmartConstant.ASSET_ID + SmartConstant.ASPECT_NAME
-					+ SmartConstant.TIME_RANGE + SmartConstant.INTERVAL_PARAMS + SmartConstant.SELECT_PARAMS);
-			System.out.println("URL---->" + url.toString());
-
-			myURLConnection = (HttpURLConnection) url.openConnection();
-
-			// Set Auth TOken
-			String authorizationToken = "Bearer " + SmartConstant.JWT_TOKEN;
-			myURLConnection.setRequestProperty("Authorization",
-					authorizationToken);
-
-			myURLConnection.setRequestMethod("GET");
-			myURLConnection.setRequestProperty("Content-Type",
-					"application/json");
-			myURLConnection.setDoOutput(true);
-			myURLConnection.connect();
-
-			InputStream inputStream = myURLConnection.getInputStream();
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					inputStream));
-
-			while (str != null) {
-				str = br.readLine();
-				data = data + str;
-			}
-			System.out.println(" Data------->" + data);
-			
-			List<SmartCheckVO> smartList = parseVoFromRequest(data);
-			Gson gson = new Gson();
-			// convert your list to json
-			data = gson.toJson(smartList);
-			
-			PrintWriter out = response.getWriter();
-			response.setContentType("application/json");
-			out.print(data);
-
-			System.out.println("Inside getSmartCheckDetails - Time Taken: "
-					+ (System.currentTimeMillis() - startTime) / 1000
-					+ " seconds");
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
 	public List<SmartCheckVO> parseVoFromRequest(String requestString,
 			Class className) throws Exception {
 
