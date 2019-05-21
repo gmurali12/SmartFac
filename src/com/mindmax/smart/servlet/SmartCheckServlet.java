@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.mindmax.smart.util.SmartConstant;
+import com.mindmax.smart.util.SmartUtil;
 import com.mindmax.smart.vo.SmartCheckVO;
 
 /**
@@ -64,9 +65,9 @@ public class SmartCheckServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Inside Post");
-		//getSmartCheckDetails(request, response);
+		getSmartCheckDetails(request, response);
 		
-		getDummyData(request, response);
+		//getDummyData(request, response);
 	}
 	
     private void getDummyData(HttpServletRequest request,
@@ -120,13 +121,36 @@ public class SmartCheckServlet extends HttpServlet {
 		HttpURLConnection myURLConnection = null;
 		String data = "";
 		String str = "";
-		String headerlink = null;
+		
+		String fromDate = null;
+		String toDate = null;
+		String assetId = null;
+		
+		assetId = request.getParameter("assetId");
+		
+		if(assetId == null){
+			try {
+				throw new Exception("INVALID_ASSET_ID");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		fromDate = request.getParameter("fromDT");
+		toDate = request.getParameter("toDT");
 
+		System.out.println("Date fromDate--->"+fromDate);
+		System.out.println("Date toDate--->"+toDate);
+		
+		String dateFilter = SmartUtil.populateDateFilter(fromDate, toDate);
+		System.out.println("Date Filter--->"+dateFilter);
+		
 		try {
 
-			URL url = new URL("" + SmartConstant.TIMESERIES_URL
-					+ SmartConstant.ASSET_ID + SmartConstant.ASPECT_NAME
-					+ SmartConstant.TIME_RANGE + SmartConstant.SELECT_PARAMS);
+			URL url = new URL("" + SmartConstant.AGGREGATE_TIMESERIES_URL
+					+ assetId + SmartConstant.ASPECT_NAME
+					+ dateFilter + SmartConstant.SELECT_PARAMS);
 			System.out.println("URL---->" + url.toString());
 
 			myURLConnection = (HttpURLConnection) url.openConnection();
@@ -152,15 +176,11 @@ public class SmartCheckServlet extends HttpServlet {
 				data = data + str;
 			}
 
-			List<SmartCheckVO> smartList = parseVoFromRequest(data,
-					SmartCheckVO.class);
-			Gson gson = new Gson();
-			// convert your list to json
-			data = gson.toJson(smartList);
-			System.out.println("Final Data------->" + data);
+			JSONArray jsonArray = new JSONArray(data);
+            
 			PrintWriter out = response.getWriter();
 			response.setContentType("application/json");
-			out.print(data);
+			out.print(jsonArray);
 
 			System.out.println("Inside getSmartCheckDetails - Time Taken: "
 					+ (System.currentTimeMillis() - startTime) / 1000

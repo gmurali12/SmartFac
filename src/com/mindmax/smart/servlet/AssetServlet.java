@@ -82,11 +82,10 @@ public class AssetServlet extends HttpServlet {
 			}
            
             JSONObject jsonObj = new JSONObject(data);
-            System.out.println("jsonObj"+jsonObj);
 
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
-            out.print(jsonObj);;
+            out.print(jsonObj);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -119,8 +118,6 @@ public class AssetServlet extends HttpServlet {
 
 			InputStream inputStream = myURLConnection.getInputStream();
 
-			System.out.println("inputStream------->" + inputStream.toString());
-
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					inputStream));
 
@@ -129,17 +126,15 @@ public class AssetServlet extends HttpServlet {
 				data = data + str;
 			}
 
-			System.out.println("Data......" + data);
-
-			AssetVO vo = parseVoFromRequest(data,AssetVO.class);
-			if(vo!=null){
-				System.out.println(vo.toString());
-				
-			}
+			AssetVO assetVO = parseVoFromRequest(data,AssetVO.class);
+			
+			Gson gson = new Gson();
+			String jsonInString = gson.toJson(assetVO);
+			JSONObject jsonObj = new JSONObject(jsonInString);
 			
 			PrintWriter out = response.getWriter();
 			response.setContentType("application/json");
-			out.print(vo);
+			out.print(jsonObj);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

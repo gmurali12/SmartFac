@@ -15,27 +15,33 @@ public class SmartUtil {
 
 		try {
 
-			if (fromDate == null && toDate == null) {
+			if (fromDate.equalsIgnoreCase("") || toDate.equalsIgnoreCase("")) {
 
 				Calendar startCal = Calendar.getInstance();
-				startCal.add(Calendar.HOUR, -2);
+				startCal.set(Calendar.HOUR, 0);
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
+				startCal.add(Calendar.DATE, -1);
 				
-				startCal.add(Calendar.HOUR, -5);  
+/*				startCal.add(Calendar.HOUR, -5);  
 				startCal.add(Calendar.MINUTE, -30);
-				
+*/				
 				startDate = startCal.getTime();
-
+				System.out.println("startDate"+startDate);
+				
 				Calendar endCal = Calendar.getInstance();
+				endCal.set(Calendar.MINUTE,23);
 				endCal.set(Calendar.MINUTE,0);
 				endCal.set(Calendar.SECOND,0);
-				endCal.add(Calendar.HOUR, -5);  
-				endCal.add(Calendar.MINUTE, -30);
+				endCal.add(Calendar.DATE, -1);
+				/*endCal.add(Calendar.HOUR, -5);  
+				endCal.add(Calendar.MINUTE, -30);*/
 				
 				endDate = endCal.getTime();
+				System.out.println("endDate"+endDate);
 
 			} else {
+
 				Date date = null;
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 				date = sdf.parse(fromDate);
