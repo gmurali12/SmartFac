@@ -1,12 +1,16 @@
 package com.mindmax.smart.servlet;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,8 +56,43 @@ public class AssetServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		getAssetDetails(request, response);
+		//getDummyData(request, response);
 	}
 
+    private void getDummyData(HttpServletRequest request,
+            HttpServletResponse response) {
+        String data = "";
+        String str = "";
+
+
+
+        InputStream inputStream = null;
+        JSONArray JData = new JSONArray();
+
+        try {
+
+            inputStream = new FileInputStream(new File(
+            		"/home/tgi-user/git/SmartFac/src/com/mindmax/smart/servlet/API_Asset_Data.txt"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    inputStream));
+
+            while (str != null) {
+				str = br.readLine();
+				data = data + str;
+			}
+           
+            JSONObject jsonObj = new JSONObject(data);
+            System.out.println("jsonObj"+jsonObj);
+
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            out.print(jsonObj);;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
 	protected void getAssetDetails(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 

@@ -27,7 +27,6 @@ $(function() {
 		  var fDt = start.format('YYYY-MM-DDTHH:mm:00');
 		  var tDt = end.format('YYYY-MM-DDTHH:mm:00');
 		  
-		  onloadData(fDt,tDt);
 
 	  });
 	  
@@ -38,9 +37,42 @@ $(function() {
 	  $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
 	      $(this).val('');
 	  });
+	  
+	  $.ajax({
+		  url : "getAssetDetails",
+			method : "GET",		
+			cache: false,
+			datatype : "application/json",
+			contentType: "application/json;	 charset=utf-8",
+			success : function(response){
+				
+				console.log(response,"response")
+				console.log(response.aspects[0].variables[1].value)
+				if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'false'){
+					document.getElementById("dateButton").className = "label label-danger";
+				} else{
+					document.getElementById("dateButton").className = "label label-success";
+				}
+				
+				if(response.aspects[0].variables[1].name === 'lastUpdated'){
+					console.log(response.aspects[0].variables[0].name)
+				document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
+				}
+				 smartCheckChart(response.assetId,null,null);
+			},
+	  error:function(error){
+		 
+		  console.log(assetData)
+		 console.log(error.responseText,"AssetDetailsError") 
+		 
+	  }
+		  
+	  });
+	  
+	  
 	});
 
-function onloadData(fdt,tdt){
+function smartCheckChart(assetId, fdt,tdt){
 	
 	var DateTime1 = moment(fdt);
 	 fromdt = DateTime1.format('DD-MM-YY HH:mm');
@@ -56,6 +88,7 @@ function onloadData(fdt,tdt){
 				url : "getSmartheckDetails",
 				method : "GET",
 				 data:{
+					 assetId:assetId,
 					 fromDT: fdt,
 					 toDT: tdt,
 			     },
@@ -92,7 +125,7 @@ function onloadData(fdt,tdt){
 
 					} else {
 					
-					var output = data.filter(obj => Object.keys(obj).includes("Axis1_Load","Axis2_Load","Axis3_Load","Axis4_Load"));
+					var output = data.filter(obj => Object.keys(obj).includes("Axis1_Load","Axis2_Load","Axis3_Load","Axis4_Load","Axis1_Temp","Axis2_Temp","Axis3_Temp","Axis4_Temp","Axis1_Vib","Axis2_Vib","Axis3_Vib","Axis4_Vib"));
 					
 					
 
@@ -202,8 +235,47 @@ function onloadData(fdt,tdt){
 					    			output[key].Axis4_Vib.firstvalue,
 					    			output[key].Axis4_Vib.lastvalue
 				    		)	
+				    	//axis Load
+				    	document.getElementById("ax1TS").innerHTML = moment(output[key].Axis1_Load.lasttime).format("DD-MM-YY HH:mm:ss");				    	
+				    	document.getElementById("ax1L").innerHTML = output[key].Axis1_Load.lastvalue+"%";
+				    	
+				    	document.getElementById("ax2TS").innerHTML = moment(output[key].Axis2_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
+				    	document.getElementById("ax2L").innerHTML = output[key].Axis2_Load.lastvalue+"%";
+				    	
+				    	document.getElementById("ax3TS").innerHTML = moment(output[key].Axis3_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
+				    	document.getElementById("ax3L").innerHTML = output[key].Axis3_Load.lastvalue+"%";
+				    	
+				    	document.getElementById("ax4TS").innerHTML = moment(output[key].Axis4_Load.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
+				    	document.getElementById("ax4L").innerHTML = output[key].Axis4_Load.lastvalue+"%";
+				    	
+				    	//axis Temp
+				    	document.getElementById("ax1TTS").innerHTML = moment(output[key].Axis1_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
+				    	document.getElementById("ax1T").innerHTML = output[key].Axis1_Temp.lastvalue+"%";
+				    	
+				    	document.getElementById("ax2TTS").innerHTML = moment(output[key].Axis2_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
+				    	document.getElementById("ax2T").innerHTML = output[key].Axis2_Temp.lastvalue+"%";
+				    	
+				    	document.getElementById("ax3TTS").innerHTML = moment(output[key].Axis3_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
+				    	document.getElementById("ax3T").innerHTML = output[key].Axis3_Temp.lastvalue+"%";
+				    	
+				    	document.getElementById("ax4TTS").innerHTML = moment(output[key].Axis4_Temp.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
+				    	document.getElementById("ax4T").innerHTML = output[key].Axis4_Temp.lastvalue+"%";
+				    	
+				    	//axis Vib
+				    	document.getElementById("ax1VTS").innerHTML = moment(output[key].Axis1_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");				    	
+				    	document.getElementById("ax1V").innerHTML = output[key].Axis1_Vib.lastvalue+"%";
+				    	
+				    	document.getElementById("ax2VTS").innerHTML = moment(output[key].Axis2_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
+				    	document.getElementById("ax2V").innerHTML = output[key].Axis2_Vib.lastvalue+"%";
+				    	
+				    	document.getElementById("ax3VTS").innerHTML = moment(output[key].Axis3_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
+				    	document.getElementById("ax3V").innerHTML = output[key].Axis3_Vib.lastvalue+"%";
+				    	
+				    	document.getElementById("ax4VTS").innerHTML = moment(output[key].Axis4_Vib.lasttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss");
+				    	document.getElementById("ax4V").innerHTML = output[key].Axis4_Vib.lastvalue+"%";
 				    	
 				    	timelbl.push(
+				    			
 				    			moment(output[key].Axis1_Load.firsttime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
 				    			moment(output[key].Axis1_Load.mintime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
 				    			moment(output[key].Axis1_Load.maxtime).utcOffset("+05:30").format("YYYY-MM-DD HH:mm:ss"),
@@ -269,11 +341,13 @@ function onloadData(fdt,tdt){
 				    			)
 				    	
 				    }				   
-
+ 
 				    
 					// document.getElementById("ax1LT").innerHTML = fromDT;
-					document.getElementById("ax1L").innerHTML = axisLoad1Percent+" %"; document.getElementById("ax2L").innerHTML = axisLoad2Percent+" %"; document.getElementById("ax3L").innerHTML = axisLoad3Percent+" %"; document.getElementById("ax4L").innerHTML = axisLoad4Percent+" %";
+					//document.getElementById("ax1L").innerHTML = axisLoad1Percent+" %"; document.getElementById("ax2L").innerHTML = axisLoad2Percent+" %"; document.getElementById("ax3L").innerHTML = axisLoad3Percent+" %"; document.getElementById("ax4L").innerHTML = axisLoad4Percent+" %";
 					
+					
+				
 					if(axisLoad1Percent > 100){
 						$('#ax1st').attr('class','label label-danger'); $('#ax1st').text("NOT OK");
 					} else {
@@ -300,7 +374,7 @@ function onloadData(fdt,tdt){
 					var axisTemp4Percent = 0;
 					
 					// document.getElementById("ax1TT").innerHTML = fromDT;
-					document.getElementById("ax1T").innerHTML = axisTemp1Percent+" %"; document.getElementById("ax2T").innerHTML = axisTemp2Percent+" %"; document.getElementById("ax3T").innerHTML = axisTemp3Percent+" %"; document.getElementById("ax4T").innerHTML = axisTemp4Percent+" %";
+					//document.getElementById("ax1T").innerHTML = axisTemp1Percent+" %"; document.getElementById("ax2T").innerHTML = axisTemp2Percent+" %"; document.getElementById("ax3T").innerHTML = axisTemp3Percent+" %"; document.getElementById("ax4T").innerHTML = axisTemp4Percent+" %";
 					
 					if(axisTemp1Percent > 100){
 						$('#ax1Tst').attr('class','label label-danger'); $('#ax1Tst').text("NOT OK");
@@ -318,7 +392,8 @@ function onloadData(fdt,tdt){
 						$('#ax4Tst').attr('class','label label-danger'); $('#ax4Tst').text("NOT OK");
 					} else {
 						$('#ax4Tst').attr('class','label label-success'); $('#ax4Tst').text("OK");
-					}					
+					}	
+					
 					
 // Axis Var
 					
@@ -329,7 +404,7 @@ function onloadData(fdt,tdt){
 					var axisVib4Percent = 0;
 					
 					// document.getElementById("ax1VT").innerHTML = fromDT;
-					document.getElementById("ax1V").innerHTML = axisVib1Percent+" %"; document.getElementById("ax2V").innerHTML = axisVib2Percent+" %"; document.getElementById("ax3V").innerHTML = axisVib3Percent+" %"; document.getElementById("ax4V").innerHTML = axisVib4Percent+" %";
+					//document.getElementById("ax1V").innerHTML = axisVib1Percent+" %"; document.getElementById("ax2V").innerHTML = axisVib2Percent+" %"; document.getElementById("ax3V").innerHTML = axisVib3Percent+" %"; document.getElementById("ax4V").innerHTML = axisVib4Percent+" %";
 					
 					if(axisVib1Percent > 100){
 						$('#ax1Vst').attr('class','label label-danger'); $('#ax1Vst').text("NOT OK");
@@ -362,7 +437,8 @@ function onloadData(fdt,tdt){
 					var minTime = moment(_.min(timelbl));
 					var maxTime = moment(_.max(timelbl));
 					
-					
+					console.log(maxTime,"maxTime");
+					console.log(minTime,"minTime");
 					var duration = moment.duration(maxTime.diff(minTime));
 					var asMinutes = duration.asMinutes();
 					
@@ -433,6 +509,7 @@ function onloadData(fdt,tdt){
 									}
 					        ]
 					      };
+					 					 
 								
 				    var  options1 = {
 				    	responsive: true,
@@ -464,11 +541,12 @@ function onloadData(fdt,tdt){
 				                    format: "YYYY-MM-DD hh:mm",
 				                    unitStepSize: unitStepSizeChart1,
 				                    displayFormats: {
-				                    	'minute': 'hh:mm'
+				                    	'minute': 'hh:mm',
+				                         'hour': 'hh:mm'
 				                    }
 					             },
 				            	 ticks: {
-				            	        autoSkip: true,
+				            		 autoSkip: true,
 				            	        maxTicksLimit: 20
 				            	    },
 				            	    scaleLabel: {
@@ -507,7 +585,7 @@ function onloadData(fdt,tdt){
 				   
 				    }
 
-
+console.log(options1,"options1")
 								
 					var data2 = {
 					        labels: timelbl,
@@ -585,7 +663,8 @@ function onloadData(fdt,tdt){
 					                    format: "YYYY-MM-DD hh:mm",
 					                    unitStepSize: unitStepSizeChart1,
 					                    displayFormats: {
-					                    	'minute': 'hh:mm'
+					                    	'minute': 'hh:mm',
+					                    	'hour': 'hh:mm'
 				                    }
 					             },
 				            	 ticks: {
@@ -703,7 +782,8 @@ function onloadData(fdt,tdt){
 					                    format: "YYYY-MM-DD hh:mm",
 					                    unitStepSize: unitStepSizeChart1,
 					                    displayFormats: {
-					                    	'minute': 'hh:mm'
+					                    	'minute': 'hh:mm',
+					                    	'hour': 'hh:mm'
 				                    }
 					             },
 				            	 ticks: {

@@ -27,7 +27,7 @@
 	
 </head>
 
-<body onload="onloadData('2019-03-02T09:00:00','2019-03-02T10:00:00')">
+<body>
 <!-- Mindsphere os bar -->
 <script src="https://static.eu1.mindsphere.io/osbar/v4/js/main.min.js"></script>
 	<script>
@@ -121,28 +121,33 @@
 											<tr>
 												<th>Axis</th>
 												<th>Load</th>
-												<th>Health Status</th>
+												<th>Time Stamp</th>
+												<th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1L"> </td>
+												<td id="ax1TS"> </td>
 												<td><span id='ax1st'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 2</td>
 												<td id="ax2L"> </td>
+												<td id="ax2TS"> </td>
 												<td><span id='ax2st'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 3</td>
 												<td id="ax3L"> </td>
+												<td id="ax3TS"> </td>
 												<td><span id='ax3st'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 4</td>
 												<td id="ax4L"> </td>
+												<td id="ax4TS"> </td>
 												<td><span id='ax4st'> </span></td>
 											</tr>
 										</tbody>
@@ -155,28 +160,33 @@
 											<tr>
 												<th>Axis</th>
 												<th>Temperature</th>
-												<th>Health Status</th>
+												<th>Time Stamp</th>
+												<th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1T"> </td>
+												<td id="ax1TTS"> </td>
 												<td><span id='ax1Tst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 2</td>
 												<td id="ax2T"> </td>
+												<td id="ax2TTS"> </td>
 												<td><span id='ax2Tst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 3</td>
 												<td id="ax3T"> </td>
+												<td id="ax3TTS"> </td>
 												<td><span id='ax3Tst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 4</td>
 												<td id="ax4T"> </td>
+												<td id="ax4TTS"> </td>
 												<td><span id='ax4Tst'> </span></td>
 											</tr>
 										</tbody>
@@ -189,28 +199,33 @@
 											<tr>
 												<th>Axis</th>
 												<th>Vibration</th>
-												<th>Health Status</th>
+												<th>Time Stamp</th>
+												<th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1V"> </td>
+												<td id="ax1VTS"> </td>
 												<td><span id='ax1Vst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 2</td>
 												<td id="ax2V"> </td>
+												<td id="ax2VTS"> </td>
 												<td><span id='ax2Vst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 3</td>
 												<td id="ax3V"> </td>
+												<td id="ax3VTS"> </td>
 												<td><span id='ax3Vst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 4</td>
 												<td id="ax4V"> </td>
+												<td id="ax4VTS"> </td>
 												<td><span id='ax4Vst'> </span></td>
 											</tr>
 										</tbody>

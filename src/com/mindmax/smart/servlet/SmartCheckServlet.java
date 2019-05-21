@@ -9,9 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -79,20 +77,8 @@ public class SmartCheckServlet extends HttpServlet {
         String fromDT = request.getParameter("fromDT");
         String toDT = request.getParameter("toDT");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        Calendar c = Calendar.getInstance();
-        Calendar c1 = Calendar.getInstance();
-        try {
-            c.setTime(sdf.parse(fromDT));
-            c1.setTime(sdf.parse(toDT));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        c.add(Calendar.HOUR, -5);
-        c.add(Calendar.MINUTE, -30);
-        c1.add(Calendar.HOUR, -5);
-        c1.add(Calendar.MINUTE, -30);
+       
+       
 
         InputStream inputStream = null;
         JSONArray JData = new JSONArray();
@@ -100,7 +86,7 @@ public class SmartCheckServlet extends HttpServlet {
         try {
 
             inputStream = new FileInputStream(new File(
-            		"/home/dhinesh/eclipse-workspace/personal/smartfac_Mindsphere_chart/src/com/mindmax/smart/servlet/API_All_Axis_Data.txt"));
+            		"/home/tgi-user/git/SmartFac/src/com/mindmax/smart/servlet/API_All_Axis_Data.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     inputStream));
 
