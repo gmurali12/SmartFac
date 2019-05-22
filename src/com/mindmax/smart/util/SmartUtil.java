@@ -21,7 +21,7 @@ public class SmartUtil {
 				startCal.set(Calendar.HOUR, 0);
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
-				startCal.add(Calendar.DATE, -2);
+				startCal.add(Calendar.DATE, -1);
 				startDate = startCal.getTime();
 				System.out.println("startDate"+startDate);
 				
@@ -69,7 +69,7 @@ public class SmartUtil {
 		try {
 			String fromDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
 					.format(startDate);
-			filterString.add("?from=");
+			filterString.add("&from=");
 			filterString.add(fromDate);
 			filterString.add(SmartConstant.TIMEZONE);
 
@@ -118,7 +118,7 @@ public class SmartUtil {
 
 	public static void main(String[] arg) {
 
-		System.out.println(populateDateFilter(null, null));
+		System.out.println(populateDateFilter("", ""));
 		System.out.println("-----------------------------------");
 		System.out.println(populateDateFilter("20-04-2019 00:00",
 				"20-05-2019 00:00"));
