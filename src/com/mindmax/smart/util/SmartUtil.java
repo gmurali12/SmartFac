@@ -21,7 +21,7 @@ public class SmartUtil {
 				startCal.set(Calendar.HOUR, 0);
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
-				startCal.add(Calendar.DATE, -1);
+				startCal.add(Calendar.DATE, -2);
 				startDate = startCal.getTime();
 				System.out.println("startDate"+startDate);
 				
@@ -101,7 +101,7 @@ public class SmartUtil {
 		System.out.println("diffInDays:"+diffInDays);
 		
 		if (diffHours >= 48) {
-			filterString.add("&intervalUnit=hour&intervalValue=8");
+			filterString.add("&intervalUnit=hour&intervalValue=1");
 			return filterString;
 		} else if (diffHours >= 8 && diffHours < 48) {
 			filterString.add("&intervalUnit=hour&intervalValue=1");

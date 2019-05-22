@@ -10,11 +10,14 @@
 			<span title="Asset Last Connected Status" id="lastdiscon"> </span>	
 		</div>				
 		<div class="navbar-btn navbar-btn-right">
-			<!-- <span class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"><i class="fa fa-calendar"></i> <span id="dateTime"> </span></span> -->			
+			<!-- <span class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"><i class="fa fa-calendar"></i> <span id="dateTime"> </span></span> -->
+			     <select name="assetName" id="assetName"  onchange="changeName(this.value);">
+                 <option value="">Select Name</option>
+</select> 			
 		</div>
-		<div id="col-md-2">
+		<div id="col-md-2" id="showAssetName">
 			<ul class="nav navbar-nav navbar-right" style="margin-right: 20px;margin-top:30px">
-				<span id = "dateButton" class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"><i class="fa fa-calendar"></i> <span id="dateTime"> </span></span>			
+				<span id = "dateButton" class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"> <span id="dateTime"> </span></span>			
 			</ul>
 		</div>
 
@@ -23,3 +26,4 @@
 
 <audio id="my_audio" src="assets/media/beep.ogg"></audio>
 <span class="btn-toastr"></span>
+
