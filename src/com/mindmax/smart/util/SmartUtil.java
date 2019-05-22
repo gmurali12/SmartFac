@@ -21,7 +21,7 @@ public class SmartUtil {
 				startCal.set(Calendar.HOUR, 0);
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
-				startCal.add(Calendar.DATE, -1);
+				//startCal.add(Calendar.DATE, -1);
 				startDate = startCal.getTime();
 				System.out.println("startDate"+startDate);
 				
@@ -40,16 +40,21 @@ public class SmartUtil {
 				date = sdf.parse(fromDate);
 				Calendar startCal = Calendar.getInstance();
 				startCal.setTime(date);
+				startCal.set(Calendar.HOUR, 0);
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
 				startDate = startCal.getTime();
 
 				Calendar endCal = Calendar.getInstance();
 				date = sdf.parse(toDate);
+				System.out.println(date);
 				endCal.setTime(date);
+				endCal.set(Calendar.HOUR,0);
 				endCal.set(Calendar.MINUTE,0);
 				endCal.set(Calendar.SECOND,0);
 				endDate = endCal.getTime();
+				System.out.println(endDate+"endDate");
+				
 			}
 
 			filterString = populateFilterWithDate(startDate, endDate);
@@ -100,8 +105,14 @@ public class SmartUtil {
 		System.out.println("diffHours:"+diffHours);
 		System.out.println("diffInDays:"+diffInDays);
 		
-		if (diffHours >= 48) {
-			filterString.add("&intervalUnit=hour&intervalValue=1");
+		if (diffInDays >90) {
+			filterString.add("&intervalUnit=hour&intervalValue=24");
+			return filterString;
+		} else if (diffInDays >30 && diffInDays <=90) {
+			filterString.add("&intervalUnit=hour&intervalValue=8");
+			return filterString;
+		} else if (diffInDays >= 2 && diffInDays <=30) {
+			filterString.add("&intervalUnit=hour&intervalValue=4");
 			return filterString;
 		} else if (diffHours >= 8 && diffHours < 48) {
 			filterString.add("&intervalUnit=hour&intervalValue=1");
@@ -118,10 +129,8 @@ public class SmartUtil {
 
 	public static void main(String[] arg) {
 
-		System.out.println(populateDateFilter("", ""));
-		System.out.println("-----------------------------------");
-		System.out.println(populateDateFilter("20-04-2019 00:00",
-				"20-05-2019 00:00"));
+		System.out.println(populateDateFilter("01-04-2019 00:00",
+				"31-05-2019 23:00"));
 	
 	}
 }
