@@ -56,16 +56,39 @@
 			<div class="main-content">
 				<div class="container-fluid">
 					<div class="row">
-					
-						<div class="col-md-8">
+
+							<div id="myModal" class="modal modal-wide fade"
+								data-backdrop="static" aria-hidden="true" data-keyboard="false">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Asset Name</h4>
+										</div>
+										<div class="modal-body" style="text-align: center">
+											<form id="assetForm" method="post" action="">
+												<select name="assetName" id="assetName">
+													<option value="">Select Asset Name</option>
+												</select> <span id="validation" class="text-danger"></span>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary"
+												onclick="changeName(this.value);">Search</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-8">
 							<div class="panel">
 							
 								<div class="panel-heading">
-									<div class="col-md-4">
+									<div class="col-md-4">									    
 										<img src="assets/img/loading.gif" height="35px" width="35px" id='loadingLoad' style='display:none;'/>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-4">									
 										<h3 class="panel-title" style='text-align:center'>Axis Load</h3>
+										<div class="showCharTable" id="showAxisLoad"></div>
 									</div>
 								</div>
 								<div class="panel-body">
@@ -73,11 +96,12 @@
 								</div><hr>
 								
 								<div class="panel-heading">
-									<div class="col-md-4">
+									<div class="col-md-4">									  
 										<img src="assets/img/loading.gif" height="35px" width="35px" id='loadingTemp' style='display:none;'/>
 									</div>
 									<div class="col-md-4">
 										<h3 class="panel-title" style='text-align:center'>Axis Temperature</h3>
+										<div class="showCharTable" id="showAxisTemp"></div>
 									</div>
 								</div>
 								<div class="panel-body">
@@ -90,6 +114,7 @@
 									</div>
 									<div class="col-md-4">
 										<h3 class="panel-title" style='text-align:center'>Axis Vibration</h3>
+										<div class ="showCharTable" id="showAxisVib"></div>
 									</div>
 								</div>
 								<div class="panel-body">
@@ -125,7 +150,7 @@
 												<th>Status</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="myTable">
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1L"> </td>

@@ -1,81 +1,124 @@
-//Date time picker
 
-var fDt;
-var tDt;
 
-$(function() {
-	  $('input[name="datetimes"]').daterangepicker({
-		  "showDropdowns": true,
-		  "opens": "left",
-		  ranges: {
-			  'Today': [moment().startOf('day'), moment()],
-		        'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
-		        'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
-		        'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
-		        'This Month': [moment().startOf('month'), moment().endOf('month')],
-		        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-		    },
-	    timePicker: true,
-	    // startDate: moment().startOf('hour'),
-	    // endDate: moment().startOf('hour').add(32, 'hour'),
-	    autoUpdateInput: false,
-	    locale: {
-	      format: 'DD-MM-YY',
-	      cancelLabel: 'Clear'
-	    }
-	  }, function(start, end, label) {
-		  
-		  /* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
-		  
-		   fDt = start.format('DD-MM-YYYY HH:mm');
-		   tDt = end.format('DD-MM-YYYY HH:mm');	
-		   
-		   getAssetDetails(fDt,tDt)
+ getAssetDetails();
 
-	  });
-	  
-	  $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-	      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-	  });
-	  
-	  $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
-	      $(this).val('');
-	  });
-	  document.getElementById("dateButton").style.display = "none";
-	  getAssetDetails(null,null)
-
+$(document).ready(function() {
+	  $('#myModal').modal('show');
+	  $('[data-toggle="tooltip"]').tooltip({title:'Click here to change asset details!', delay :500,placement: "bottom"}); 
 	});
 
- function changeName(assetName){
+
+function changeAssetName(){
+	 $('#myModal').modal('show');
+}
+
+
+
+
+function changeName(assetName){
+
 	
-	 $.ajax({
-		  url : "getAssetDetails",
-			method : "GET",		
-			cache: false,
-			datatype : "application/json",
-			contentType: "application/json;	 charset=utf-8",
-			success : function(response){
-				
-			if(response.name === assetName){
+	 var e = document.getElementById("assetName");
+     var strUser = e.options[e.selectedIndex].value;
+     
+     if(strUser==0){
+    	
+    	 document.getElementById("validation").innerHTML = "Choose Asset Name";	
+    	 
+     }else{
+    	 
+    	 document.getElementById("validation").style.display = "none";	 
+     
+	document.getElementById("dateButton").style.display = "none";	
+	document.getElementById("selectAssetName").style.display = "none";
+	
+	var fDt = moment().startOf('day').format('DD-MM-YYYY HH:mm');
+	var tDt = moment().endOf('day').format('DD-MM-YYYY HH:mm');
+	
+	document.getElementById("ftdt").value = fDt + ' - ' + tDt;
+	
+
+	 
+	//Date time picker
+     var assetId;
+
+	 	  $('input[name="datetimes"]').daterangepicker({
+	 		  "showDropdowns": true,
+	 		  "opens": "left",
+	 		  ranges: {
+	 			  'Today': [moment().startOf('day'), moment()],
+	 		        'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+	 		        'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
+	 		        'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
+	 		        'This Month': [moment().startOf('month'), moment().endOf('month')],
+	 		        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	 		    },
+	 	    timePicker: true,
+	 	    // startDate: moment().startOf('hour'),
+	 	    // endDate: moment().startOf('hour').add(32, 'hour'),
+	 	    autoUpdateInput: false,
+	 	    locale: {
+	 	      format: 'DD-MM-YY',
+	 	      cancelLabel: 'Clear'
+	 	    }
+	 	  }, function(start, end, label) {
+	 		  
+	 		  /* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
+	 		  
+	 		   fDt = start.format('DD-MM-YYYY HH:mm');
+	 		   tDt = end.format('DD-MM-YYYY HH:mm');		 		  
+	 		   smartCheckChart(assetId,fDt,tDt);
+	 		
+
+	 	  });
+	 	  
+	 	  $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+	 	      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+	 	  });
+	 	  
+	 	  $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+	 	      $(this).val('');
+	 	  });
+
+
+	$.ajax({
+		url : "getAssetDetails",
+		method : "GET",		
+		cache: false,
+		datatype : "application/json",
+		contentType: "application/json;	 charset=utf-8",
+		success : function(response){				
+
+			assetId = response.assetId;
+
+			if(response.name === $('#assetName').val()){				
+
+				document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
 				document.getElementById("dateButton").style.display = "block";
 				document.getElementById("dateTime").style.display = "block";
+				document.getElementById("selectAssetName").style.display = "block";
 				if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'false'){
 					document.getElementById("dateButton").className = "label label-danger";
 				} else{
 					document.getElementById("dateButton").className = "label label-success";
 				}
-				
+
 				if(response.aspects[0].variables[1].name === 'lastUpdated'){
-				document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
+					document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
 				}
 			}else{
+				document.getElementById("selectAssetName").style.display = "none";
 				document.getElementById("dateButton").style.display = "none";
 				document.getElementById("dateTime").style.display = "none";
 			}
 
+			$('#myModal').modal('hide');
+
+			smartCheckChart(response.assetId,fDt,tDt);
+
 		}
-	 });
-	
+	});
+     }
 }
 
 
@@ -88,12 +131,14 @@ function getAssetDetails(fDt,tDt){
 			contentType: "application/json;	 charset=utf-8",
 			success : function(response){
 
+				if(response){
 				var selectName = document.createElement('option');
 				var  selectHTML = "<option value='" + response.name + "'>" + response.name + "</option>";				
 				
 				selectName.innerHTML = selectHTML;
 				document.getElementById("assetName").add(selectName);
-				smartCheckChart(response.assetId,fDt,tDt);
+				}
+			
 			},
 			error:function(error){
 				console.log(error.responseText,"AssetDetailsError") 
@@ -105,12 +150,14 @@ function getAssetDetails(fDt,tDt){
 
 function smartCheckChart(assetId, fdt,tdt){
 	
-	var DateTime1 = moment(fdt);
-	fromdt = DateTime1.format('DD-MM-YY HH:mm');
-	var DateTime2 = moment(tdt);
-	todt = DateTime2.format('DD-MM-YY HH:mm');
 	
-	document.getElementById("ftdt").value = fromdt + ' - ' + todt;
+//	console.log(assetId, fdt,tdt)
+//	var DateTime1 = moment(fdt);
+//	fromdt = DateTime1.format('DD-MM-YY HH:mm');
+//	var DateTime2 = moment(tdt);
+//	todt = DateTime2.format('DD-MM-YY HH:mm');
+	
+	document.getElementById("ftdt").value = fdt + ' - ' + tdt;
 	
 	$('#loadingLoad,#loadingTemp,#loadingVib').show();
 		
@@ -157,8 +204,7 @@ function smartCheckChart(assetId, fdt,tdt){
 					
 						drawAxisLoad(data);
 						drawAxisTemp(data);
-						drawAxisVib(data);
-						
+						drawAxisVib(data);						
 						drawAxisTable(data);
 						  
 					}
@@ -181,6 +227,13 @@ function drawAxisLoad(data){
 	var axis4Load=[];
 	var loadTime = [];
 	
+
+	if(axisLoad == ""){	
+		document.getElementById('showAxisLoad').innerHTML= "No data Found";
+		
+	}else{
+	    
+		document.getElementById('showAxisLoad').style.display = "none";
 	
     for(var key in axisLoad){				
 	
@@ -330,7 +383,7 @@ function drawAxisLoad(data){
 	  		data: axisLoadData,
 	    	options: axisLoadOptions
 	  	});
-	
+	}
 }
 
 function drawAxisTemp(data){
@@ -342,6 +395,15 @@ function drawAxisTemp(data){
 	var axis3Temp=[];
 	var axis4Temp=[];
 	var tempTime = [];
+	
+	
+	if(axisTemp == ""){		
+		document.getElementById('showAxisTemp').innerHTML= "No data Found";
+		
+	}else{
+	    		
+		document.getElementById('showAxisTemp').style.display = "none";
+
 	
 	
     for(var key in axisTemp){				
@@ -490,7 +552,7 @@ function drawAxisTemp(data){
 	  		data: axisTempData,
 	    	options: axisTempOptions
 	  	});
-	
+	}
 }
 
 function drawAxisVib(data){
@@ -502,160 +564,174 @@ function drawAxisVib(data){
 	var axis4Vib=[];
 	var vibTime = [];
 	
-	
-    for(var key in axisVib){				
-	
-    	axis1Vib.push(axisVib[key].Axis1_Vib.minvalue,axisVib[key].Axis1_Vib.maxvalue,axisVib[key].Axis1_Vib.firstvalue,axisVib[key].Axis1_Vib.lastvalue);
-    	axis2Vib.push(axisVib[key].Axis2_Vib.minvalue,axisVib[key].Axis2_Vib.maxvalue,axisVib[key].Axis2_Vib.firstvalue,axisVib[key].Axis2_Vib.lastvalue);
-    	axis3Vib.push(axisVib[key].Axis3_Vib.minvalue,axisVib[key].Axis3_Vib.maxvalue,axisVib[key].Axis3_Vib.firstvalue,axisVib[key].Axis3_Vib.lastvalue);
-    	axis4Vib.push(axisVib[key].Axis4_Vib.minvalue,axisVib[key].Axis4_Vib.maxvalue,axisVib[key].Axis4_Vib.firstvalue,axisVib[key].Axis4_Vib.lastvalue);
-			
-    	vibTime.push(axisVib[key].Axis1_Vib.firsttime,axisVib[key].Axis1_Vib.mintime,axisVib[key].Axis1_Vib.maxtime,axisVib[key].Axis1_Vib.lasttime);
+	if(axisVib == ""){
 
-    }
+		document.getElementById('showAxisVib').innerHTML= "No data Found";
+	}else{
 
-	var minTime = moment(_.min(vibTime));
-	var maxTime = moment(_.max(vibTime));
-	var duration = moment.duration(maxTime.diff(minTime));
-	var asMinutes = duration.asMinutes();
-	var duration1 = moment.duration(maxTime.diff(minTime));
-	var asHours = duration1.asHours();
+		document.getElementById('showAxisVib').style.display= "none";
 
-	if(asMinutes > 0 && asMinutes <= 60){
-		unitChart1 = 'minute';
-		unitStepSizeChart1 = 5; 
-	} else if(asMinutes > 60 && asMinutes <= 120){
-		unitChart1 = 'minute';
-		unitStepSizeChart1 = 10; 
-	} else if(asMinutes > 120 && asMinutes <= 240){
-		unitChart1 = 'minute';
-		unitStepSizeChart1 = 15; 
-	} else if(asMinutes > 240 && asHours >= 4){
-		unitChart1 = 'hour';
-		unitStepSizeChart1 = 1; 
-	}
-	
-									
-	var axisVibData = {
-		labels: vibTime,
-			datasets: 
-			[					
-				 {
-					 label: "Axis 1",
-					 borderColor: 'rgb(78,176,153)',backgroundColor: 'rgb(78,176,153)',
-					 fill: false,pointRadius: 0,lineTension: 0,radius: 5,
-					 data: axis1Vib
-		         },
-		         {
-		        	 label: "Axis 2",
-		        	 borderColor: 'rgb(195, 184, 78)',backgroundColor: 'rgb(195, 184, 78)',
-		        	 fill: false,pointRadius: 0,lineTension: 0,radius: 5,
-		        	 data: axis2Vib
-		          },
-		          {
-		        	  label: "Axis 3",
-		        	  borderColor: 'rgb(178, 75, 9)',backgroundColor: 'rgb(178, 75, 9)',
-		        	  fill: false, pointRadius: 0,lineTension: 0,radius: 5,
-		        	  data: axis3Vib
-				   },
-				   {
-					   label: "Axis 4",
-					   borderColor: 'rgb(162, 143, 188)',backgroundColor: 'rgb(162, 143, 188)',
-					   pointRadius: 0,fill: false,lineTension: 0,radius: 5,
-					   data: axis4Vib
-					}
-			  ]
-	};
-	 					 
-				
-	var  axisVibOptions = {
-			responsive: true,
-			maintainAspectRatio: false,
-			legend: {
-				display: true,
-				position : 'right',
-				labels: {
-					fontSize: 10
-				}
-			},
-			tooltips: {
-				mode: 'index',
-				intersect: false,
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			crosshairs: {
-				color: 'grey',
-				lineWidth: 1
-			},
-			scales: {
-				xAxes: [{
-					type: 'time',
-					time: {
-						unit: unitChart1,
-						format: "YYYY-MM-DD hh:mm",
-						unitStepSize: unitStepSizeChart1,
-						displayFormats: {
-							'minute': 'hh:mm',
-							'hour': 'hh:mm'
+		for(var key in axisVib){				
+
+			axis1Vib.push(axisVib[key].Axis1_Vib.minvalue,axisVib[key].Axis1_Vib.maxvalue,axisVib[key].Axis1_Vib.firstvalue,axisVib[key].Axis1_Vib.lastvalue);
+			axis2Vib.push(axisVib[key].Axis2_Vib.minvalue,axisVib[key].Axis2_Vib.maxvalue,axisVib[key].Axis2_Vib.firstvalue,axisVib[key].Axis2_Vib.lastvalue);
+			axis3Vib.push(axisVib[key].Axis3_Vib.minvalue,axisVib[key].Axis3_Vib.maxvalue,axisVib[key].Axis3_Vib.firstvalue,axisVib[key].Axis3_Vib.lastvalue);
+			axis4Vib.push(axisVib[key].Axis4_Vib.minvalue,axisVib[key].Axis4_Vib.maxvalue,axisVib[key].Axis4_Vib.firstvalue,axisVib[key].Axis4_Vib.lastvalue);
+
+			vibTime.push(axisVib[key].Axis1_Vib.firsttime,axisVib[key].Axis1_Vib.mintime,axisVib[key].Axis1_Vib.maxtime,axisVib[key].Axis1_Vib.lasttime);
+
+		}
+
+		var minTime = moment(_.min(vibTime));
+		var maxTime = moment(_.max(vibTime));
+		var duration = moment.duration(maxTime.diff(minTime));
+		var asMinutes = duration.asMinutes();
+		var duration1 = moment.duration(maxTime.diff(minTime));
+		var asHours = duration1.asHours();
+
+		if(asMinutes > 0 && asMinutes <= 60){
+			unitChart1 = 'minute';
+			unitStepSizeChart1 = 5; 
+		} else if(asMinutes > 60 && asMinutes <= 120){
+			unitChart1 = 'minute';
+			unitStepSizeChart1 = 10; 
+		} else if(asMinutes > 120 && asMinutes <= 240){
+			unitChart1 = 'minute';
+			unitStepSizeChart1 = 15; 
+		} else if(asMinutes > 240 && asHours >= 4){
+			unitChart1 = 'hour';
+			unitStepSizeChart1 = 1; 
+		}
+
+
+		var axisVibData = {
+				labels: vibTime,
+				datasets: 
+					[					
+						{
+							label: "Axis 1",
+							borderColor: 'rgb(78,176,153)',backgroundColor: 'rgb(78,176,153)',
+							fill: false,pointRadius: 0,lineTension: 0,radius: 5,
+							data: axis1Vib
+						},
+						{
+							label: "Axis 2",
+							borderColor: 'rgb(195, 184, 78)',backgroundColor: 'rgb(195, 184, 78)',
+							fill: false,pointRadius: 0,lineTension: 0,radius: 5,
+							data: axis2Vib
+						},
+						{
+							label: "Axis 3",
+							borderColor: 'rgb(178, 75, 9)',backgroundColor: 'rgb(178, 75, 9)',
+							fill: false, pointRadius: 0,lineTension: 0,radius: 5,
+							data: axis3Vib
+						},
+						{
+							label: "Axis 4",
+							borderColor: 'rgb(162, 143, 188)',backgroundColor: 'rgb(162, 143, 188)',
+							pointRadius: 0,fill: false,lineTension: 0,radius: 5,
+							data: axis4Vib
 						}
-	             },
-            	 ticks: {
-            		 autoSkip: true,
-            	     maxTicksLimit: 20
-            	 },
-            	 scaleLabel: {
-            		 display: true,
-	                 labelString: 'Time',
-	                 fontSize: 12,
-	                 fontColor: "black"
-	             },
-	             gridLines: {
-	            	 display:false
-	             }
-			}],
-            
-			yAxes: [{
-	            	horizontalAlign: "left",
-	                verticalAlign: "center",
-	                scaleLabel: {
-	                    display: true,
-	                    labelString: 'Vibration (%)',
-	                    fontSize: 12,
-	                },
-	                ticks: {
-	                	scaleOverride : true,
-	                    scaleSteps : 10,
-	                    scaleStepWidth : 50,
-	                    min: 0 
-	                },
-	                gridLines: {
-	                    display:false
-	                }
-            	}]
-			}
-   
-    	}
+						]
+		};
 
-	var axisVibCtx = $("#axisvibration");
 
-	if(window.chart3 != undefined)
-		window.chart3.destroy();
-	  	window.chart3 = new Chart(axisVibCtx, {
-	  		type: "line",
-	  		data: axisVibData,
-	    	options: axisVibOptions
-	  	});
-	
+		var  axisVibOptions = {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: true,
+					position : 'right',
+					labels: {
+						fontSize: 10
+					}
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				crosshairs: {
+					color: 'grey',
+					lineWidth: 1
+				},
+				scales: {
+					xAxes: [{
+						type: 'time',
+						time: {
+							unit: unitChart1,
+							format: "YYYY-MM-DD hh:mm",
+							unitStepSize: unitStepSizeChart1,
+							displayFormats: {
+								'minute': 'hh:mm',
+								'hour': 'hh:mm'
+							}
+						},
+						ticks: {
+							autoSkip: true,
+							maxTicksLimit: 20
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Time',
+							fontSize: 12,
+							fontColor: "black"
+						},
+						gridLines: {
+							display:false
+						}
+					}],
+
+					yAxes: [{
+						horizontalAlign: "left",
+						verticalAlign: "center",
+						scaleLabel: {
+							display: true,
+							labelString: 'Vibration (%)',
+							fontSize: 12,
+						},
+						ticks: {
+							scaleOverride : true,
+							scaleSteps : 10,
+							scaleStepWidth : 50,
+							min: 0 
+						},
+						gridLines: {
+							display:false
+						}
+					}]
+				}
+
+		}
+
+		var axisVibCtx = $("#axisvibration");
+
+		if(window.chart3 != undefined)
+			window.chart3.destroy();
+		window.chart3 = new Chart(axisVibCtx, {
+			type: "line",
+			data: axisVibData,
+			options: axisVibOptions
+		});
+}
 }
 
 function drawAxisTable(data){
 	
+	console.log(data,"axisTable")
 	var smartTableData = data[1];
 	var axisTable = smartTableData[0];
 
+
+	
+	if(axisTable == ""){
+	 $('#myTable').empty()
+     var newRow = $("<tr><td>no results found</td></tr>");
+     $("#myTable").append(newRow);
+	}
 	//axis Load Table
 	document.getElementById("ax1TS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
 	document.getElementById("ax1L").innerHTML = axisTable.Axis1_Load+"%";

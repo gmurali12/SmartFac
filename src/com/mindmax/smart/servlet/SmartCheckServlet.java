@@ -65,7 +65,7 @@ public class SmartCheckServlet extends HttpServlet {
 		}
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
-		response.setCharacterEncoding("utf-8");
+		
 
 		out.print(jsonArray);
 
@@ -100,6 +100,8 @@ public class SmartCheckServlet extends HttpServlet {
 
 		fromDate = request.getParameter("fromDT");
 		toDate = request.getParameter("toDT");
+		
+		System.out.println(fromDate+"&&&&&&&&&"+toDate);
 
 		String dateFilter = SmartUtil.populateDateFilter(fromDate, toDate);
 
