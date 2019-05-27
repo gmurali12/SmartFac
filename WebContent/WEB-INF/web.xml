@@ -16,14 +16,23 @@
 		<servlet-name>AssetServlet</servlet-name>
 		<url-pattern>/getAssetDetails</url-pattern>
 	</servlet-mapping>
-
-		<servlet>
+	
+	<servlet>
 		<servlet-name>SmartCheckServlet</servlet-name>
     	<servlet-class>com.mindmax.smart.servlet.SmartCheckServlet</servlet-class>
 	</servlet>	
 	<servlet-mapping>
 		<servlet-name>SmartCheckServlet</servlet-name>
-		<url-pattern>/getSmartheckDetails</url-pattern>
+		<url-pattern>/getSmartCheckDetails</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SmartElectronicsServlet</servlet-name>
+    	<servlet-class>com.mindmax.smart.servlet.SmartElectronicsServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>SmartElectronicsServlet</servlet-name>
+		<url-pattern>/getSmartElectronicsDetails</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

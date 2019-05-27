@@ -109,7 +109,7 @@
 						</div>
 					</a>
 					
-					<a href ="#">
+					<a href ="smartElectronics.jsp">
 						<div class="col-md-2">
 							<div class="card">
 							    <div class="box">
