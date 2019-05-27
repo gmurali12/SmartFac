@@ -23,6 +23,7 @@ function changeName(assetName){
      
      if(strUser==0){
     	
+    	 document.getElementById("validation").style.display = "block";
     	 document.getElementById("validation").innerHTML = "Choose Asset Name";	
     	 
      }else{
@@ -163,7 +164,7 @@ function smartCheckChart(assetId, fdt,tdt){
 		
 	  $(function(){
 		  $.ajax({
-				url : "getSmartheckDetails",
+				url : "getSmartCheckDetails",
 				method : "GET",
 				 data:{
 					 assetId:assetId,
@@ -175,6 +176,7 @@ function smartCheckChart(assetId, fdt,tdt){
 				contentType: "application/json",
 				success : function(data){
 
+					console.log(data)
 					$('#loadingLoad,#loadingTemp,#loadingVib').hide();
 										
 					var dLen = data.length;
