@@ -1,0 +1,14 @@
+{
+  "displayName": "Smart Monitor",
+  "appVersion": "1.0",
+  "appCopyright": "© MindMax 2019",
+  "links": {
+    "default": [
+      {
+        "type": "WWW",
+        "name": "DEV Information",
+        "value": "https://www.mindmaxtech.com/"
+      }
+    ]
+  }
+}
