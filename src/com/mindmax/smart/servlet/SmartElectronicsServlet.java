@@ -125,22 +125,28 @@ public class SmartElectronicsServlet extends HttpServlet {
 					"application/json");
 			myURLConnection.setDoOutput(true);
 			myURLConnection.connect();
+			if(myURLConnection.getResponseCode() == 400){
+				PrintWriter out = response.getWriter();
+				response.setContentType("application/json");
+				out.print("BAD_REQUEST, interval aligned");
+				
+			} else{
+				InputStream inputStream = myURLConnection.getInputStream();
+	
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						inputStream));
+	
+				while (str != null) {
+					str = br.readLine();
+					data = data + str;
+				}
+	
+				jsonArray = new JSONArray(data);
+				System.out.println("Inside getSmartElectronicsChartData - Time Taken: "
+						+ (System.currentTimeMillis() - startTime) / 1000
+						+ " seconds");
 
-			InputStream inputStream = myURLConnection.getInputStream();
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					inputStream));
-
-			while (str != null) {
-				str = br.readLine();
-				data = data + str;
 			}
-
-			jsonArray = new JSONArray(data);
-			System.out.println("Inside getSmartElectronicsChartData - Time Taken: "
-					+ (System.currentTimeMillis() - startTime) / 1000
-					+ " seconds");
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -191,22 +197,28 @@ public class SmartElectronicsServlet extends HttpServlet {
 					"application/json");
 			myURLConnection.setDoOutput(true);
 			myURLConnection.connect();
-
-			inputStream = myURLConnection.getInputStream();
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					inputStream));
-
-			while (str != null) {
-				str = br.readLine();
-				data = data + str;
+			if(myURLConnection.getResponseCode() == 400){
+				PrintWriter out = response.getWriter();
+				response.setContentType("application/json");
+				out.print("BAD_REQUEST, interval aligned");
+				
+			}else{
+				inputStream = myURLConnection.getInputStream();
+	
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						inputStream));
+	
+				while (str != null) {
+					str = br.readLine();
+					data = data + str;
+				}
+	
+				jsonArray = new JSONArray(data);
+	
+				System.out.println("Inside getSmartElectronicsTableData - Time Taken: "
+						+ (System.currentTimeMillis() - startTime) / 1000
+						+ " seconds");
 			}
-
-			jsonArray = new JSONArray(data);
-
-			System.out.println("Inside getSmartElectronicsTableData - Time Taken: "
-					+ (System.currentTimeMillis() - startTime) / 1000
-					+ " seconds");
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
