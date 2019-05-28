@@ -1,3 +1,152 @@
+
+
+ getAssetDetails();
+
+$(document).ready(function() {
+	  $('#myModal').modal('show');
+	  $('[data-toggle="tooltip"]').tooltip({title:'Click here to change asset details!', delay :500,placement: "bottom"}); 
+	});
+
+
+function changeAssetName(){
+	 $('#myModal').modal('show');
+}
+
+
+
+
+function changeName(assetName){
+
+	
+	 var e = document.getElementById("assetName");
+     var strUser = e.options[e.selectedIndex].value;
+     
+     if(strUser==0){
+    	
+    	 document.getElementById("validation").style.display = "block";
+    	 document.getElementById("validation").innerHTML = "Choose Asset Name";	
+    	 
+     }else{
+    	 
+    	 document.getElementById("validation").style.display = "none";	 
+     
+	document.getElementById("dateButton").style.display = "none";	
+	document.getElementById("selectAssetName").style.display = "none";
+	
+	var fDt = moment().startOf('day').format('DD-MM-YYYY HH:mm');
+	var tDt = moment().endOf('day').format('DD-MM-YYYY HH:mm');
+	
+	document.getElementById("ftdt").value = fDt + ' - ' + tDt;
+	
+
+	 
+	//Date time picker
+     var assetId;
+
+	 	  $('input[name="datetimes"]').daterangepicker({
+	 		  "showDropdowns": true,
+	 		  "opens": "left",
+	 		  ranges: {
+	 			  'Today': [moment().startOf('day'), moment()],
+	 		        'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+	 		        'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
+	 		        'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
+	 		        'This Month': [moment().startOf('month'), moment().endOf('month')],
+	 		        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	 		    },
+	 	    timePicker: true,
+	 	    // startDate: moment().startOf('hour'),
+	 	    // endDate: moment().startOf('hour').add(32, 'hour'),
+	 	    autoUpdateInput: false,
+	 	    locale: {
+	 	      format: 'DD-MM-YY',
+	 	      cancelLabel: 'Clear'
+	 	    }
+	 	  }, function(start, end, label) {
+	 		  
+	 		  /* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
+	 		  
+	 		   fDt = start.format('DD-MM-YYYY HH:mm');
+	 		   tDt = end.format('DD-MM-YYYY HH:mm');		 		  
+	 		   smartCheckChart(assetId,fDt,tDt);
+	 		
+
+	 	  });
+	 	  
+	 	  $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+	 	      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+	 	  });
+	 	  
+	 	  $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+	 	      $(this).val('');
+	 	  });
+
+
+	$.ajax({
+		url : "getAssetDetails",
+		method : "GET",		
+		cache: false,
+		datatype : "application/json",
+		contentType: "application/json;	 charset=utf-8",
+		success : function(response){				
+
+			assetId = response.assetId;
+
+			if(response.name === $('#assetName').val()){				
+
+				document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
+				document.getElementById("dateButton").style.display = "block";
+				document.getElementById("dateTime").style.display = "block";
+				document.getElementById("selectAssetName").style.display = "block";
+				if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'false'){
+					document.getElementById("dateButton").className = "label label-danger";
+				} else{
+					document.getElementById("dateButton").className = "label label-success";
+				}
+
+				if(response.aspects[0].variables[1].name === 'lastUpdated'){
+					document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
+				}
+			}else{
+				document.getElementById("selectAssetName").style.display = "none";
+				document.getElementById("dateButton").style.display = "none";
+				document.getElementById("dateTime").style.display = "none";
+			}
+
+			$('#myModal').modal('hide');
+
+			smartCheckChart(response.assetId,fDt,tDt);
+
+		}
+	});
+     }
+}
+
+
+function getAssetDetails(fDt,tDt){
+	 $.ajax({
+		  url : "getAssetDetails",
+			method : "GET",		
+			cache: false,
+			datatype : "application/json",
+			contentType: "application/json;	 charset=utf-8",
+			success : function(response){
+
+				if(response){
+				var selectName = document.createElement('option');
+				var  selectHTML = "<option value='" + response.name + "'>" + response.name + "</option>";				
+				
+				selectName.innerHTML = selectHTML;
+				document.getElementById("assetName").add(selectName);
+				}
+			
+			},
+			error:function(error){
+				console.log(error.responseText,"AssetDetailsError") 
+			}
+	  });
+}
+
 //Date time picker
 
 var fDt;

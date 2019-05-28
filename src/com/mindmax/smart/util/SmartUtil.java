@@ -21,17 +21,17 @@ public class SmartUtil {
 				startCal.set(Calendar.HOUR, 0);
 				startCal.set(Calendar.MINUTE,0);
 				startCal.set(Calendar.SECOND,0);
-				//startCal.add(Calendar.DATE, -1);
 				startDate = startCal.getTime();
-				System.out.println("startDate"+startDate);
 				
 				Calendar endCal = Calendar.getInstance();
 				endCal.set(Calendar.HOUR,23);
 				endCal.set(Calendar.MINUTE,0);
 				endCal.set(Calendar.SECOND,0);
-				
 				endDate = endCal.getTime();
-				System.out.println("endDate"+endDate);
+				
+				System.out.println("Inside IF ");
+				System.out.println("startDate->"+startDate);
+				System.out.println("endDate->"+endDate);
 
 			} else {
 
@@ -47,17 +47,27 @@ public class SmartUtil {
 
 				Calendar endCal = Calendar.getInstance();
 				date = sdf.parse(toDate);
-				System.out.println(date);
 				endCal.setTime(date);
 				endCal.set(Calendar.HOUR,0);
 				endCal.set(Calendar.MINUTE,0);
 				endCal.set(Calendar.SECOND,0);
+				
+
+				int diffInDays = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+				if (diffInDays >30) {
+					endCal.set(Calendar.HOUR_OF_DAY, 0);
+				}
+				
 				endDate = endCal.getTime();
-				System.out.println(endDate+"endDate");
+				System.out.println("Inside ELSE ");
+				System.out.println("startDate->"+startDate);
+				System.out.println("endDate->"+endDate);
+
 				
 			}
 
 			filterString = populateFilterWithDate(startDate, endDate);
+			System.out.println("filterString----->"+filterString);
 
 		} catch (Exception e) {
 			System.out.println("INVALID DATE....");
@@ -102,22 +112,16 @@ public class SmartUtil {
 		long diffHours = diff / (60 * 60 * 1000);
 		int diffInDays = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
 
-		System.out.println("diffHours:"+diffHours);
-		System.out.println("diffInDays:"+diffInDays);
-		
-		if (diffInDays >90) {
-			filterString.add("&intervalUnit=hour&intervalValue=24");
-			return filterString;
-		} else if (diffInDays >30 && diffInDays <=90) {
-			filterString.add("&intervalUnit=hour&intervalValue=8");
+		if (diffInDays >30) {
+			filterString.add("&intervalUnit=day&intervalValue=1");
 			return filterString;
 		} else if (diffInDays >= 2 && diffInDays <=30) {
 			filterString.add("&intervalUnit=hour&intervalValue=4");
 			return filterString;
-		} else if (diffHours >= 8 && diffHours < 48) {
+		} else if (diffHours >= 24 && diffHours < 48) {
 			filterString.add("&intervalUnit=hour&intervalValue=1");
 			return filterString;
-		} else if (diffHours >= 2 && diffHours < 8) {
+		} else if (diffHours >= 2 && diffHours < 24) {
 			filterString.add("&intervalUnit=minute&intervalValue=10");
 			return filterString;
 		} else{

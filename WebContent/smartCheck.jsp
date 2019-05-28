@@ -32,9 +32,15 @@
 <script src="https://static.eu1.mindsphere.io/osbar/v4/js/main.min.js"></script>
 	<script>
       _mdsp.init({
-        title: "SMARTFAC",
-        appId: "_mdspcontent",
-        appInfoPath: ""
+    	  title: "SMARTFAC",
+    	  appId: "_mdspcontent",
+    	  initialize: true,
+    	  appInfoPath: "assets/json/app-info.json",
+    	  polyfills: {
+    	        es5adapter: true,
+    	        promise: false,
+    	        webcomponents: true
+    	    }
        });
   	</script>
  
@@ -92,7 +98,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<canvas id="axisload" class="ct-chart" style="max-height:160px !important; height:160px !important"></canvas>
+									<canvas id="axisload" class="ct-chart" width="604px" height="180px" style="max-height:160px !important; height:160px !important"></canvas>
 								</div><hr>
 								
 								<div class="panel-heading">
@@ -105,7 +111,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<canvas id="axistemperature" class="ct-chart" style="max-height:160px !important; height:160px !important"></canvas>
+									<canvas id="axistemperature" class="ct-chart" width="604px" height="180px" style="max-height:160px !important; height:160px !important"></canvas>
 								</div><hr>
 								
 								<div class="panel-heading">
@@ -118,7 +124,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<canvas id="axisvibration" class="ct-chart" style="max-height:160px !important; height:160px !important"></canvas>
+									<canvas id="axisvibration" class="ct-chart" width="604px" height="180px"  style="max-height:160px !important; height:160px !important"></canvas>
 								</div>
 														
 							</div>

@@ -110,7 +110,9 @@ public class SmartCheckServlet extends HttpServlet {
 			URL url = new URL("" + SmartConstant.AGGREGATE_TIMESERIES_URL
 					+ assetId + SmartConstant.ASPECT_NAME
 					+ SmartConstant.SMART_CHECK_SELECT + dateFilter);
-
+			System.out.println("url------>"+url);
+			
+			
 			myURLConnection = (HttpURLConnection) url.openConnection();
 
 			// Set Auth TOken

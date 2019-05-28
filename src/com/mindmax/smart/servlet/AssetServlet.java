@@ -77,26 +77,34 @@ public class AssetServlet extends HttpServlet {
 					"application/json");
 			myURLConnection.setDoOutput(true);
 			myURLConnection.connect();
+			
+			if(myURLConnection.getResponseCode() == 401){
+				PrintWriter out = response.getWriter();
+				response.setContentType("application/json");
+				out.print("INVALID_TOKEN");
+				
+			}else{
 
-			InputStream inputStream = myURLConnection.getInputStream();
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					inputStream));
-
-			while (str != null) {
-				str = br.readLine();
-				data = data + str;
+				InputStream inputStream = myURLConnection.getInputStream();
+	
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						inputStream));
+	
+				while (str != null) {
+					str = br.readLine();
+					data = data + str;
+				}
+	
+				AssetVO assetVO = parseVoFromRequest(data, AssetVO.class);
+	
+				Gson gson = new Gson();
+				String jsonInString = gson.toJson(assetVO);
+				JSONObject jsonObj = new JSONObject(jsonInString);
+	
+				PrintWriter out = response.getWriter();
+				response.setContentType("application/json");
+				out.print(jsonObj);
 			}
-
-			AssetVO assetVO = parseVoFromRequest(data, AssetVO.class);
-
-			Gson gson = new Gson();
-			String jsonInString = gson.toJson(assetVO);
-			JSONObject jsonObj = new JSONObject(jsonInString);
-
-			PrintWriter out = response.getWriter();
-			response.setContentType("application/json");
-			out.print(jsonObj);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
