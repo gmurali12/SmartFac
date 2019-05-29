@@ -10,28 +10,28 @@
 		<div class="row">
 
 			<div class="col-md-2"></div>
-			<div class="col-md-4" style="text-align: center">
+			<div class="col-md-3" style="text-align: center">
 				<h2 style="margin-top: 30px; !important" id="headName"
 					class="headfont"></h2>
 				<span title="Asset Last Connected Status" id="lastdiscon"> </span>
 			</div>
-			<div class="col-md-4">
-				<!-- <span class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"><i class="fa fa-calendar"></i> <span id="dateTime"> </span></span> -->
-			</div>
+<!-- 			<div class="col-md-4">
+				<span class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"><i class="fa fa-calendar"></i> <span id="dateTime"> </span></span>
+			</div> -->
 
-			<div id="col-md-2" id="showAssetName">
+			<div id="col-md-4" id="showAssetName">
 				<div class="nav navbar-nav navbar-right"
-					style="margin-right: 20px; margin-top: 30px">
-					<span id="dateButton" class="btn btn-primary"
+					style="margin-right: 20px; margin-top: 4%;">
+					<span id="dateButton" 
 						title="Date-Time (YYYY-MM-DD HH:mm:ss)"> 
 						<span id="dateTime"> </span>
 					</span>
 				</div>
 			</div>
-			<div id="col-md-2" id="showAssetName">
+			<div id="col-md-3" id="showAssetName">
 				<div class="nav navbar-nav navbar-right"
-					style="margin-right: 20px; margin-top: 30px">
-					<span class="btn btn-info" data-toggle="tooltip"
+					style="margin-right: 20px; margin-top: 3%;">
+					<span  data-toggle="tooltip"
 						title="Click here to change asset details" id="selectAssetName"
 						onclick="changeAssetName()"></span>
 				</div>

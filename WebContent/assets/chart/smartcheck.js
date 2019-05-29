@@ -1,6 +1,11 @@
 
 
  getAssetDetails();
+ 
+ document.getElementById("assetForm").style.display = 'none';
+ document.getElementById("assetName").style.display='none';
+ document.getElementById("assetName").style.display = 'none';
+
 
 $(document).ready(function() {
 	  $('#myModal').modal('show');
@@ -94,6 +99,7 @@ function changeName(assetName){
 
 			if(response.name === $('#assetName').val()){				
 
+				document.getElementById("selectAssetName").className = "btn btn-info";
 				document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
 				document.getElementById("dateButton").style.display = "block";
 				document.getElementById("dateTime").style.display = "block";
@@ -133,16 +139,25 @@ function getAssetDetails(fDt,tDt){
 			success : function(response){
 
 				if(response){
+					
+				document.getElementById("errorMsg").style.display = 'none';
+				document.getElementById("assetForm").style.display = 'block';
+				document.getElementById("assetName").style.display='block';
+				
 				var selectName = document.createElement('option');
 				var  selectHTML = "<option value='" + response.name + "'>" + response.name + "</option>";				
 				
 				selectName.innerHTML = selectHTML;
-				document.getElementById("assetName").add(selectName);
+				document.getElementById("assetName").add(selectName);				
 				}
 			
 			},
 			error:function(error){
-				console.log(error.responseText,"AssetDetailsError") 
+				
+				document.getElementById("errorMsg").style.display = 'block';
+			    document.getElementById("assetForm").style.display = 'none';
+			    document.getElementById("assetName").style.display='none';
+			    document.getElementById("errorMsg").innerHTML = error.responseText;
 			}
 	  });
 }

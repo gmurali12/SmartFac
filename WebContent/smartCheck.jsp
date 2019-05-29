@@ -70,12 +70,21 @@
 										<div class="modal-header">
 											<h4 class="modal-title">Asset Name</h4>
 										</div>
-										<div class="modal-body" style="text-align: center">
-											<form id="assetForm" method="post" action="">
-												<select name="assetName" id="assetName">
-													<option value="">Select Asset Name</option>
-												</select> <span id="validation" class="text-danger"></span>
-											</form>
+										<div class="col-md-12 modal-body"
+											style="left: 30%;">
+											<div>
+												<span class="text-danger" id="errorMsg"></span>
+											</div>
+											<div class = "col-md-4">
+												<form id="assetForm" method="post" action="">
+													<select name="assetName" id="assetName">
+														<option value="">Select Asset Name</option>
+													</select>
+												</form>
+											</div>
+											<div  class = "col-md-4" style="padding-top: 6px;">
+												<span id="validation" class="text-danger" ></span>
+											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-primary"
