@@ -20,7 +20,7 @@ function changeAssetName(){
 
 
 
-function changeName(assetName){
+function changeAssetDetails(assetName){
 
 	
 	 var e = document.getElementById("assetName");

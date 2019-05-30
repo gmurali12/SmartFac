@@ -64,7 +64,7 @@ function changeAssetDetails(assetName){
 			}
 		}, function(start, end, label) {
 
-			/* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
+			/* $('#loadingHyPress,#loadingTemp,#loadingVib').show(); */
 
 			fDt = start.format('DD-MM-YYYY HH:mm');
 			tDt = end.format('DD-MM-YYYY HH:mm');		 		  
@@ -238,7 +238,7 @@ function smartCheckChart(assetId, fdt,tdt){
 	
 	document.getElementById("ftdt").value = fdt + ' - ' + tdt;
 	
-	$('#loadingLoad,#loadingTemp,#loadingVib').show();
+	$('#loadingHyPress,#loadingTemp,#loadingVib').show();
 		
 	  $(function(){
 		  $.ajax({
@@ -254,7 +254,7 @@ function smartCheckChart(assetId, fdt,tdt){
 				contentType: "application/json",
 				success : function(data){
 
-					$('#loadingLoad,#loadingTemp,#loadingVib').hide();
+					$('#loadingHyPress,#loadingTemp,#loadingVib').hide();
 										
 					var dLen = data.length;
 								
