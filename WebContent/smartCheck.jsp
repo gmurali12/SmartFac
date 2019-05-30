@@ -88,7 +88,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-primary"
-												onclick="changeName(this.value);">Search</button>
+												onclick="changeAssetDetails(this.value);">Search</button>
 										</div>
 									</div>
 								</div>

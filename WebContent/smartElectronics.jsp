@@ -80,14 +80,14 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-primary"
-												onclick="changeName(this.value);">Search</button>
+												onclick="changeAssetDetails(this.value);">Search</button>
 										</div>
 									</div>
 								</div>
 							</div>
 
 
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<div class="panel">
 								<div class="panel-heading">
 									<div class="col-md-4">
@@ -127,7 +127,7 @@
 							</div>
 						</div>
 					
-						<div class="col-md-3">
+						<div class="col-md-4">
 					<!-- INPUTS -->
 							<div class="panel">
 								<form action="#" method="POST">
@@ -146,7 +146,7 @@
 									<table class="table table-striped">
 										<thead>
 											<tr>
-												<th></th>
+												<th>Property</th>
 												<th>Status</th>
 											</tr>
 										</thead>

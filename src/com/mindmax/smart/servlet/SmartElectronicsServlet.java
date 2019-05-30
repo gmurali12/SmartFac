@@ -67,7 +67,7 @@ public class SmartElectronicsServlet extends HttpServlet {
 		}
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
-		response.setCharacterEncoding("utf-8");
+		//response.setCharacterEncoding("utf-8");
 
 		out.print(jsonArray);
 

@@ -15,111 +15,123 @@ function changeAssetName(){
 
 
 
-function changeName(assetName){
-
-	
-	 var e = document.getElementById("assetName");
-     var strUser = e.options[e.selectedIndex].value;
-     
-     if(strUser==0){
-    	
-    	 document.getElementById("validation").style.display = "block";
-    	 document.getElementById("validation").innerHTML = "Choose Asset Name";	
-    	 
-     }else{
-    	 
-    	 document.getElementById("validation").style.display = "none";	 
-     
-	document.getElementById("dateButton").style.display = "none";	
-	document.getElementById("selectAssetName").style.display = "none";
-	
-	var fDt = moment().startOf('day').format('DD-MM-YYYY HH:mm');
-	var tDt = moment().endOf('day').format('DD-MM-YYYY HH:mm');
-	
-	document.getElementById("ftdt").value = fDt + ' - ' + tDt;
-	
-
-	 
-	//Date time picker
-     var assetId;
-
-	 	  $('input[name="datetimes"]').daterangepicker({
-	 		  "showDropdowns": true,
-	 		  "opens": "left",
-	 		  ranges: {
-	 			  'Today': [moment().startOf('day'), moment()],
-	 		        'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
-	 		        'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
-	 		        'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
-	 		        'This Month': [moment().startOf('month'), moment().endOf('month')],
-	 		        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-	 		    },
-	 	    timePicker: true,
-	 	    // startDate: moment().startOf('hour'),
-	 	    // endDate: moment().startOf('hour').add(32, 'hour'),
-	 	    autoUpdateInput: false,
-	 	    locale: {
-	 	      format: 'DD-MM-YY',
-	 	      cancelLabel: 'Clear'
-	 	    }
-	 	  }, function(start, end, label) {
-	 		  
-	 		  /* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
-	 		  
-	 		   fDt = start.format('DD-MM-YYYY HH:mm');
-	 		   tDt = end.format('DD-MM-YYYY HH:mm');		 		  
-	 		   smartCheckChart(assetId,fDt,tDt);
-	 		
-
-	 	  });
-	 	  
-	 	  $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-	 	      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-	 	  });
-	 	  
-	 	  $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
-	 	      $(this).val('');
-	 	  });
+function changeAssetDetails(assetName){
 
 
-	$.ajax({
-		url : "getAssetDetails",
-		method : "GET",		
-		cache: false,
-		datatype : "application/json",
-		contentType: "application/json;	 charset=utf-8",
-		success : function(response){				
+	var e = document.getElementById("assetName");
+	var strUser = e.options[e.selectedIndex].value;
 
-			assetId = response.assetId;
+	if(strUser==0){
 
-			if(response.name === $('#assetName').val()){				
+		document.getElementById("validation").style.display = "block";
+		document.getElementById("validation").innerHTML = "Choose Asset Name";	
 
-				document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
-				document.getElementById("dateButton").style.display = "block";
-				document.getElementById("dateTime").style.display = "block";
-				document.getElementById("selectAssetName").style.display = "block";
-				if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'false'){
-					document.getElementById("dateButton").className = "label label-danger";
-				} else{
-					document.getElementById("dateButton").className = "label label-success";
-				}
+	}else{
 
-				if(response.aspects[0].variables[1].name === 'lastUpdated'){
-					document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
-				}
-			}else{
-				document.getElementById("selectAssetName").style.display = "none";
-				document.getElementById("dateButton").style.display = "none";
-				document.getElementById("dateTime").style.display = "none";
+		document.getElementById("validation").style.display = "none";	 
+
+		document.getElementById("dateButton").style.display = "none";	
+		document.getElementById("selectAssetName").style.display = "none";
+
+		var fDt = moment().startOf('day').format('DD-MM-YYYY HH:mm');
+		var tDt = moment().endOf('day').format('DD-MM-YYYY HH:mm');
+
+		document.getElementById("ftdt").value = fDt + ' - ' + tDt;
+
+
+
+		//Date time picker
+		var assetId;
+
+		$('input[name="datetimes"]').daterangepicker({
+			"showDropdowns": true,
+			"opens": "left",
+			ranges: {
+				'Today': [moment().startOf('day'), moment()],
+				'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+				'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
+				'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
+				'This Month': [moment().startOf('month'), moment().endOf('month')],
+				'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+			},
+			timePicker: true,
+			// startDate: moment().startOf('hour'),
+			// endDate: moment().startOf('hour').add(32, 'hour'),
+			autoUpdateInput: false,
+			locale: {
+				format: 'DD-MM-YY',
+				cancelLabel: 'Clear'
 			}
+		}, function(start, end, label) {
 
-			$('#myModal').modal('hide');
+			/* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
 
-			smartCheckChart(response.assetId,fDt,tDt);
+			fDt = start.format('DD-MM-YYYY HH:mm');
+			tDt = end.format('DD-MM-YYYY HH:mm');		 		  
+			smartCheckChart(assetId,fDt,tDt);
 
-		}
-	});
-     }
+
+		});
+
+		$('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+			$(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+		});
+
+		$('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+			$(this).val('');
+		});
+
+
+		$.ajax({
+			url : "getAssetDetails",
+			method : "GET",		
+			cache: false,
+			datatype : "application/json",
+			contentType: "application/json;	 charset=utf-8",
+			success : function(response){				
+
+				assetId = response.assetId;
+				
+				console.log(response,"responseresponse")
+
+				if(response.name === $('#assetName').val()){				
+
+					document.getElementById("selectAssetName").className = "btn btn-info";
+					document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
+					document.getElementById("dateButton").style.display = "block";
+					document.getElementById("dateTime").style.display = "block";
+					document.getElementById("selectAssetName").style.display = "block";
+					if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'false'){
+						document.getElementById("dateButton").className = "label label-danger";
+					} else{
+						document.getElementById("dateButton").className = "label label-success";
+					}
+
+					if(response.aspects[0].variables[1].name === 'lastUpdated'){
+						document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
+					}
+				}else{
+					document.getElementById("selectAssetName").style.display = "none";
+					document.getElementById("dateButton").style.display = "none";
+					document.getElementById("dateTime").style.display = "none";
+				}
+
+				$('#myModal').modal('hide');
+				
+
+				smartCheckChart(response.assetId,fDt,tDt);
+
+			},
+			error : function(error){
+				
+				document.getElementById("errorMsg").style.display = 'block';
+			    document.getElementById("assetForm").style.display = 'none';
+			    document.getElementById("assetName").style.display='none';
+			    document.getElementById("errorMsg").innerHTML = error.responseText;
+				
+			}
+		});
+	}
 }
 
 
@@ -133,6 +145,8 @@ function getAssetDetails(fDt,tDt){
 			success : function(response){
 
 				if(response){
+					
+					console.log(response,"response")
 				var selectName = document.createElement('option');
 				var  selectHTML = "<option value='" + response.name + "'>" + response.name + "</option>";				
 				
@@ -142,58 +156,16 @@ function getAssetDetails(fDt,tDt){
 			
 			},
 			error:function(error){
-				console.log(error.responseText,"AssetDetailsError") 
+				console.log(error.responseText,"AssetDetailsError")
+				document.getElementById("errorMsg").style.display = 'block';
+			    document.getElementById("assetForm").style.display = 'none';
+			    document.getElementById("assetName").style.display='none';
+			    document.getElementById("errorMsg").innerHTML = error.responseText;
 			}
 	  });
 }
 
-//Date time picker
 
-var fDt;
-var tDt;
-
-$(function() {
-	  $('input[name="datetimes"]').daterangepicker({
-		  "showDropdowns": true,
-		  "opens": "left",
-		  ranges: {
-			  'Today': [moment().startOf('day'), moment()],
-		        'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
-		        'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
-		        'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
-		        'This Month': [moment().startOf('month'), moment().endOf('month')],
-		        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-		    },
-	    timePicker: true,
-	    // startDate: moment().startOf('hour'),
-	    // endDate: moment().startOf('hour').add(32, 'hour'),
-	    autoUpdateInput: false,
-	    locale: {
-	      format: 'DD-MM-YY',
-	      cancelLabel: 'Clear'
-	    }
-	  }, function(start, end, label) {
-		  
-		  /* $('#loadingLoad,#loadingTemp,#loadingVib').show(); */
-		  
-		   fDt = start.format('DD-MM-YYYY HH:mm');
-		   tDt = end.format('DD-MM-YYYY HH:mm');	
-		   
-		   getAssetDetails(fDt,tDt)
-
-	  });
-	  
-	  $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-	      $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-	  });
-	  
-	  $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
-	      $(this).val('');
-	  });
-	  document.getElementById("dateButton").style.display = "none";
-	  getAssetDetails(null,null)
-
-	});
 
  function changeName(assetName){
 	
@@ -241,11 +213,14 @@ function getAssetDetails(fDt,tDt){
 				var  selectHTML = "<option value='" + response.name + "'>" + response.name + "</option>";				
 				
 				selectName.innerHTML = selectHTML;
-				document.getElementById("assetName").add(selectName);
-				smartCheckChart(response.assetId,fDt,tDt);
+				document.getElementById("assetName").add(selectName);				
 			},
 			error:function(error){
-				console.log(error.responseText,"AssetDetailsError") 
+				console.log(error.responseText,"AssetDetailsError")
+				document.getElementById("errorMsg").style.display = 'block';
+			    document.getElementById("assetForm").style.display = 'none';
+			    document.getElementById("assetName").style.display='none';
+			    document.getElementById("errorMsg").innerHTML = error.responseText;
 			}
 	  });
 }
@@ -254,12 +229,14 @@ function getAssetDetails(fDt,tDt){
 
 function smartCheckChart(assetId, fdt,tdt){
 	
+	console.log(assetId, fdt,tdt)
+	
 	var DateTime1 = moment(fdt);
 	fromdt = DateTime1.format('DD-MM-YY HH:mm');
 	var DateTime2 = moment(tdt);
 	todt = DateTime2.format('DD-MM-YY HH:mm');
 	
-	document.getElementById("ftdt").value = fromdt + ' - ' + todt;
+	document.getElementById("ftdt").value = fdt + ' - ' + tdt;
 	
 	$('#loadingLoad,#loadingTemp,#loadingVib').show();
 		
@@ -797,57 +774,59 @@ function drawPneumatic(data){
 
 function drawElectronicsTable(data){
 	
-	var tableData = data[1];
+	var tableData = data[1][0];
+	
+	console.log(tableData.Hydraulic_MCB,"Test")
    	
-	if(tableData.Hydraulic_MCB == "true"){
+	if(tableData.Hydraulic_MCB === true){
 		$('#hMPCBStatus').attr('class','label label-success'); $('#hMPCBStatus').text("ON");
 	} else {
 		$('#hMPCBStatus').attr('class','label label-danger'); $('#hMPCBStatus').text("OFF");
 	}
 	
-	if(tableData.Lubrication_MCB == "true"){
+	if(tableData.Lubrication_MCB === true){
 		$('#lMPCBStatus').attr('class','label label-success'); $('#lMPCBStatus').text("ON");
 	} else {
 		$('#lMPCBStatus').attr('class','label label-danger'); $('#lMPCBStatus').text("OFF");
 	}
 	
-	if(tableData.Blower_Fan_MCB == "true"){
+	if(tableData.Blower_Fan_MCB === true){
 		$('#bfMPCBStatus').attr('class','label label-success'); $('#bfMPCBStatus').text("ON");
 	} else {
 		$('#bfMPCBStatus').attr('class','label label-danger'); $('#bfMPCBStatus').text("OFF");
 	}
 	
-	if(tableData.Air_Conditioner_MCB == "true"){
+	if(tableData.Air_Conditioner_MCB === true){
 		$('#acMPCBStatus').attr('class','label label-success'); $('#acMPCBStatus').text("ON");
 	} else {
 		$('#acMPCBStatus').attr('class','label label-danger'); $('#acMPCBStatus').text("OFF");
 	}
 	
-	if(tableData.Lubrication_Level == "true"){
+	if(tableData.Lubrication_Level === true){
 		$('#lLevelStatus').attr('class','label label-success'); $('#lLevelStatus').text("ON");
 	} else {
 		$('#lLevelStatus').attr('class','label label-danger'); $('#lLevelStatus').text("OFF");
 	}
 	
-	if(tableData.Hydraulic_Level == "true"){
+	if(tableData.Hydraulic_Level === true){
 		$('#hLevelStatus').attr('class','label label-success'); $('#hLevelStatus').text("ON");
 	} else {
 		$('#hLevelStatus').attr('class','label label-danger'); $('#hLevelStatus').text("OFF");
 	}
 	
-	if(tableData.Lubrication_Pressure == "true"){
+	if(tableData.Lubrication_Pressure === true){
 		$('#lPressureStatus').attr('class','label label-success'); $('#lPressureStatus').text("ON");
 	} else {
 		$('#lPressureStatus').attr('class','label label-danger'); $('#lPressureStatus').text("OFF");
 	}
 	
-	if(tableData.Air_Pressure == "true"){
+	if(tableData.Air_Pressure === true){
 		$('#airPressureStatus').attr('class','label label-success'); $('#airPressureStatus').text("ON");
 	} else {
 		$('#airPressureStatus').attr('class','label label-danger'); $('#airPressureStatus').text("OFF");
 	}
 	
-	if(tableData.Hydraulic_Pressure == "true"){
+	if(tableData.Hydraulic_Pressure === true){
 		$('#hPressureStatus').attr('class','label label-success'); $('#hPressureStatus').text("ON");
 	} else {
 		$('#hPressureStatus').attr('class','label label-danger'); $('#hPressureStatus').text("OFF");
