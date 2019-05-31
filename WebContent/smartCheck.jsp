@@ -158,10 +158,12 @@
 								<div class="panel-body">
 								<table class="table table-striped">
 										<thead>
+											<tr><th colspan="3">Recent Updated Time: <span id='lastReported'> </span></th></tr>
+										</thead>
+										<thead>
 											<tr>
 												<th>Axis</th>
 												<th>Load</th>
-												<th>Time Stamp</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -169,25 +171,21 @@
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1L"> </td>
-												<td id="ax1TS"> </td>
 												<td><span id='ax1st'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 2</td>
 												<td id="ax2L"> </td>
-												<td id="ax2TS"> </td>
 												<td><span id='ax2st'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 3</td>
 												<td id="ax3L"> </td>
-												<td id="ax3TS"> </td>
 												<td><span id='ax3st'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 4</td>
 												<td id="ax4L"> </td>
-												<td id="ax4TS"> </td>
 												<td><span id='ax4st'> </span></td>
 											</tr>
 										</tbody>
@@ -200,7 +198,6 @@
 											<tr>
 												<th>Axis</th>
 												<th>Temperature</th>
-												<th>Time Stamp</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -208,25 +205,21 @@
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1T"> </td>
-												<td id="ax1TTS"> </td>
 												<td><span id='ax1Tst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 2</td>
 												<td id="ax2T"> </td>
-												<td id="ax2TTS"> </td>
 												<td><span id='ax2Tst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 3</td>
 												<td id="ax3T"> </td>
-												<td id="ax3TTS"> </td>
 												<td><span id='ax3Tst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 4</td>
 												<td id="ax4T"> </td>
-												<td id="ax4TTS"> </td>
 												<td><span id='ax4Tst'> </span></td>
 											</tr>
 										</tbody>
@@ -239,7 +232,6 @@
 											<tr>
 												<th>Axis</th>
 												<th>Vibration</th>
-												<th>Time Stamp</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -247,25 +239,21 @@
 											<tr>
 												<td>Axis 1</td>
 												<td id="ax1V"> </td>
-												<td id="ax1VTS"> </td>
 												<td><span id='ax1Vst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 2</td>
 												<td id="ax2V"> </td>
-												<td id="ax2VTS"> </td>
 												<td><span id='ax2Vst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 3</td>
 												<td id="ax3V"> </td>
-												<td id="ax3VTS"> </td>
 												<td><span id='ax3Vst'> </span></td>
 											</tr>
 											<tr>
 												<td>Axis 4</td>
 												<td id="ax4V"> </td>
-												<td id="ax4VTS"> </td>
 												<td><span id='ax4Vst'> </span></td>
 											</tr>
 										</tbody>

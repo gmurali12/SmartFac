@@ -7,6 +7,9 @@
 			style="width:260px;"></a>
 	</div>
 	<div class="container-fluid">
+		<div class="navbar-btn">
+			<button type="button" id="navigation_toggle" class="btn-toggle-fullwidth"><i class="fa fa-bars" title="Navigation Toggle"></i></button>
+		</div>
 		<div class="row">
 
 			<div class="col-md-2"></div>
@@ -15,9 +18,6 @@
 					class="headfont"></h2>
 				<span title="Asset Last Connected Status" id="lastdiscon"> </span>
 			</div>
-<!-- 			<div class="col-md-4">
-				<span class="btn btn-primary" title="Date-Time (YYYY-MM-DD HH:mm:ss)"><i class="fa fa-calendar"></i> <span id="dateTime"> </span></span>
-			</div> -->
 
 			<div id="col-md-4" id="showAssetName">
 				<div class="nav navbar-nav navbar-right"

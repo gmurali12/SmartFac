@@ -776,8 +776,10 @@ function drawElectronicsTable(data){
 	
 	var tableData = data[1][0];
 	
-	console.log(tableData.Hydraulic_MCB,"Test")
+	console.log(data,"data")
+	console.log(tableData,"tableData")
    	
+	document.getElementById("lastReported").innerHTML = moment(tableData._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
 	if(tableData.Hydraulic_MCB === true){
 		$('#hMPCBStatus').attr('class','label label-success'); $('#hMPCBStatus').text("ON");
 	} else {
@@ -803,32 +805,32 @@ function drawElectronicsTable(data){
 	}
 	
 	if(tableData.Lubrication_Level === true){
-		$('#lLevelStatus').attr('class','label label-success'); $('#lLevelStatus').text("ON");
+		$('#lLevelStatus').attr('class','label label-success'); $('#lLevelStatus').text("OK");
 	} else {
-		$('#lLevelStatus').attr('class','label label-danger'); $('#lLevelStatus').text("OFF");
+		$('#lLevelStatus').attr('class','label label-danger'); $('#lLevelStatus').text("NOT OK");
 	}
 	
 	if(tableData.Hydraulic_Level === true){
-		$('#hLevelStatus').attr('class','label label-success'); $('#hLevelStatus').text("ON");
+		$('#hLevelStatus').attr('class','label label-success'); $('#hLevelStatus').text("OK");
 	} else {
-		$('#hLevelStatus').attr('class','label label-danger'); $('#hLevelStatus').text("OFF");
+		$('#hLevelStatus').attr('class','label label-danger'); $('#hLevelStatus').text("NOT OK");
 	}
 	
 	if(tableData.Lubrication_Pressure === true){
-		$('#lPressureStatus').attr('class','label label-success'); $('#lPressureStatus').text("ON");
+		$('#lPressureStatus').attr('class','label label-success'); $('#lPressureStatus').text("OK");
 	} else {
-		$('#lPressureStatus').attr('class','label label-danger'); $('#lPressureStatus').text("OFF");
+		$('#lPressureStatus').attr('class','label label-danger'); $('#lPressureStatus').text("NOT OK");
 	}
 	
 	if(tableData.Air_Pressure === true){
-		$('#airPressureStatus').attr('class','label label-success'); $('#airPressureStatus').text("ON");
+		$('#airPressureStatus').attr('class','label label-success'); $('#airPressureStatus').text("OK");
 	} else {
-		$('#airPressureStatus').attr('class','label label-danger'); $('#airPressureStatus').text("OFF");
+		$('#airPressureStatus').attr('class','label label-danger'); $('#airPressureStatus').text("NOT OK");
 	}
 	
 	if(tableData.Hydraulic_Pressure === true){
-		$('#hPressureStatus').attr('class','label label-success'); $('#hPressureStatus').text("ON");
+		$('#hPressureStatus').attr('class','label label-success'); $('#hPressureStatus').text("OK");
 	} else {
-		$('#hPressureStatus').attr('class','label label-danger'); $('#hPressureStatus').text("OFF");
+		$('#hPressureStatus').attr('class','label label-danger'); $('#hPressureStatus').text("NOT OK");
 	}
 }

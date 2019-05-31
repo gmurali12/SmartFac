@@ -111,7 +111,8 @@ function changeAssetDetails(assetName){
 				}
 
 				if(response.aspects[0].variables[1].name === 'lastUpdated'){
-					document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
+					//document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
+					document.getElementById("dateTime").innerHTML = moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
 				}
 			}else{
 				document.getElementById("selectAssetName").style.display = "none";
@@ -750,7 +751,8 @@ function drawAxisTable(data){
      $("#myTable").append(newRow);
 	}
 	//axis Load Table
-	document.getElementById("ax1TS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
+	document.getElementById("lastReported").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+	
 	document.getElementById("ax1L").innerHTML = axisTable.Axis1_Load+"%";
 	if(axisTable.Axis1_Load > 100){
 		$('#ax1st').attr('class','label label-danger'); $('#ax1st').text("NOT OK");
@@ -758,7 +760,6 @@ function drawAxisTable(data){
 		$('#ax1st').attr('class','label label-success'); $('#ax1st').text("OK");
 	}
 	
-	document.getElementById("ax2TS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax2L").innerHTML = axisTable.Axis2_Load+"%";
 	if(axisTable.Axis2_Load > 100){
 		$('#ax2st').attr('class','label label-danger'); $('#ax2st').text("NOT OK");
@@ -766,7 +767,6 @@ function drawAxisTable(data){
 		$('#ax2st').attr('class','label label-success'); $('#ax2st').text("OK");
 	}
 	
-	document.getElementById("ax3TS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax3L").innerHTML = axisTable.Axis3_Load+"%";
 	if(axisTable.Axis3_Load > 100){
 		$('#ax3st').attr('class','label label-danger'); $('#ax3st').text("NOT OK");
@@ -774,7 +774,6 @@ function drawAxisTable(data){
 		$('#ax3st').attr('class','label label-success'); $('#ax3st').text("OK");
 	}
 	
-	document.getElementById("ax4TS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax4L").innerHTML = axisTable.Axis4_Load+"%";
 	if(axisTable.Axis4_Load > 100){
 		$('#ax4st').attr('class','label label-danger'); $('#ax4st').text("NOT OK");
@@ -783,7 +782,6 @@ function drawAxisTable(data){
 	}
 	
 	//axis Temp Table
-	document.getElementById("ax1TTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
 	document.getElementById("ax1T").innerHTML = axisTable.Axis1_Temp+"%";
 	if(axisTable.Axis1_Temp > 100){
 		$('#ax1Tst').attr('class','label label-danger'); $('#ax1Tst').text("NOT OK");
@@ -791,7 +789,6 @@ function drawAxisTable(data){
 		$('#ax1Tst').attr('class','label label-success'); $('#ax1Tst').text("OK");
 	}
 	
-	document.getElementById("ax2TTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax2T").innerHTML = axisTable.Axis2_Temp+"%";
 	if(axisTable.Axis2_Temp > 100){
 		$('#ax2Tst').attr('class','label label-danger'); $('#ax2Tst').text("NOT OK");
@@ -799,7 +796,6 @@ function drawAxisTable(data){
 		$('#ax2Tst').attr('class','label label-success'); $('#ax2Tst').text("OK");
 	}
 	
-	document.getElementById("ax3TTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax3T").innerHTML = axisTable.Axis3_Temp+"%";
 	if(axisTable.Axis3_Temp > 100){
 		$('#ax3Tst').attr('class','label label-danger'); $('#ax3Tst').text("NOT OK");
@@ -807,7 +803,6 @@ function drawAxisTable(data){
 		$('#ax3Tst').attr('class','label label-success'); $('#ax3Tst').text("OK");
 	}
 	
-	document.getElementById("ax4TTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax4T").innerHTML = axisTable.Axis4_Temp+"%";
 	if(axisTable.Axis4_Temp > 100){
 		$('#ax4Tst').attr('class','label label-danger'); $('#ax4Tst').text("NOT OK");
@@ -816,7 +811,6 @@ function drawAxisTable(data){
 	}
 	
 	//axis Vib Table
-	document.getElementById("ax1VTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");				    	
 	document.getElementById("ax1V").innerHTML = axisTable.Axis1_Vib+"%";
 	if(axisTable.Axis1_Vib > 100){
 		$('#ax1Vst').attr('class','label label-danger'); $('#ax1Vst').text("NOT OK");
@@ -824,7 +818,6 @@ function drawAxisTable(data){
 		$('#ax1Vst').attr('class','label label-success'); $('#ax1Vst').text("OK");
 	}
 	
-	document.getElementById("ax2VTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax2V").innerHTML = axisTable.Axis2_Vib+"%";
 	if(axisTable.Axis2_Vib > 100){
 		$('#ax2Vst').attr('class','label label-danger'); $('#ax2Vst').text("NOT OK");
@@ -832,7 +825,6 @@ function drawAxisTable(data){
 		$('#ax2Vst').attr('class','label label-success'); $('#ax2Vst').text("OK");
 	}
 	
-	document.getElementById("ax3VTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax3V").innerHTML = axisTable.Axis3_Vib+"%";
 	if(axisTable.Axis3_Vib > 100){
 		$('#ax3Vst').attr('class','label label-danger'); $('#ax3Vst').text("NOT OK");
@@ -840,7 +832,6 @@ function drawAxisTable(data){
 		$('#ax3Vst').attr('class','label label-success'); $('#ax3Vst').text("OK");
 	}
 	
-	document.getElementById("ax4VTS").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");					    	
 	document.getElementById("ax4V").innerHTML = axisTable.Axis4_Vib+"%";
 	if(axisTable.Axis4_Vib.lastvalue > 100){
 		$('#ax4Vst').attr('class','label label-danger'); $('#ax4Vst').text("NOT OK");

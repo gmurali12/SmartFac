@@ -110,7 +110,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<canvas id="motorTemp" class="ct-chart" style="max-height:160px !important; height:160px !important"></canvas>
+									<canvas id="motorTemp" class="ct-chart" width="604px" height="180px" style="max-height:160px !important; height:160px !important"></canvas>
 								</div><hr>
 								
 								<div class="panel-heading">
@@ -144,6 +144,9 @@
 							<div class="panel">
 								<div class="panel-body">
 									<table class="table table-striped">
+										<thead>
+											<tr><th colspan="3">Recent Updated Time: <span id='lastReported'> </span></th></tr>
+										</thead>
 										<thead>
 											<tr>
 												<th>Property</th>
