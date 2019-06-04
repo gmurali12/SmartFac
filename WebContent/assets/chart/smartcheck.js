@@ -237,7 +237,7 @@ function smartCheckChart(assetId, fdt,tdt){
 function drawAxisLoad(data){
 	
 	var smartChartData = data[0];
-	var axisLoad = smartChartData.filter(obj => Object.keys(obj).includes("Axis1_Load","Axis2_Load","Axis3_Load","Axis4_Load"));
+	var axisLoad = smartChartData.filter(obj => Object.keys(obj).includes("LoadAxis1","LoadAxis2","LoadAxis3","LoadAxis4"));
 
 	var axis1Load = [];
 	var axis2Load=[];
@@ -255,12 +255,12 @@ function drawAxisLoad(data){
 	
     for(var key in axisLoad){				
 	
-    	axis1Load.push(axisLoad[key].Axis1_Load.minvalue,axisLoad[key].Axis1_Load.maxvalue,axisLoad[key].Axis1_Load.firstvalue,axisLoad[key].Axis1_Load.lastvalue);
-    	axis2Load.push(axisLoad[key].Axis2_Load.minvalue,axisLoad[key].Axis2_Load.maxvalue,axisLoad[key].Axis2_Load.firstvalue,axisLoad[key].Axis2_Load.lastvalue);
-    	axis3Load.push(axisLoad[key].Axis3_Load.minvalue,axisLoad[key].Axis3_Load.maxvalue,axisLoad[key].Axis3_Load.firstvalue,axisLoad[key].Axis3_Load.lastvalue);
-    	axis4Load.push(axisLoad[key].Axis4_Load.minvalue,axisLoad[key].Axis4_Load.maxvalue,axisLoad[key].Axis4_Load.firstvalue,axisLoad[key].Axis4_Load.lastvalue);
+    	axis1Load.push(axisLoad[key].LoadAxis1.minvalue,axisLoad[key].LoadAxis1.maxvalue,axisLoad[key].LoadAxis1.firstvalue,axisLoad[key].LoadAxis1.lastvalue);
+    	axis2Load.push(axisLoad[key].LoadAxis2.minvalue,axisLoad[key].LoadAxis2.maxvalue,axisLoad[key].LoadAxis2.firstvalue,axisLoad[key].LoadAxis2.lastvalue);
+    	axis3Load.push(axisLoad[key].LoadAxis3.minvalue,axisLoad[key].LoadAxis3.maxvalue,axisLoad[key].LoadAxis3.firstvalue,axisLoad[key].LoadAxis3.lastvalue);
+    	axis4Load.push(axisLoad[key].LoadAxis4.minvalue,axisLoad[key].LoadAxis4.maxvalue,axisLoad[key].LoadAxis4.firstvalue,axisLoad[key].LoadAxis4.lastvalue);
 			
-    	loadTime.push(axisLoad[key].Axis1_Load.firsttime,axisLoad[key].Axis1_Load.mintime,axisLoad[key].Axis1_Load.maxtime,axisLoad[key].Axis1_Load.lasttime);
+    	loadTime.push(axisLoad[key].LoadAxis1.firsttime,axisLoad[key].LoadAxis1.mintime,axisLoad[key].LoadAxis1.maxtime,axisLoad[key].LoadAxis1.lasttime);
 
     }
 
@@ -407,7 +407,7 @@ function drawAxisLoad(data){
 function drawAxisTemp(data){
 	
 	var smartChartData = data[0];
-	var axisTemp = smartChartData.filter(obj => Object.keys(obj).includes("Axis1_Temp","Axis2_Temp","Axis3_Temp","Axis4_Temp"));
+	var axisTemp = smartChartData.filter(obj => Object.keys(obj).includes("TempAxis1","TempAxis2","TempAxis3","TempAxis4"));
 	var axis1Temp = [];
 	var axis2Temp=[];
 	var axis3Temp=[];
@@ -426,12 +426,12 @@ function drawAxisTemp(data){
 	
     for(var key in axisTemp){				
 	
-    	axis1Temp.push(axisTemp[key].Axis1_Temp.minvalue,axisTemp[key].Axis1_Temp.maxvalue,axisTemp[key].Axis1_Temp.firstvalue,axisTemp[key].Axis1_Temp.lastvalue);
-    	axis2Temp.push(axisTemp[key].Axis2_Temp.minvalue,axisTemp[key].Axis2_Temp.maxvalue,axisTemp[key].Axis2_Temp.firstvalue,axisTemp[key].Axis2_Temp.lastvalue);
-    	axis3Temp.push(axisTemp[key].Axis3_Temp.minvalue,axisTemp[key].Axis3_Temp.maxvalue,axisTemp[key].Axis3_Temp.firstvalue,axisTemp[key].Axis3_Temp.lastvalue);
-    	axis4Temp.push(axisTemp[key].Axis4_Temp.minvalue,axisTemp[key].Axis4_Temp.maxvalue,axisTemp[key].Axis4_Temp.firstvalue,axisTemp[key].Axis4_Temp.lastvalue);
+    	axis1Temp.push(axisTemp[key].TempAxis1.minvalue,axisTemp[key].TempAxis1.maxvalue,axisTemp[key].TempAxis1.firstvalue,axisTemp[key].TempAxis1.lastvalue);
+    	axis2Temp.push(axisTemp[key].TempAxis2.minvalue,axisTemp[key].TempAxis2.maxvalue,axisTemp[key].TempAxis2.firstvalue,axisTemp[key].TempAxis2.lastvalue);
+    	axis3Temp.push(axisTemp[key].TempAxis3.minvalue,axisTemp[key].TempAxis3.maxvalue,axisTemp[key].TempAxis3.firstvalue,axisTemp[key].TempAxis3.lastvalue);
+    	axis4Temp.push(axisTemp[key].TempAxis4.minvalue,axisTemp[key].TempAxis4.maxvalue,axisTemp[key].TempAxis4.firstvalue,axisTemp[key].TempAxis4.lastvalue);
 			
-    	tempTime.push(axisTemp[key].Axis1_Temp.firsttime,axisTemp[key].Axis1_Temp.mintime,axisTemp[key].Axis1_Temp.maxtime,axisTemp[key].Axis1_Temp.lasttime);
+    	tempTime.push(axisTemp[key].TempAxis1.firsttime,axisTemp[key].TempAxis1.mintime,axisTemp[key].TempAxis1.maxtime,axisTemp[key].TempAxis1.lasttime);
 
     }
 
@@ -575,7 +575,7 @@ function drawAxisTemp(data){
 
 function drawAxisVib(data){
 	var smartChartData = data[0];
-	var axisVib = smartChartData.filter(obj => Object.keys(obj).includes("Axis1_Vib","Axis2_Vib","Axis3_Vib","Axis4_Vib"));
+	var axisVib = smartChartData.filter(obj => Object.keys(obj).includes("VibAxis1","VibAxis2","VibAxis3","VibAxis4"));
 	var axis1Vib = [];
 	var axis2Vib=[];
 	var axis3Vib=[];
@@ -591,12 +591,12 @@ function drawAxisVib(data){
 
 		for(var key in axisVib){				
 
-			axis1Vib.push(axisVib[key].Axis1_Vib.minvalue,axisVib[key].Axis1_Vib.maxvalue,axisVib[key].Axis1_Vib.firstvalue,axisVib[key].Axis1_Vib.lastvalue);
-			axis2Vib.push(axisVib[key].Axis2_Vib.minvalue,axisVib[key].Axis2_Vib.maxvalue,axisVib[key].Axis2_Vib.firstvalue,axisVib[key].Axis2_Vib.lastvalue);
-			axis3Vib.push(axisVib[key].Axis3_Vib.minvalue,axisVib[key].Axis3_Vib.maxvalue,axisVib[key].Axis3_Vib.firstvalue,axisVib[key].Axis3_Vib.lastvalue);
-			axis4Vib.push(axisVib[key].Axis4_Vib.minvalue,axisVib[key].Axis4_Vib.maxvalue,axisVib[key].Axis4_Vib.firstvalue,axisVib[key].Axis4_Vib.lastvalue);
+			axis1Vib.push(axisVib[key].VibAxis1.minvalue,axisVib[key].VibAxis1.maxvalue,axisVib[key].VibAxis1.firstvalue,axisVib[key].VibAxis1.lastvalue);
+			axis2Vib.push(axisVib[key].VibAxis2.minvalue,axisVib[key].VibAxis2.maxvalue,axisVib[key].VibAxis2.firstvalue,axisVib[key].VibAxis2.lastvalue);
+			axis3Vib.push(axisVib[key].VibAxis3.minvalue,axisVib[key].VibAxis3.maxvalue,axisVib[key].VibAxis3.firstvalue,axisVib[key].VibAxis3.lastvalue);
+			axis4Vib.push(axisVib[key].VibAxis4.minvalue,axisVib[key].VibAxis4.maxvalue,axisVib[key].VibAxis4.firstvalue,axisVib[key].VibAxis4.lastvalue);
 
-			vibTime.push(axisVib[key].Axis1_Vib.firsttime,axisVib[key].Axis1_Vib.mintime,axisVib[key].Axis1_Vib.maxtime,axisVib[key].Axis1_Vib.lasttime);
+			vibTime.push(axisVib[key].VibAxis1.firsttime,axisVib[key].VibAxis1.mintime,axisVib[key].VibAxis1.maxtime,axisVib[key].VibAxis1.lasttime);
 
 		}
 
@@ -734,7 +734,7 @@ function drawAxisVib(data){
 			data: axisVibData,
 			options: axisVibOptions
 		});
-}
+	}
 }
 
 function drawAxisTable(data){
@@ -753,87 +753,87 @@ function drawAxisTable(data){
 	//axis Load Table
 	document.getElementById("lastReported").innerHTML = moment(axisTable._time).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
 	
-	document.getElementById("ax1L").innerHTML = axisTable.Axis1_Load+"%";
-	if(axisTable.Axis1_Load > 100){
+	document.getElementById("ax1L").innerHTML = axisTable.LoadAxis1+"%";
+	if(axisTable.LoadAxis1 > 100){
 		$('#ax1st').attr('class','label label-danger'); $('#ax1st').text("NOT OK");
 	} else {
 		$('#ax1st').attr('class','label label-success'); $('#ax1st').text("OK");
 	}
 	
-	document.getElementById("ax2L").innerHTML = axisTable.Axis2_Load+"%";
-	if(axisTable.Axis2_Load > 100){
+	document.getElementById("ax2L").innerHTML = axisTable.LoadAxis2+"%";
+	if(axisTable.LoadAxis2 > 100){
 		$('#ax2st').attr('class','label label-danger'); $('#ax2st').text("NOT OK");
 	} else {
 		$('#ax2st').attr('class','label label-success'); $('#ax2st').text("OK");
 	}
 	
-	document.getElementById("ax3L").innerHTML = axisTable.Axis3_Load+"%";
-	if(axisTable.Axis3_Load > 100){
+	document.getElementById("ax3L").innerHTML = axisTable.LoadAxis3+"%";
+	if(axisTable.LoadAxis3 > 100){
 		$('#ax3st').attr('class','label label-danger'); $('#ax3st').text("NOT OK");
 	} else {
 		$('#ax3st').attr('class','label label-success'); $('#ax3st').text("OK");
 	}
 	
-	document.getElementById("ax4L").innerHTML = axisTable.Axis4_Load+"%";
-	if(axisTable.Axis4_Load > 100){
+	document.getElementById("ax4L").innerHTML = axisTable.LoadAxis4+"%";
+	if(axisTable.LoadAxis4 > 100){
 		$('#ax4st').attr('class','label label-danger'); $('#ax4st').text("NOT OK");
 	} else {
 		$('#ax4st').attr('class','label label-success'); $('#ax4st').text("OK");
 	}
 	
 	//axis Temp Table
-	document.getElementById("ax1T").innerHTML = axisTable.Axis1_Temp+"%";
-	if(axisTable.Axis1_Temp > 100){
+	document.getElementById("ax1T").innerHTML = axisTable.TempAxis1+"%";
+	if(axisTable.TempAxis1 > 100){
 		$('#ax1Tst').attr('class','label label-danger'); $('#ax1Tst').text("NOT OK");
 	} else {
 		$('#ax1Tst').attr('class','label label-success'); $('#ax1Tst').text("OK");
 	}
 	
-	document.getElementById("ax2T").innerHTML = axisTable.Axis2_Temp+"%";
-	if(axisTable.Axis2_Temp > 100){
+	document.getElementById("ax2T").innerHTML = axisTable.TempAxis2+"%";
+	if(axisTable.TempAxis2 > 100){
 		$('#ax2Tst').attr('class','label label-danger'); $('#ax2Tst').text("NOT OK");
 	} else {
 		$('#ax2Tst').attr('class','label label-success'); $('#ax2Tst').text("OK");
 	}
 	
-	document.getElementById("ax3T").innerHTML = axisTable.Axis3_Temp+"%";
-	if(axisTable.Axis3_Temp > 100){
+	document.getElementById("ax3T").innerHTML = axisTable.TempAxis3+"%";
+	if(axisTable.TempAxis3 > 100){
 		$('#ax3Tst').attr('class','label label-danger'); $('#ax3Tst').text("NOT OK");
 	} else {
 		$('#ax3Tst').attr('class','label label-success'); $('#ax3Tst').text("OK");
 	}
 	
-	document.getElementById("ax4T").innerHTML = axisTable.Axis4_Temp+"%";
-	if(axisTable.Axis4_Temp > 100){
+	document.getElementById("ax4T").innerHTML = axisTable.TempAxis4+"%";
+	if(axisTable.TempAxis4 > 100){
 		$('#ax4Tst').attr('class','label label-danger'); $('#ax4Tst').text("NOT OK");
 	} else {
 		$('#ax4Tst').attr('class','label label-success'); $('#ax4Tst').text("OK");
 	}
 	
 	//axis Vib Table
-	document.getElementById("ax1V").innerHTML = axisTable.Axis1_Vib+"%";
-	if(axisTable.Axis1_Vib > 100){
+	document.getElementById("ax1V").innerHTML = axisTable.VibAxis1+"%";
+	if(axisTable.VibAxis1 > 100){
 		$('#ax1Vst').attr('class','label label-danger'); $('#ax1Vst').text("NOT OK");
 	} else {
 		$('#ax1Vst').attr('class','label label-success'); $('#ax1Vst').text("OK");
 	}
 	
-	document.getElementById("ax2V").innerHTML = axisTable.Axis2_Vib+"%";
-	if(axisTable.Axis2_Vib > 100){
+	document.getElementById("ax2V").innerHTML = axisTable.VibAxis2+"%";
+	if(axisTable.VibAxis2 > 100){
 		$('#ax2Vst').attr('class','label label-danger'); $('#ax2Vst').text("NOT OK");
 	} else {
 		$('#ax2Vst').attr('class','label label-success'); $('#ax2Vst').text("OK");
 	}
 	
-	document.getElementById("ax3V").innerHTML = axisTable.Axis3_Vib+"%";
-	if(axisTable.Axis3_Vib > 100){
+	document.getElementById("ax3V").innerHTML = axisTable.VibAxis3+"%";
+	if(axisTable.VibAxis3 > 100){
 		$('#ax3Vst').attr('class','label label-danger'); $('#ax3Vst').text("NOT OK");
 	} else {
 		$('#ax3Vst').attr('class','label label-success'); $('#ax3Vst').text("OK");
 	}
 	
-	document.getElementById("ax4V").innerHTML = axisTable.Axis4_Vib+"%";
-	if(axisTable.Axis4_Vib.lastvalue > 100){
+	document.getElementById("ax4V").innerHTML = axisTable.VibAxis4+"%";
+	if(axisTable.VibAxis4.lastvalue > 100){
 		$('#ax4Vst').attr('class','label label-danger'); $('#ax4Vst').text("NOT OK");
 	} else {
 		$('#ax4Vst').attr('class','label label-success'); $('#ax4Vst').text("OK");

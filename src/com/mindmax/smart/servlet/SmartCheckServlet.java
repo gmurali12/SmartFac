@@ -108,8 +108,8 @@ public class SmartCheckServlet extends HttpServlet {
 		try {
 
 			URL url = new URL("" + SmartConstant.AGGREGATE_TIMESERIES_URL
-					+ assetId + SmartConstant.ASPECT_NAME
-					+ SmartConstant.SMART_CHECK_SELECT + dateFilter);
+					+ assetId + SmartConstant.SMART_CHECK_ASPECT_NAME
+					+ SmartConstant.SMART_CHECK_CHART + dateFilter);
 			System.out.println("url------>"+url);
 			
 			
@@ -183,8 +183,8 @@ public class SmartCheckServlet extends HttpServlet {
 		try {
 
 			URL url = new URL("" + SmartConstant.TIMESERIES_URL + assetId
-					+ SmartConstant.ASPECT_NAME
-					+ SmartConstant.SMART_CHECK_SELECT);
+					+ SmartConstant.SMART_CHECK_ASPECT_NAME
+					+ SmartConstant.SMART_CHECK_TABLE);
 
 			myURLConnection = (HttpURLConnection) url.openConnection();
 

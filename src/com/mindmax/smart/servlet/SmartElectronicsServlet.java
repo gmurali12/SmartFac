@@ -108,7 +108,7 @@ public class SmartElectronicsServlet extends HttpServlet {
 		try {
 
 			URL url = new URL("" + SmartConstant.AGGREGATE_TIMESERIES_URL
-					+ assetId + SmartConstant.ASPECT_NAME
+					+ assetId + SmartConstant.SMART_ELECTRONICS_ASPECT_NAME
 					+ SmartConstant.SMART_ELECTRONICS_CHART + dateFilter);
 			
 			System.out.println("url--->"+url.toString());
@@ -182,7 +182,7 @@ public class SmartElectronicsServlet extends HttpServlet {
 		try {
 
 			URL url = new URL("" + SmartConstant.TIMESERIES_URL + assetId
-					+ SmartConstant.ASPECT_NAME
+					+ SmartConstant.SMART_ELECTRONICS_ASPECT_NAME
 					+ SmartConstant.SMART_ELECTRONICS_TABLE);
 
 			myURLConnection = (HttpURLConnection) url.openConnection();
