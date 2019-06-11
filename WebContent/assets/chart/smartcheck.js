@@ -263,7 +263,9 @@ function drawAxisLoad(data){
     	loadTime.push(axisLoad[key].LoadAxis1.firsttime,axisLoad[key].LoadAxis1.mintime,axisLoad[key].LoadAxis1.maxtime,axisLoad[key].LoadAxis1.lasttime);
 
     }
-
+    
+    console.log(loadTime, "loadTime");
+    
     var minTime = moment(_.min(loadTime));
 	var maxTime = moment(_.max(loadTime));
 	

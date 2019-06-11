@@ -34,5 +34,13 @@
 		<servlet-name>SmartElectronicsServlet</servlet-name>
 		<url-pattern>/getSmartElectronicsDetails</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>SmartCorrectServlet</servlet-name>
+    	<servlet-class>com.mindmax.smart.servlet.SmartCorrectServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>SmartCorrectServlet</servlet-name>
+		<url-pattern>/getSmartCorrectDetails</url-pattern>
+	</servlet-mapping>	
 </web-app>

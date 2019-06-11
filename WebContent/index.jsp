@@ -61,7 +61,7 @@
 					 <div class="col-md-1">
 					 </div>
 					 
-					 <a href ="#">
+					 <a href ="smartCorrect.jsp">
 						 <div class="col-md-2">
 							<div class="card">
 							    <div class="box">
