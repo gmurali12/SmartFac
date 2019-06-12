@@ -1799,6 +1799,7 @@ background-image: url("../../assets/img/connect.png");
  background-repeat: no-repeat;
  padding:10px;
  text-align: center;
+ display:none;
 }
 
 #assetDisConnectedImg{
@@ -1806,15 +1807,19 @@ background-image: url("../../assets/img/disConnect.jpg");
  background-repeat: no-repeat;
  padding:10px;
  text-align: center;
+ display:none;
 }
 
 .navAlign{
-	margin-top:5%;
-	margin-right:20%;
+	margin-top:12%;
+	margin-right:0%;
 }
 
 .navAlignRight{
 	margin-top:5%;
-	margin-right:2%;
+	margin-left:10%;
+}
+.paddingNav{
+	    padding-top: 22px;
 }
 /*# sourceMappingURL=main.css.map */

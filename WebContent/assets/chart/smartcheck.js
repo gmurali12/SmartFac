@@ -6,7 +6,7 @@
  document.getElementById("assetName").style.display='none';
  document.getElementById("assetName").style.display = 'none';
  document.getElementById("assetDisConnectedImg").style.display = "none";
-	document.getElementById("assetConnectedImg").style.display = "none";
+ document.getElementById("assetConnectedImg").style.display = "none";
 
 
 $(document).ready(function() {
@@ -118,9 +118,9 @@ function changeAssetDetails(assetName){
 
 				if(response.aspects[0].variables[1].name === 'lastUpdated' && response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'true'){
 					//document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
-					document.getElementById("dateTime").innerHTML = 'Online '+moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("MMM-DD-YYYY A");
+					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("MMM-DD-YYYY A");
 				}else{
-					document.getElementById("dateTime").innerHTML = 'Offline '+moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("MMM-DD-YYYY A");
+					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("MMM-DD-YYYY A");
 				}
 			}else{
 				document.getElementById("selectAssetName").style.display = "none";
