@@ -1794,4 +1794,27 @@ ul.activity-timeline > li {
 margin-top: 28px;
 	
 }
+#assetConnectedImg{
+background-image: url("../../assets/img/connect.png");
+ background-repeat: no-repeat;
+ padding:10px;
+ text-align: center;
+}
+
+#assetDisConnectedImg{
+background-image: url("../../assets/img/disConnect.jpg");
+ background-repeat: no-repeat;
+ padding:10px;
+ text-align: center;
+}
+
+.navAlign{
+	margin-top:5%;
+	margin-right:20%;
+}
+
+.navAlignRight{
+	margin-top:5%;
+	margin-right:2%;
+}
 /*# sourceMappingURL=main.css.map */
