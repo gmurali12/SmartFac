@@ -85,7 +85,7 @@
 						</div>
 					</a>
 					
-					<a href ="#">
+					<a href ="smartInsert.jsp">
 						<div class="col-md-2">
 							<div class="card">
 							    <div class="box">

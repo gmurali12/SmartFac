@@ -117,7 +117,7 @@
 										</div>
 										<br>
 										<div class="input-group col-md-12">
-											<select class="form-control" id="jobSelected" name="jobSelected" onchange="drawJob(data)">
+											<select class="form-control" id="jobSelected" name="jobSelected" onchange="drawJob(this)">
 												<option value="0">- Select -</option>
 												<option selected value="1">JOB OD</option>
 												<option value="2">ID</option>

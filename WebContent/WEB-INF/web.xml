@@ -43,4 +43,13 @@
 		<servlet-name>SmartCorrectServlet</servlet-name>
 		<url-pattern>/getSmartCorrectDetails</url-pattern>
 	</servlet-mapping>	
+	
+	<servlet>
+		<servlet-name>SmartInsertServlet</servlet-name>
+    	<servlet-class>com.mindmax.smart.servlet.SmartInsertServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>SmartInsertServlet</servlet-name>
+		<url-pattern>/getSmartInsertDetails</url-pattern>
+	</servlet-mapping>		
 </web-app>

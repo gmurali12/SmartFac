@@ -18,8 +18,6 @@ function changeAssetName(){
 }
 
 
-
-
 function changeAssetDetails(assetName){
 
 	var e = document.getElementById("assetName");
@@ -217,7 +215,6 @@ function smartCorrectChart(assetId, fdt,tdt){
 
 
 					} else {
-						alert("data-->"+data);
 						drawJob(data);
 						//drawAxisTable(data);
 						  
