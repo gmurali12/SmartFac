@@ -15,46 +15,33 @@
 				<i class="fa fa-bars" title="Navigation Toggle"></i>
 			</button>
 		</div></div>
-		<!-- 		<div class="row"> -->
-       <div class="col-md-7">
-		<div class="col-md-2" style="text-align: center">
-			<h2 style="margin-top: 30px; !important" id="headName"
-				class="headfont"></h2>
-			<span title="Asset Last Connected Status" id="lastdiscon"> </span>
-		</div>
+
+					<div class="col-md-2" style="text-align: center">
+						<h2 style="margin-top: 30px; !important" id="headName"
+							class="headfont"></h2>
+						<span title="Asset Last Connected Status" id="lastdiscon">
+						</span>
+					</div>
 
 
-	<div class="col-md-3 navAlign" id="showAssetName">
-			<div class="nav navbar-nav navbar-right">
-				<span data-toggle="tooltip"
-					title="Click here to change asset details" id="selectAssetName"
-					onclick="changeAssetName()"></span>
-			</div>
-		</div>
+					<div class="col-md-2 navAlign" id="showAssetName">
+							<span data-toggle="tooltip"
+								title="Click here to change asset details" id="selectAssetName"
+								onclick="changeAssetName()"></span>
+					</div>
 
-	<div class="col-md-3 navAlignRight">	    
-		<div id="assetConnectedImg" >
-		<span>Online</span>
-		</div>
-		<div id="assetDisConnectedImg">
-		<span>Offline</span>
-		</div>
-		
-		<div class="navAlignRight" id="showAssetName">
-			<div class="nav navbar-nav navbar-right">
-				<span id="dateButton" title="Date-Time (YYYY-MM-DD HH:mm:ss)">
-					<span id="dateTime"></span>
-				</span>				
-			</div>
-		</div>
-		</div>
+					<div class="col-md-3 navAlignRight">
+						<div id="assetConnectedImg">
+							<span>Online</span>
+						</div>
+						<div id="assetDisConnectedImg">
+							<span>Offline</span>
+						</div>
+						<span id="dateTime"></span>
+					</div>
 
 
-		
-		
-	
-	</div>
-		<!-- 		</div> -->
+				<!-- 		</div> -->
 		<!-- 	</div> -->
 	</nav>
 	</div>

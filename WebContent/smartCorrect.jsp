@@ -95,7 +95,7 @@
 										<img src="assets/img/loading.gif" height="35px" width="35px" id='loadingCorr' style='display:none;'/>
 									</div>
 									<div class="col-md-4">								
-										<h3 class="panel-title">JOB OD</h3>
+										<h3 class="panel-title" id="smartCorrectIds"></h3>
 										<div class="showCharTable" id="showJobLoad"></div>
 									</div>
 								</div>
@@ -117,7 +117,7 @@
 										</div>
 										<br>
 										<div class="input-group col-md-12">
-											<select class="form-control" id="jobSelected" name="jobSelected" onchange="drawJob(this)">
+											<select class="form-control" id="jobSelected" name="jobSelected" onchange="drawJob(this.value)">
 												<option value="0">- Select -</option>
 												<option selected value="1">JOB OD</option>
 												<option value="2">ID</option>

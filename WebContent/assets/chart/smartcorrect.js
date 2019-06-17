@@ -1,10 +1,14 @@
 getAssetDetails();
 
 var data = "";
+var smartCorrectData = null;
  
 document.getElementById("assetForm").style.display = 'none';
 document.getElementById("assetName").style.display='none';
 document.getElementById("assetName").style.display = 'none';
+document.getElementById("assetDisConnectedImg").style.display = "none";
+document.getElementById("assetConnectedImg").style.display = "none";
+
 
 
 $(document).ready(function() {
@@ -32,7 +36,7 @@ function changeAssetDetails(assetName){
     	 
     	 document.getElementById("validation").style.display = "none";	 
      
-    	 document.getElementById("dateButton").style.display = "none";	
+    	 //document.getElementById("dateButton").style.display = "none";	
     	 document.getElementById("selectAssetName").style.display = "none";
 	
     	 var fDt = moment().startOf('day').format('DD-MM-YYYY HH:mm');
@@ -97,23 +101,29 @@ function changeAssetDetails(assetName){
 	
 					document.getElementById("selectAssetName").className = "btn btn-info";
 					document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
-					document.getElementById("dateButton").style.display = "block";
+					//document.getElementById("dateButton").style.display = "block";
 					document.getElementById("dateTime").style.display = "block";
 					document.getElementById("selectAssetName").style.display = "block";
 					if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'false'){
-						document.getElementById("dateButton").className = "label label-danger";
+						//document.getElementById("dateButton").className = "label label-danger";
+						document.getElementById("assetDisConnectedImg").style.display = "none";
+						document.getElementById("assetConnectedImg").style.display = "block";
 					} else{
-						document.getElementById("dateButton").className = "label label-success";
+						//document.getElementById("dateButton").className = "label label-success";
+						document.getElementById("assetDisConnectedImg").style.display = "block";
+						document.getElementById("assetConnectedImg").style.display = "none";
 					}
 	
-					if(response.aspects[0].variables[1].name === 'lastUpdated'){
-						//document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
-						document.getElementById("dateTime").innerHTML = moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("DD-MM-YY HH:mm:ss");
+					if(response.aspects[0].variables[1].name === 'lastUpdated' && response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'true'){
+						//document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;	
+						document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value).format("MMM DD,YYYY hh:mm A");
+					}else{
+						document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value)	.format("MMM DD,YYYY hh:mm A");
 					}
 				}else{
 					document.getElementById("selectAssetName").style.display = "none";
-					document.getElementById("dateButton").style.display = "none";
-					document.getElementById("dateTime").style.display = "none";
+					//document.getElementById("dateButton").style.display = "none";
+					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value)	.format("MMM,DD,YYYY hh:mm A");
 				}
 	
 				$('#myModal').modal('hide');
@@ -187,8 +197,7 @@ function smartCorrectChart(assetId, fdt,tdt){
 				datatype : "application/json",
 				contentType: "application/json",
 				success : function(data){
-
-					console.log(data)
+				
 					$('#loadingLoad,#loadingTemp,#loadingVib').hide();
 										
 					var dLen = data.length;
@@ -215,7 +224,8 @@ function smartCorrectChart(assetId, fdt,tdt){
 
 
 					} else {
-						drawJob(data);
+						smartCorrectData = data;
+						drawJob(null);						
 						//drawAxisTable(data);
 						  
 					}
@@ -227,13 +237,16 @@ function smartCorrectChart(assetId, fdt,tdt){
 	  });
 }
 
-function drawJob(data){
+function drawJob(){
+	
+	
 	
 	var jobSelected = document.getElementById('jobSelected');
-	var jobId = jobSelected.value;
-	var smartChartData = data[0];
 	
-	console.log(smartChartData, "smartChartData");
+	var jobId = jobSelected.value;
+	var smartChartData = smartCorrectData[0];
+	
+
 	var jobLoad = smartChartData.filter(obj => Object.keys(obj).includes("MeanOD","MesuredOD","LoTolOD","UpTolOD","MeanID","MesuredID","LoTolID","UpTolID","MeanHeight",
 			"MesuredHeight","LoTolHeight","UpTolHeight","MeanOvality","MesuredOvality","LoTolOvality","UpTolOvality","MeanFaceout","MesuredFaceout","LoTolFaceout",
 			"UpTolFaceout","MeanRunout","MesuredRunout","LoTolRunout","UpTolRunout","TotalPartCount"));
@@ -252,6 +265,7 @@ function drawJob(data){
     for(var key in jobLoad){				
 	
     	if(jobId==1){
+    		document.getElementById('smartCorrectIds').innerHTML = 'JOB OD'; 
     		meanSize.push(jobLoad[key].MeanOD.minvalue,jobLoad[key].MeanOD.maxvalue,jobLoad[key].MeanOD.firstvalue,jobLoad[key].MeanOD.lastvalue);
     		measuredSize.push(jobLoad[key].MesuredOD.minvalue,jobLoad[key].MesuredOD.maxvalue,jobLoad[key].MesuredOD.firstvalue,jobLoad[key].MesuredOD.lastvalue);
     		//upperTol.push(jobLoad[key].UpTolOD.minvalue,jobLoad[key].UpTolOD.maxvalue,jobLoad[key].UpTolOD.firstvalue,jobLoad[key].UpTolOD.lastvalue);
@@ -259,12 +273,31 @@ function drawJob(data){
 				
 	    	loadTime.push(jobLoad[key].MeanOD.firsttime,jobLoad[key].MeanOD.mintime,jobLoad[key].MeanOD.maxtime,jobLoad[key].MeanOD.lasttime);
     	}else if(jobId==2){
+    		document.getElementById('smartCorrectIds').innerHTML = 'ID'; 
     		meanSize.push(jobLoad[key].MeanID.minvalue,jobLoad[key].MeanID.maxvalue,jobLoad[key].MeanID.firstvalue,jobLoad[key].MeanID.lastvalue);
     		measuredSize.push(jobLoad[key].MesuredID.minvalue,jobLoad[key].MesuredID.maxvalue,jobLoad[key].MesuredID.firstvalue,jobLoad[key].MesuredID.lastvalue);
     		//upperTol.push(jobLoad[key].UpTolID.minvalue,jobLoad[key].UpTolID.maxvalue,jobLoad[key].UpTolID.firstvalue,jobLoad[key].UpTolID.lastvalue);
     		lowerTol.push(jobLoad[key].LoTolID.minvalue,jobLoad[key].LoTolID.maxvalue,jobLoad[key].LoTolID.firstvalue,jobLoad[key].LoTolID.lastvalue);
 				
 	    	loadTime.push(jobLoad[key].MeanID.firsttime,jobLoad[key].MeanID.mintime,jobLoad[key].MeanID.maxtime,jobLoad[key].MeanID.lasttime);
+    	}else if(jobId==3){    		
+    		document.getElementById('smartCorrectIds').innerHTML = 'HEIGHT'; 
+    		    		
+    	}else if(jobId==4){
+    		document.getElementById('smartCorrectIds').innerHTML = 'RUNOUT'; 
+    		
+    	}else if(jobId==5){
+    		document.getElementById('smartCorrectIds').innerHTML = 'OVALITY'; 
+    		
+    	}else if(jobId==6){
+    		document.getElementById('smartCorrectIds').innerHTML = 'FACEOUT'; 
+    		
+    	}
+    	
+    	
+    	
+    	else{
+    		document.getElementById('smartCorrectIds').style.display = 'none'; 
     	}
 
     }

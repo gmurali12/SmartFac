@@ -1797,27 +1797,36 @@ margin-top: 28px;
 #assetConnectedImg{
 background-image: url("../../assets/img/connect.png");
  background-repeat: no-repeat;
- padding:10px;
+  padding-top:10px;
  text-align: center;
  display:none;
+ text-align: right;
+ display: none;
+ margin-right: 0;
+ background-position: 70% center;
 }
 
 #assetDisConnectedImg{
 background-image: url("../../assets/img/disConnect.jpg");
  background-repeat: no-repeat;
- padding:10px;
- text-align: center;
- display:none;
+ padding-top:10px;
+ text-align: right;
+ display: none;
+ margin-right: 0;
+ background-position: 70% center;
 }
 
 .navAlign{
-	margin-top:12%;
-	margin-right:0%;
+	margin-top:4%;
+	margin-left: 3%;
 }
 
 .navAlignRight{
-	margin-top:5%;
-	margin-left:10%;
+	margin-top:3%;
+	margin-left:0%;
+	padding-right: 3.4%;
+	text-align: right;
+	width: auto;
 }
 .paddingNav{
 	    padding-top: 22px;

@@ -37,7 +37,7 @@ function changeAssetDetails(assetName){
     	 
     	 document.getElementById("validation").style.display = "none";	 
      
-	document.getElementById("dateButton").style.display = "none";	
+//	document.getElementById("dateButton").style.display = "none";	
 	document.getElementById("selectAssetName").style.display = "none";
 	
 	var fDt = moment().startOf('day').format('DD-MM-YYYY HH:mm');
@@ -103,28 +103,28 @@ function changeAssetDetails(assetName){
 
 				document.getElementById("selectAssetName").className = "btn btn-info";
 				document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
-				document.getElementById("dateButton").style.display = "block";
+//				document.getElementById("dateButton").style.display = "block";
 				document.getElementById("dateTime").style.display = "block";
 				document.getElementById("selectAssetName").style.display = "block";
 				if(response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'true'){
-					document.getElementById("dateButton").className = "btn btn-success";
+//					document.getElementById("dateButton").className = "btn btn-success";
 					document.getElementById("assetConnectedImg").style.display = "block";
 					document.getElementById("assetDisConnectedImg").style.display = "none";
 				} else{
-					document.getElementById("dateButton").className = "btn btn-danger";
+//					document.getElementById("dateButton").className = "btn btn-danger";
 					document.getElementById("assetDisConnectedImg").style.display = "block";
 					document.getElementById("assetConnectedImg").style.display = "none";
 				}
 
 				if(response.aspects[0].variables[1].name === 'lastUpdated' && response.aspects[0].variables[0].name === 'connected' && response.aspects[0].variables[0].value === 'true'){
-					//document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;
-					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("MMM-DD-YYYY A");
+					//document.getElementById("dateTime").innerHTML = response.aspects[0].variables[1].value;	
+					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value).format("MMM DD,YYYY hh:mm A");
 				}else{
-					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value).utcOffset("+00:00").format("MMM-DD-YYYY A");
+					document.getElementById("dateTime").innerHTML = 'Since '+moment(response.aspects[0].variables[1].value)	.format("MMM DD,YYYY hh:mm A");
 				}
 			}else{
 				document.getElementById("selectAssetName").style.display = "none";
-				document.getElementById("dateButton").style.display = "none";
+//				document.getElementById("dateButton").style.display = "none";
 				document.getElementById("dateTime").style.display = "none";
 			}
 
