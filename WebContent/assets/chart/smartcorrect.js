@@ -239,8 +239,6 @@ function smartCorrectChart(assetId, fdt,tdt){
 
 function drawJob(){
 	
-	
-	
 	var jobSelected = document.getElementById('jobSelected');
 	
 	var jobId = jobSelected.value;
@@ -273,7 +271,7 @@ function drawJob(){
 				
 	    	loadTime.push(jobLoad[key].MeanOD.firsttime,jobLoad[key].MeanOD.mintime,jobLoad[key].MeanOD.maxtime,jobLoad[key].MeanOD.lasttime);
     	}else if(jobId==2){
-    		document.getElementById('smartCorrectIds').innerHTML = 'ID'; 
+    		document.getElementById('smartCorrectIds').innerHTML = 'JOB ID'; 
     		meanSize.push(jobLoad[key].MeanID.minvalue,jobLoad[key].MeanID.maxvalue,jobLoad[key].MeanID.firstvalue,jobLoad[key].MeanID.lastvalue);
     		measuredSize.push(jobLoad[key].MesuredID.minvalue,jobLoad[key].MesuredID.maxvalue,jobLoad[key].MesuredID.firstvalue,jobLoad[key].MesuredID.lastvalue);
     		//upperTol.push(jobLoad[key].UpTolID.minvalue,jobLoad[key].UpTolID.maxvalue,jobLoad[key].UpTolID.firstvalue,jobLoad[key].UpTolID.lastvalue);
@@ -281,22 +279,42 @@ function drawJob(){
 				
 	    	loadTime.push(jobLoad[key].MeanID.firsttime,jobLoad[key].MeanID.mintime,jobLoad[key].MeanID.maxtime,jobLoad[key].MeanID.lasttime);
     	}else if(jobId==3){    		
-    		document.getElementById('smartCorrectIds').innerHTML = 'HEIGHT'; 
-    		    		
+    		document.getElementById('smartCorrectIds').innerHTML = 'JOB HEIGHT'; 
+    		meanSize.push(jobLoad[key].MeanHeight.minvalue,jobLoad[key].MeanHeight.maxvalue,jobLoad[key].MeanHeight.firstvalue,jobLoad[key].MeanHeight.lastvalue);
+    		measuredSize.push(jobLoad[key].MesuredHeight.minvalue,jobLoad[key].MesuredHeight.maxvalue,jobLoad[key].MesuredHeight.firstvalue,jobLoad[key].MesuredHeight.lastvalue);
+    		//upperTol.push(jobLoad[key].UpTolHeight.minvalue,jobLoad[key].UpTolHeight.maxvalue,jobLoad[key].UpTolHeight.firstvalue,jobLoad[key].UpTolHeight.lastvalue);
+    		lowerTol.push(jobLoad[key].LoTolHeight.minvalue,jobLoad[key].LoTolHeight.maxvalue,jobLoad[key].LoTolHeight.firstvalue,jobLoad[key].LoTolHeight.lastvalue);
+				
+	    	loadTime.push(jobLoad[key].MeanHeight.firsttime,jobLoad[key].MeanHeight.mintime,jobLoad[key].MeanHeight.maxtime,jobLoad[key].MeanHeight.lasttime);
+
     	}else if(jobId==4){
-    		document.getElementById('smartCorrectIds').innerHTML = 'RUNOUT'; 
-    		
+    		document.getElementById('smartCorrectIds').innerHTML = 'JOB RUNOUT'; 
+    		meanSize.push(jobLoad[key].MeanRunout.minvalue,jobLoad[key].MeanRunout.maxvalue,jobLoad[key].MeanRunout.firstvalue,jobLoad[key].MeanRunout.lastvalue);
+    		measuredSize.push(jobLoad[key].MesuredRunout.minvalue,jobLoad[key].MesuredRunout.maxvalue,jobLoad[key].MesuredRunout.firstvalue,jobLoad[key].MesuredRunout.lastvalue);
+    		//upperTol.push(jobLoad[key].UpTolRunout.minvalue,jobLoad[key].UpTolRunout.maxvalue,jobLoad[key].UpTolRunout.firstvalue,jobLoad[key].UpTolRunout.lastvalue);
+    		lowerTol.push(jobLoad[key].LoTolRunout.minvalue,jobLoad[key].LoTolRunout.maxvalue,jobLoad[key].LoTolRunout.firstvalue,jobLoad[key].LoTolRunout.lastvalue);
+				
+	    	loadTime.push(jobLoad[key].MeanRunout.firsttime,jobLoad[key].MeanRunout.mintime,jobLoad[key].MeanRunout.maxtime,jobLoad[key].MeanRunout.lasttime);
+
     	}else if(jobId==5){
-    		document.getElementById('smartCorrectIds').innerHTML = 'OVALITY'; 
-    		
+    		document.getElementById('smartCorrectIds').innerHTML = 'JOB OVALITY'; 
+    		meanSize.push(jobLoad[key].MeanOvality.minvalue,jobLoad[key].MeanOvality.maxvalue,jobLoad[key].MeanOvality.firstvalue,jobLoad[key].MeanOvality.lastvalue);
+    		measuredSize.push(jobLoad[key].MesuredOvality.minvalue,jobLoad[key].MesuredOvality.maxvalue,jobLoad[key].MesuredOvality.firstvalue,jobLoad[key].MesuredOvality.lastvalue);
+    		//upperTol.push(jobLoad[key].UpTolOvality.minvalue,jobLoad[key].UpTolOvality.maxvalue,jobLoad[key].UpTolOvality.firstvalue,jobLoad[key].UpTolOvality.lastvalue);
+    		lowerTol.push(jobLoad[key].LoTolOvality.minvalue,jobLoad[key].LoTolOvality.maxvalue,jobLoad[key].LoTolOvality.firstvalue,jobLoad[key].LoTolOvality.lastvalue);
+				
+	    	loadTime.push(jobLoad[key].MeanOvality.firsttime,jobLoad[key].MeanOvality.mintime,jobLoad[key].MeanOvality.maxtime,jobLoad[key].MeanOvality.lasttime);
+
     	}else if(jobId==6){
-    		document.getElementById('smartCorrectIds').innerHTML = 'FACEOUT'; 
-    		
-    	}
-    	
-    	
-    	
-    	else{
+    		document.getElementById('smartCorrectIds').innerHTML = 'JOB FACEOUT'; 
+    		meanSize.push(jobLoad[key].MeanFaceout.minvalue,jobLoad[key].MeanFaceout.maxvalue,jobLoad[key].MeanFaceout.firstvalue,jobLoad[key].MeanFaceout.lastvalue);
+    		measuredSize.push(jobLoad[key].MesuredFaceout.minvalue,jobLoad[key].MesuredFaceout.maxvalue,jobLoad[key].MesuredFaceout.firstvalue,jobLoad[key].MesuredFaceout.lastvalue);
+    		//upperTol.push(jobLoad[key].UpTolFaceout.minvalue,jobLoad[key].UpTolFaceout.maxvalue,jobLoad[key].UpTolFaceout.firstvalue,jobLoad[key].UpTolFaceout.lastvalue);
+    		lowerTol.push(jobLoad[key].LoTolFaceout.minvalue,jobLoad[key].LoTolFaceout.maxvalue,jobLoad[key].LoTolFaceout.firstvalue,jobLoad[key].LoTolFaceout.lastvalue);
+				
+	    	loadTime.push(jobLoad[key].MeanFaceout.firsttime,jobLoad[key].MeanFaceout.mintime,jobLoad[key].MeanFaceout.maxtime,jobLoad[key].MeanFaceout.lasttime);
+
+    	}else{
     		document.getElementById('smartCorrectIds').style.display = 'none'; 
     	}
 
