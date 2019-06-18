@@ -1,13 +1,12 @@
+getAssetDetails();
 
+var smartInsertData = null;
 
- getAssetDetails();
- 
- document.getElementById("assetForm").style.display = 'none';
- document.getElementById("assetName").style.display='none';
- document.getElementById("assetName").style.display = 'none';
- document.getElementById("assetDisConnectedImg").style.display = "none";
- document.getElementById("assetConnectedImg").style.display = "none";
-
+document.getElementById("assetForm").style.display = 'none';
+document.getElementById("assetName").style.display='none';
+document.getElementById("assetName").style.display = 'none';
+document.getElementById("assetDisConnectedImg").style.display = "none";
+document.getElementById("assetConnectedImg").style.display = "none";
 
 $(document).ready(function() {
 	  $('#myModal').modal('show');
@@ -18,9 +17,6 @@ $(document).ready(function() {
 function changeAssetName(){
 	 $('#myModal').modal('show');
 }
-
-
-
 
 function changeAssetDetails(assetName){
 
@@ -219,8 +215,9 @@ function smartCheckChart(assetId, fdt,tdt){
 
 					} else {
 					
-						drawToolChart(data);
-						drawToolTable(data);
+						smartInsertData = data;
+						drawToolChart();
+						drawToolTable();
 						  
 					}
 				},
@@ -231,10 +228,13 @@ function smartCheckChart(assetId, fdt,tdt){
 	  });
 }
 
-function drawToolChart(data){
+function drawToolChart(){
 	
-	var smartInsertData = data[0];
-	var toolLoad = smartInsertData.filter(obj => Object.keys(obj).includes("ActWpcPrdT1","ActWpcPrdT2","ActWpcPrdT3","ActWpcPrdT4","ActWpcPrdT5","ActWpcPrdT6",
+	var jobSelected = document.getElementById('jobSelected');
+	var jobId = jobSelected.value;
+	var chartData = smartInsertData[0];
+	
+	var toolLoad = chartData.filter(obj => Object.keys(obj).includes("ActWpcPrdT1","ActWpcPrdT2","ActWpcPrdT3","ActWpcPrdT4","ActWpcPrdT5","ActWpcPrdT6",
 			"ActWpcPrdT7","ActWpcPrdT8","ActWpcPrdT9","ActWpcPrdT10","ActWpcPrdT11","ActWpcPrdT12",
 			"ActCuttTimeT1","ActCuttTimeT2","ActCuttTimeT3","ActCuttTimeT4","ActCuttTimeT5","ActCuttTimeT6","ActCuttTimeT7","ActCuttTimeT8","ActCuttTimeT9",
 			"ActCuttTimeT10","ActCuttTimeT11","ActCuttTimeT12"));
@@ -251,19 +251,82 @@ function drawToolChart(data){
 		//document.getElementById('showAxisLoad').style.display = "none";
 		for(var key in toolLoad){
 			
-			toolWorkPiece.push(toolLoad[key].ActWpcPrdT1.firstvalue);
-	    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT1.firstvalue);
-	    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT1.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+			if(jobId==1){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T1'; 
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT1.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT1.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT1.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			} else if(jobId==2){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T2';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT2.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT2.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT2.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==3){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T3';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT3.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT3.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT3.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==4){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T4';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT4.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT4.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT4.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==5){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T5';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT5.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT5.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT5.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==6){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T6';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT6.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT6.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT6.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==7){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T7';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT7.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT7.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT7.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==8){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T8';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT8.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT8.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT8.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==9){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T9';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT9.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT9.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT9.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==10){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T10';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT10.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT10.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT10.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==11){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T11';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT11.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT11.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT11.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}else if(jobId==12){
+				document.getElementById('smartCorrectIds').innerHTML = 'Tool Life - T12';
+				toolWorkPiece.push(toolLoad[key].ActWpcPrdT12.firstvalue);
+		    	toolCuttingTime.push(toolLoad[key].ActCuttTimeT12.firstvalue);
+		    	toolLbTime.push(moment(toolLoad[key].ActWpcPrdT12.firsttime, "YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm"));
+		    	
+			}
 	    	
-	    	//toolWorkPiece.push(toolLoad[key].ActWpcPrdT1.lastvalue,toolLoad[key].ActWpcPrdT1.firstvalue,toolLoad[key].ActWpcPrdT1.minvalue,toolLoad[key].ActWpcPrdT1.maxvalue);
-	    	//toolCuttingTime.push(toolLoad[key].ActCuttTimeT1.lastvalue,toolLoad[key].ActCuttTimeT1.firstvalue,toolLoad[key].ActCuttTimeT1.minvalue,toolLoad[key].ActCuttTimeT1.maxvalue);
-	    	//toolLbTime.push(toolLoad[key].ActWpcPrdT1.lasttime,toolLoad[key].ActWpcPrdT1.firsttime,toolLoad[key].ActWpcPrdT1.mintime, toolLoad[key].ActWpcPrdT1.maxtime);
 	    }
-    
-		console.log("toolWorkPiece",toolWorkPiece);
-		console.log("toolCuttingTime",toolCuttingTime);
-		console.log("toolLbTime",toolLbTime);
-						
+
 		var toolData = {
 		labels: toolLbTime,
 	    datasets: [
@@ -323,11 +386,9 @@ function drawToolChart(data){
 	}
 }
 
-function drawToolTable(data){
+function drawToolTable(){
 	
-	var smartTableData = data[1];
-	console.log(smartTableData,"smartTableData")
-	var toolTable = smartTableData[0];
+	var toolTable = smartInsertData[1];
 
 	console.log(toolTable,"toolTable")
 	if(toolTable == ""){
@@ -337,40 +398,40 @@ function drawToolTable(data){
 	}
 
 	// Table Data
-	document.getElementById("t1actCutTim").innerHTML = toolTable.ActCuttTimeT1;
-	document.getElementById("t1actWrkPcs").innerHTML = toolTable.ActWpcPrdT1;
+	document.getElementById("t1actCutTim").innerHTML = toolTable[0].ActCuttTimeT1;
+	document.getElementById("t1actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT1;
 	
-	document.getElementById("t2actCutTim").innerHTML = toolTable.ActCuttTimeT2;
-	document.getElementById("t2actWrkPcs").innerHTML = toolTable.ActWpcPrdT2;
+	document.getElementById("t2actCutTim").innerHTML = toolTable[0].ActCuttTimeT2;
+	document.getElementById("t2actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT2;
 	
-	document.getElementById("t3actCutTim").innerHTML = toolTable.ActCuttTimeT3;
-	document.getElementById("t3actWrkPcs").innerHTML = toolTable.ActWpcPrdT3;
+	document.getElementById("t3actCutTim").innerHTML = toolTable[0].ActCuttTimeT3;
+	document.getElementById("t3actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT3;
 	
-	document.getElementById("t4actCutTim").innerHTML = toolTable.ActCuttTimeT4;
-	document.getElementById("t4actWrkPcs").innerHTML = toolTable.ActWpcPrdT4;
+	document.getElementById("t4actCutTim").innerHTML = toolTable[0].ActCuttTimeT4;
+	document.getElementById("t4actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT4;
 	
-	document.getElementById("t5actCutTim").innerHTML = toolTable.ActCuttTimeT5;
-	document.getElementById("t5actWrkPcs").innerHTML = toolTable.ActWpcPrdT5;
+	document.getElementById("t5actCutTim").innerHTML = toolTable[0].ActCuttTimeT5;
+	document.getElementById("t5actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT5;
 	
-	document.getElementById("t6actCutTim").innerHTML = toolTable.ActCuttTimeT6;
-	document.getElementById("t6actWrkPcs").innerHTML = toolTable.ActWpcPrdT6;
+	document.getElementById("t6actCutTim").innerHTML = toolTable[0].ActCuttTimeT6;
+	document.getElementById("t6actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT6;
 	
-	document.getElementById("t7actCutTim").innerHTML = toolTable.ActCuttTimeT7;
-	document.getElementById("t7actWrkPcs").innerHTML = toolTable.ActWpcPrdT7;
+	document.getElementById("t7actCutTim").innerHTML = toolTable[0].ActCuttTimeT7;
+	document.getElementById("t7actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT7;
 	
-	document.getElementById("t8actCutTim").innerHTML = toolTable.ActCuttTimeT8;
-	document.getElementById("t8actWrkPcs").innerHTML = toolTable.ActWpcPrdT8;
+	document.getElementById("t8actCutTim").innerHTML = toolTable[0].ActCuttTimeT8;
+	document.getElementById("t8actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT8;
 	
-	document.getElementById("t9actCutTim").innerHTML = toolTable.ActCuttTimeT9;
-	document.getElementById("t9actWrkPcs").innerHTML = toolTable.ActWpcPrdT9;
+	document.getElementById("t9actCutTim").innerHTML = toolTable[0].ActCuttTimeT9;
+	document.getElementById("t9actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT9;
 	
-	document.getElementById("t10actCutTim").innerHTML = toolTable.ActCuttTimeT10;
-	document.getElementById("t10actWrkPcs").innerHTML = toolTable.ActWpcPrdT10;
+	document.getElementById("t10actCutTim").innerHTML = toolTable[0].ActCuttTimeT10;
+	document.getElementById("t10actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT10;
 	
-	document.getElementById("t11actCutTim").innerHTML = toolTable.ActCuttTimeT11;
-	document.getElementById("t11actWrkPcs").innerHTML = toolTable.ActWpcPrdT11;
+	document.getElementById("t11actCutTim").innerHTML = toolTable[0].ActCuttTimeT11;
+	document.getElementById("t11actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT11;
 	
-	document.getElementById("t12actCutTim").innerHTML = toolTable.ActCuttTimeT12;
-	document.getElementById("t12actWrkPcs").innerHTML = toolTable.ActWpcPrdT12;
+	document.getElementById("t12actCutTim").innerHTML = toolTable[0].ActCuttTimeT12;
+	document.getElementById("t12actWrkPcs").innerHTML = toolTable[0].ActWpcPrdT12;
 	
 }

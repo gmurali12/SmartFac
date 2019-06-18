@@ -1,6 +1,5 @@
 getAssetDetails();
 
-var data = "";
 var smartCorrectData = null;
  
 document.getElementById("assetForm").style.display = 'none';
@@ -225,7 +224,7 @@ function smartCorrectChart(assetId, fdt,tdt){
 
 					} else {
 						smartCorrectData = data;
-						drawJob(null);						
+						drawJob();
 						//drawAxisTable(data);
 						  
 					}

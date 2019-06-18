@@ -185,7 +185,9 @@ public class SmartInsertServlet extends HttpServlet {
 			URL url = new URL("" + SmartConstant.TIMESERIES_URL + assetId
 					+ SmartConstant.SMART_INSERT_ASPECT_NAME
 					+ SmartConstant.SMART_INSERT_TABLE);
-
+			System.out
+			.println("url--->" + url.toString());
+			
 			myURLConnection = (HttpURLConnection) url.openConnection();
 
 			// Set Auth TOken

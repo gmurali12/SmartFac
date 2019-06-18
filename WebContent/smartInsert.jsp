@@ -96,23 +96,23 @@
 										<img src="assets/img/loading.gif" height="35px" width="35px" id='loadingtool' style='display:none;'/>
 									</div>
 									<div class="col-md-4">	
-										<h3 class="panel-title">Tool Life - T1</h3>
+										<h3 class="panel-title" id="smartCorrectIds">Tool Life - T1</h3>
 									</div>
 									<div class="col-lg-3">
-										<select class="form-control" id="sel" onchange="showsmartinsert(this)">
+										<select class="form-control" id="jobSelected" name="jobSelected" onchange="drawToolChart();">
 											<option value="t0">- Select -</option>
-											<option selected value="t1">Tool 1 </option>
-											<option value="t2">Tool 2</option>
-											<option value="t3">Tool 3</option>
-											<option value="t4">Tool 4</option>
-											<option value="t2">Tool 5</option>
-											<option value="t3">Tool 6</option>
-											<option value="t4">Tool 7</option>
-											<option value="t2">Tool 8</option>
-											<option value="t3">Tool 9</option>
-											<option value="t4">Tool 10</option>
-											<option value="t3">Tool 11</option>
-											<option value="t4">Tool 12</option>
+											<option selected value="1">Tool 1</option>
+											<option value="2">Tool 2</option>
+											<option value="3">Tool 3</option>
+											<option value="4">Tool 4</option>
+											<option value="5">Tool 5</option>
+											<option value="6">Tool 6</option>
+											<option value="7">Tool 7</option>
+											<option value="8">Tool 8</option>
+											<option value="9">Tool 9</option>
+											<option value="10">Tool 10</option>
+											<option value="11">Tool 11</option>
+											<option value="12">Tool 12</option>
 										</select>
 									</div>
 								</div>
