@@ -89,6 +89,18 @@
 						</div>
 						<!-- Popup End-->
 						
+						<div class="col-lg-12">
+						  <div class="col-lg-3" style="float:right;">
+							<div class="panel">
+								<div class="panel-body">
+									<div class="input-group">
+										<input class="form-control" type="text" id="ftdt" name="datetimes" placeholder="Select Date & Time *" autoComplete="off">
+										<span class="input-group-btn"><button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button></span>
+									</div>
+								</div>
+							</div></div>
+						</div>
+						
 						<div class="col-md-6">
 							<div class="panel">
 								<div class="panel-heading">
@@ -116,23 +128,13 @@
 										</select>
 									</div>
 								</div>
-								<div class="panel-body">
+								<div class="panel-body" style="height:547px;">
 									<canvas id="toolChart" class="ct-chart"></canvas>
 								</div>
 							</div>
 						</div>
 				
-						<div class="col-lg-3"></div>
-						<div class="col-lg-3">
-							<div class="panel">
-								<div class="panel-body">
-									<div class="input-group">
-										<input class="form-control" type="text" id="ftdt" name="datetimes" placeholder="Select Date & Time *" autoComplete="off">
-										<span class="input-group-btn"><button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button></span>
-									</div>
-								</div>
-							</div>
-						</div>
+
                     
                     <div class="col-md-6">
                    
