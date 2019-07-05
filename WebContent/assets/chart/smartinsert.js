@@ -2,6 +2,8 @@ getAssetDetails();
 
 var smartInsertData = null;
 
+var assetLocPopUp = JSON.parse(sessionStorage.getItem('assetPopup'));
+
 document.getElementById("assetForm").style.display = 'none';
 document.getElementById("assetName").style.display='none';
 document.getElementById("assetName").style.display = 'none';
@@ -9,7 +11,15 @@ document.getElementById("assetDisConnectedImg").style.display = "none";
 document.getElementById("assetConnectedImg").style.display = "none";
 
 $(document).ready(function() {
-	  $('#myModal').modal('show');
+	
+	 if(assetLocPopUp == null){
+		  $('#myModal').modal('show');
+	 }else if(assetLocPopUp != null && assetLocPopUp.isAssetSelected !== 'true'){
+		 $('#myModal').modal('hide');
+		 changeAssetDetails(assetLocPopUp.assetName);		
+	 }	
+	  
+	  
 	  $('[data-toggle="tooltip"]').tooltip({title:'Click here to change asset details!', delay :500,placement: "bottom"}); 
 	});
 
@@ -18,20 +28,35 @@ function changeAssetName(){
 	 $('#myModal').modal('show');
 }
 
-function changeAssetDetails(assetName){
 
+function assetDetailsPop(){
+	
 	
 	 var e = document.getElementById("assetName");
-     var strUser = e.options[e.selectedIndex].value;
-     
-     if(strUser==0){
-    	
-    	 document.getElementById("validation").style.display = "block";
-    	 document.getElementById("validation").innerHTML = "Choose Asset Name";	
-    	 
-     }else{
-    	 
-    	 document.getElementById("validation").style.display = "none";	 
+	 var assetVal =  e.options[e.selectedIndex].value;
+	
+	if(assetVal === ""){
+	 document.getElementById("validation").style.display = "block";
+	 document.getElementById("validation").innerHTML = "Choose Asset Name";
+	}else{
+		 document.getElementById("validation").style.display = "none";	 
+		changeAssetDetails(assetVal);
+	}
+	
+	
+}
+
+function changeAssetDetails(assetName){
+	 var strUser =assetName;
+	 
+	 
+	 var selectedAssetDetails = Object.assign({
+		 isAssetSelected:true,
+		 assetName:strUser
+	 });	
+	
+	 sessionStorage.setItem('assetPopup',JSON.stringify(selectedAssetDetails));
+        	     
      
 	//document.getElementById("dateButton").style.display = "none";	
 	document.getElementById("selectAssetName").style.display = "none";
@@ -95,10 +120,10 @@ function changeAssetDetails(assetName){
 
 			assetId = response.assetId;
 
-			if(response.name === $('#assetName').val()){				
+			if(response.name === strUser){				
 
 				document.getElementById("selectAssetName").className = "btn btn-info";
-				document.getElementById("selectAssetName").innerHTML = $('#assetName').val();
+				document.getElementById("selectAssetName").innerHTML = strUser;
 				//document.getElementById("dateButton").style.display = "block";
 				document.getElementById("dateTime").style.display = "block";
 				document.getElementById("selectAssetName").style.display = "block";
@@ -127,10 +152,10 @@ function changeAssetDetails(assetName){
 			$('#myModal').modal('hide');
 
 			smartCheckChart(response.assetId,fDt,tDt);
+			
 
 		}
 	});
-     }
 }
 
 

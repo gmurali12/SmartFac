@@ -68,10 +68,14 @@
 												<span class="text-danger" id="errorMsg"></span>
 											</div>
 											<div class = "col-md-4">
-												<form id="assetForm" method="post" action="">
-													<select name="assetName" id="assetName">
+												<form name="assetform" id="assetForm" method="post" action="">
+													<select name="assetName" id="assetName" required>
 														<option value="">Select Asset Name</option>
 													</select>
+													<div style="float: left;margin-left: 150%;">
+													<button type="button" class="btn btn-primary"
+												onclick="assetDetailsPop(this.value);">Search</button>
+												</div>
 												</form>
 											</div>
 											<div  class = "col-md-4" style="padding-top: 6px;">
@@ -79,8 +83,7 @@
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-primary"
-												onclick="changeAssetDetails(this.value);">Search</button>
+											
 										</div>
 									</div>
 								</div>
