@@ -281,7 +281,7 @@ function drawAxisLoad(data){
 	
 
 	if(axisLoad == ""){	
-		document.getElementById('showAxisLoad').innerHTML= "No data Found";
+		document.getElementById('showAxisLoad').innerHTML= "No data found";
 		
 	}else{
 	    
@@ -452,7 +452,7 @@ function drawAxisTemp(data){
 	
 	
 	if(axisTemp == ""){		
-		document.getElementById('showAxisTemp').innerHTML= "No data Found";
+		document.getElementById('showAxisTemp').innerHTML= "No data found";
 		
 	}else{
 	    		
@@ -620,7 +620,7 @@ function drawAxisVib(data){
 	
 	if(axisVib == ""){
 
-		document.getElementById('showAxisVib').innerHTML= "No data Found";
+		document.getElementById('showAxisVib').innerHTML= "No data found";
 	}else{
 
 		document.getElementById('showAxisVib').style.display= "none";

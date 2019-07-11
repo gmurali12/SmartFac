@@ -332,9 +332,17 @@ function drawHydraulic(data){
 	var smartData = data[0];
 	var hpData= smartData.filter(obj => Object.keys(obj).includes("Hydraulic_Pressure_Max","Hydraulic_Pressure_Min","Hydraulic_Pressure_Actual"));
 
+	
+	
 	var hpMax = [];	var hpAct = [];	var hpMin = [];	
 	var hpTime = [];
 
+	if(hpData == ""){
+		document.getElementById('showAxisLoad').innerHTML= "No data found";
+	}else {
+		
+		document.getElementById('showAxisLoad').style.display= "none";
+		
     for(var key in hpData){				
     	hpMax.push(hpData[key].Hydraulic_Pressure_Max.firstvalue,hpData[key].Hydraulic_Pressure_Max.minvalue,
     			   hpData[key].Hydraulic_Pressure_Max.maxvalue,hpData[key].Hydraulic_Pressure_Max.lastvalue);
@@ -480,6 +488,8 @@ function drawHydraulic(data){
 	  		data: hpData,
 	    	options: hpOptions
 	  	});
+	  	
+	}
 	
 }
 
@@ -490,6 +500,13 @@ function drawMotorTemp(data){
 
 	var motorTemp1 = []; var motorTemp2 = [];  var motorTemp3 = []; var motorTemp4 = [];
 	var motorTime = [];
+	
+	if(motorData == ""){
+		
+		document.getElementById('showMotorTemp').innerHTML= "No data found";
+	}else{
+		
+		document.getElementById('showMotorTemp').style.display= "none";
 
     for(var key in motorData){				
     	motorTemp1.push(motorData[key].Motor_Temperature_Axis_1.firstvalue,motorData[key].Motor_Temperature_Axis_1.minvalue,
@@ -644,7 +661,7 @@ function drawMotorTemp(data){
 	  		data: motorAxisData,
 	    	options: motorOptions
 	  	});
-	
+	}
 }
 
 function drawPneumatic(data){
@@ -654,6 +671,12 @@ function drawPneumatic(data){
 
 	var ppMax = [];	var ppAct = [];	var ppMin = [];	
 	var ppTime = [];
+	
+	if(ppData == ""){
+		
+		document.getElementById("pneumaticPressure").innerHTML = "No data found";
+	}else{
+		document.getElementById("pneumaticPressure").style.display = "none";
 
     for(var key in ppData){				
     	ppMax.push(ppData[key].Pneumatic_Pressure_Max.firstvalue,ppData[key].Pneumatic_Pressure_Max.minvalue,
@@ -800,7 +823,7 @@ function drawPneumatic(data){
 	  		data: ppData,
 	    	options: ppOptions
 	  	});
-	  	
+	}
 }
 
 function drawElectronicsTable(data){

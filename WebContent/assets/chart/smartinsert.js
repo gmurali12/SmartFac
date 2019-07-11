@@ -205,7 +205,7 @@ function smartCheckChart(assetId, fdt,tdt){
 	
 	document.getElementById("ftdt").value = fdt + ' - ' + tdt;
 	
-	$('#loadingLoad,#loadingTemp,#loadingVib').show();
+	$('#loadingtool').show();
 		
 	  $(function(){
 		  $.ajax({
@@ -222,7 +222,7 @@ function smartCheckChart(assetId, fdt,tdt){
 				success : function(data){
 
 					console.log(data)
-					$('#loadingLoad,#loadingTemp,#loadingVib').hide();
+					$('#loadingtool').hide();
 										
 					var dLen = data.length;
 								
@@ -269,11 +269,11 @@ function drawToolChart(){
 	var toolLbTime = [];
 
 	if(toolLoad == ""){	
-		document.getElementById('showAxisLoad').innerHTML= "No data Found";
+		document.getElementById('showAxisLoad').innerHTML= "No data found";
 		
 	}else{
 	    
-		//document.getElementById('showAxisLoad').style.display = "none";
+		document.getElementById('showAxisLoad').style.display = "none";
 		for(var key in toolLoad){
 			
 			if(jobId==1){

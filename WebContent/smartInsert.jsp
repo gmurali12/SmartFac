@@ -112,6 +112,7 @@
 									</div>
 									<div class="col-md-4">	
 										<h3 class="panel-title" id="smartCorrectIds">Tool Life - T1</h3>
+										<div class="showCharTable" id="showAxisLoad"></div>
 									</div>
 									<div class="col-lg-3">
 										<select class="form-control" id="jobSelected" name="jobSelected" onchange="drawToolChart();">
@@ -130,7 +131,7 @@
 											<option value="12">Tool 12</option>
 										</select>
 									</div>
-								</div>
+								</div>						
 								<div class="panel-body" style="height:547px;">
 									<canvas id="toolChart" class="ct-chart"></canvas>
 								</div>

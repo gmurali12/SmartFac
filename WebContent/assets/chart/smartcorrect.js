@@ -203,7 +203,7 @@ function smartCorrectChart(assetId, fdt,tdt){
 	
 	document.getElementById("ftdt").value = fdt + ' - ' + tdt;
 	
-	$('#loadingLoad,#loadingTemp,#loadingVib').show();
+	$('#loadingCorr').show();
 		
 	  $(function(){
 		  $.ajax({
@@ -219,7 +219,7 @@ function smartCorrectChart(assetId, fdt,tdt){
 				contentType: "application/json",
 				success : function(data){
 				
-					$('#loadingLoad,#loadingTemp,#loadingVib').hide();
+					$('#loadingCorr').hide();
 										
 					var dLen = data.length;
 								
@@ -275,7 +275,7 @@ function drawJob(){
 	var loadTime = [];
 	
 	if(jobLoad == ""){	
-		document.getElementById('showJobLoad').innerHTML= "No data Found";
+		document.getElementById('showJobLoad').innerHTML= "No data found";
 		
 	}else{
 	    

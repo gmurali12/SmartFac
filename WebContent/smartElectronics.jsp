@@ -98,6 +98,7 @@
 									</div>
 									<div class="col-md-4">
 								 		<h3 class="panel-title" style='text-align:center'>Hydraulic Pressure</h3>
+								 		<div class="showCharTable" id="showAxisLoad"></div>
 								 	</div>
 								</div>
 								<div class="panel-body">
@@ -110,6 +111,7 @@
 									</div>
 									<div class="col-md-4">
 										<h3 class="panel-title" style='text-align:center'>Motor Temperature</h3>
+										<div class="showCharTable" id="showMotorTemp"></div>
 									</div>
 								</div>
 								<div class="panel-body">
@@ -122,6 +124,7 @@
 									</div>
 									<div class="col-md-4">								
 										<h3 class="panel-title" style='text-align:center'>Pneumatic Pressure</h3>
+										<div class="showCharTable" id="pneumaticPressure"></div>
 									</div>
 								</div>
 								<div class="panel-body">
